@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="es" class="dark">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Propuesta v1.0 · Tu Asesor Financiero · ALCONSULTING</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&family=Geist+Mono:wght@400;500&family=Source+Serif+4:ital,wght@1,400;1,500&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: #0a0a0f;
+    --surface: #14141c;
+    --surface-2: #1a1a24;
+    --border: rgba(255,255,255,0.06);
+    --border-strong: rgba(255,255,255,0.10);
+    --violet: #7c3aed;
+  }
+  body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg); color: #f5f5fa; -webkit-font-smoothing: antialiased; }
+  .display { font-family: 'Space Grotesk', system-ui, sans-serif; }
+  .font-mono { font-family: 'Geist Mono', ui-monospace, monospace; }
+  .serif-italic { font-family: 'Source Serif 4', Georgia, serif; font-style: italic; }
+  html { scroll-behavior: smooth; }
+
+  .grain { position: fixed; inset: 0; pointer-events: none; opacity: 0.025; background-image: radial-gradient(#fff 1px, transparent 1px); background-size: 4px 4px; z-index: 1; }
+
+  .gradient-text { background: linear-gradient(135deg, #7c3aed 0%, #22d3ee 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+
+  .glow-violet { box-shadow: 0 0 60px -15px rgba(124, 58, 237, 0.5); }
+  .glow-emerald { box-shadow: 0 0 30px -15px rgba(16, 185, 129, 0.4); }
+
+  .toc-link { transition: color 0.15s, border-color 0.15s; }
+  .toc-link:hover { color: rgb(255 255 255); border-left-color: rgb(139 92 246); }
+
+  .diagram-card { background: rgba(20, 20, 28, 0.6); border: 1px solid var(--border); border-radius: 24px; padding: 28px; backdrop-filter: blur(8px); }
+  @media (min-width: 768px) { .diagram-card { padding: 32px; } }
+
+  .pill { display: inline-block; padding: 3px 9px; border-radius: 6px; font-size: 11px; font-family: 'Geist Mono', ui-monospace, monospace; font-weight: 500; }
+  .pill-violet  { background: rgba(139, 92, 246, 0.15); border: 1px solid rgba(139, 92, 246, 0.35); color: rgb(196, 181, 253); }
+  .pill-amber   { background: rgba(245, 158, 11, 0.15); border: 1px solid rgba(245, 158, 11, 0.35); color: rgb(252, 211, 77); }
+  .pill-cyan    { background: rgba(6, 182, 212, 0.15);  border: 1px solid rgba(6, 182, 212, 0.35);  color: rgb(165, 243, 252); }
+  .pill-emerald { background: rgba(16, 185, 129, 0.15); border: 1px solid rgba(16, 185, 129, 0.35); color: rgb(167, 243, 208); }
+  .pill-zinc    { background: rgba(113, 113, 122, 0.15); border: 1px solid rgba(113, 113, 122, 0.35); color: rgb(212, 212, 216); }
+
+  .step-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  .step-table td {
+    padding: 12px 14px; vertical-align: top;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+    color: rgba(255, 255, 255, 0.92); line-height: 1.6;
+  }
+  .step-table td:first-child { font-weight: 500; width: 220px; font-family: 'Inter', sans-serif; color: #fff; }
+  .step-table tr:last-child td { border-bottom: none; }
+
+  .phase-card {
+    flex-shrink: 0; width: 220px; border-radius: 14px;
+    background: linear-gradient(135deg, #14141c 0%, #0c0c14 100%);
+    border: 1px solid var(--border-strong);
+    padding: 16px; display: flex; flex-direction: column; gap: 8px;
+    transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+  }
+  .phase-card:hover { transform: translateY(-3px); border-color: rgba(139, 92, 246, 0.4); box-shadow: 0 0 30px -15px rgba(124, 58, 237, 0.3); }
+
+  .pillar { transition: all 0.25s ease; background: rgba(20, 20, 28, 0.6); border: 1px solid var(--border); border-radius: 18px; padding: 24px; }
+  .pillar:hover { transform: translateY(-4px); border-color: rgba(139, 92, 246, 0.4); box-shadow: 0 0 40px -15px rgba(124, 58, 237, 0.3); }
+  .pillar-icon { width: 44px; height: 44px; border-radius: 12px; display: flex; align-items: center; justify-content: center; }
+
+  .pricing-row { display: grid; grid-template-columns: 1fr auto; gap: 16px; align-items: center; padding: 14px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.04); }
+  .pricing-row:last-child { border-bottom: 0; }
+
+  .step-num { width: 36px; height: 36px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-family: 'Geist Mono', monospace; font-weight: 600; font-size: 14px; background: rgba(139, 92, 246, 0.15); border: 1px solid rgba(139, 92, 246, 0.4); color: rgb(196, 181, 253); flex-shrink: 0; }
+
+  @media (max-width: 768px) { main { padding-bottom: 6rem; } }
+</style>
+</head>
+<body class="antialiased min-h-screen relative">
+
+<div class="grain"></div>
+<div class="fixed inset-0 pointer-events-none z-0" style="background: radial-gradient(ellipse 80% 50% at 50% -10%, rgba(139, 92, 246, 0.12), transparent 60%);"></div>
+
+<div class="relative max-w-[1400px] mx-auto flex z-10">
+
+  <!-- TOC SIDEBAR -->
+  <aside class="hidden lg:block w-60 shrink-0 sticky top-0 h-screen pt-20 px-6 overflow-y-auto bg-[#0c0c12]/80 backdrop-blur-md border-r border-white/[0.06]">
+    <div class="flex items-center gap-2 mb-5">
+      <div class="w-7 h-7 rounded-lg bg-gradient-to-br from-violet-500 to-cyan-400 flex items-center justify-center font-display font-bold text-black text-xs">AL</div>
+      <p class="font-mono text-[10px] uppercase tracking-[0.2em] text-white">Propuesta v1.0</p>
+    </div>
+    <nav class="space-y-0.5">
+      <a href="#cliente" class="toc-link block py-2 px-3 text-sm text-white/80 border-l border-transparent">01 · Cliente</a>
+      <a href="#diagnostico" class="toc-link block py-2 px-3 text-sm text-white/80 border-l border-transparent">02 · Diagnóstico</a>
+      <a href="#entregamos" class="toc-link block py-2 px-3 text-sm text-white/80 border-l border-transparent">03 · Qué entregamos</a>
+      <a href="#sesiones" class="toc-link block py-2 px-3 text-sm text-white/80 border-l border-transparent">04 · 5 sesiones</a>
+      <a href="#pricing" class="toc-link block py-2 px-3 text-sm text-white/80 border-l border-transparent">05 · Inversión</a>
+      <a href="#next" class="toc-link block py-2 px-3 text-sm text-white/80 border-l border-transparent">06 · Próximos pasos</a>
+    </nav>
+
+    <div class="mt-10 pt-6 border-t border-white/[0.06]">
+      <p class="font-mono text-[10px] uppercase tracking-wider text-white/60 mb-2">Cliente</p>
+      <p class="text-sm text-white">Tu Asesor Financiero</p>
+      <p class="text-xs text-white/60">Ari · Anabel · Eva · Cami · Mati</p>
+    </div>
+    <div class="mt-4">
+      <p class="font-mono text-[10px] uppercase tracking-wider text-white/60 mb-2">Stack</p>
+      <p class="text-sm text-white">GHL · Cuenta básica</p>
+      <p class="text-xs text-white/60">Conversation AI V2 · WhatsApp</p>
+    </div>
+    <div class="mt-4">
+      <p class="font-mono text-[10px] uppercase tracking-wider text-white/60 mb-2">Equipo</p>
+      <p class="text-sm text-white">Andrés Linares</p>
+      <p class="text-xs text-white/60">ALCONSULTING</p>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="flex-1 px-5 md:px-10 py-10 md:py-20 max-w-[1100px]">
+
+    <!-- HEADER STICKY (mobile) -->
+    <div class="lg:hidden sticky top-0 z-50 -mx-5 mb-8 bg-bg/85 backdrop-blur-md border-b border-white/[0.06]">
+      <div class="px-5 py-3 flex items-center justify-between gap-4">
+        <div class="flex items-center gap-3 min-w-0">
+          <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-violet-500 to-cyan-400 flex items-center justify-center shrink-0 font-display font-bold text-black text-xs">AL</div>
+          <div class="min-w-0">
+            <div class="text-[10px] text-white/50 uppercase tracking-wider font-mono">Propuesta v1.0</div>
+            <div class="display font-semibold text-sm truncate">Tu Asesor Financiero</div>
+          </div>
+        </div>
+        <span class="shrink-0 pill pill-violet">v1.0</span>
+      </div>
+    </div>
+
+    <!-- HEADER HERO -->
+    <header class="mb-16 md:mb-24">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/[0.04] border border-white/[0.08] text-xs text-white/80 mb-6">
+        <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+        <span class="font-mono text-[11px]">Mentoring 1 mes · 5 sesiones</span>
+      </div>
+      <h1 class="display text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight leading-[1.02]">
+        De HubSpot al <span class="text-amber-300">3%</span><br />
+        a un proceso comercial<br />
+        <span class="gradient-text">que se opera solo</span>.
+      </h1>
+      <p class="mt-7 text-lg md:text-xl text-white/85 max-w-2xl leading-relaxed">
+        En 1 mes migramos su CRM, armamos un bot interno de Q&amp;A para los asesores, y dejamos al equipo entrenado para iterar sin depender de mí.
+      </p>
+      <div class="flex flex-wrap gap-2 mt-7">
+        <span class="pill pill-violet">5 sesiones · 60 min</span>
+        <span class="pill pill-cyan">Mentoring grupal</span>
+        <span class="pill pill-emerald">200 leads migrados</span>
+        <span class="pill pill-violet">1 bot Q&amp;A interno</span>
+        <span class="pill pill-amber">USD 500</span>
+      </div>
+      <div class="flex flex-wrap gap-3 mt-8">
+        <a href="#sesiones" class="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-violet-600 hover:bg-violet-500 text-white font-medium transition glow-violet">
+          Ver las 5 sesiones
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+        </a>
+        <a href="#pricing" class="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-white/[0.04] hover:bg-white/[0.08] border border-white/[0.10] text-white font-medium transition">
+          Ver inversión
+        </a>
+      </div>
+    </header>
+
+    <!-- 01 · CLIENTE -->
+    <section id="cliente" class="mb-20 md:mb-24 scroll-mt-12">
+      <p class="font-mono text-[11px] uppercase tracking-[0.2em] text-violet-300 mb-3">01 · Cliente</p>
+      <h2 class="display text-2xl md:text-4xl font-bold tracking-tight mb-3">Tu Asesor Financiero</h2>
+      <p class="serif-italic text-white/85 mb-8 max-w-3xl">Asesoramiento financiero a personas + formación de asesores. 6 años digitalizando lo que Ari venía haciendo presencial los 12 anteriores.</p>
+
+      <div class="diagram-card">
+        <table class="step-table">
+          <tbody>
+            <tr><td>Negocio</td><td>Asesoramiento financiero + formación de asesores · 18 años Ari</td></tr>
+            <tr><td>Equipo orgánico</td><td><span class="pill pill-violet">Ari</span> <span class="pill pill-violet">Anabel</span> <span class="pill pill-violet">Eva</span> <span class="pill pill-violet">Cami</span> <span class="pill pill-violet">Mati</span></td></tr>
+            <tr><td>Ecosistema</td><td>~200 personas · 40 propios + 35 CABA + 130 Colombia</td></tr>
+            <tr><td>Stack actual</td><td><span class="pill pill-amber">HubSpot al 3%</span> <span class="pill pill-zinc">pauta redes</span> <span class="pill pill-zinc">Moodle</span></td></tr>
+            <tr><td>Implementador</td><td><span class="pill pill-cyan">Andrés Linares</span> · ALCONSULTING</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 02 · DIAGNÓSTICO -->
+    <section id="diagnostico" class="mb-20 md:mb-24 scroll-mt-12">
+      <p class="font-mono text-[11px] uppercase tracking-[0.2em] text-violet-300 mb-3">02 · Diagnóstico</p>
+      <h2 class="display text-2xl md:text-4xl font-bold tracking-tight mb-3">Dónde están hoy</h2>
+      <p class="serif-italic text-white/85 mb-8 max-w-3xl">Tienen los activos. Falta la capa que orqueste lo que ya funciona.</p>
+
+      <div class="grid md:grid-cols-3 gap-4">
+        <div class="pillar">
+          <p class="font-mono text-[10px] uppercase tracking-wider text-amber-300 mb-3">Reality check</p>
+          <p class="display text-4xl font-bold gradient-text mb-2">3%</p>
+          <p class="text-sm text-white/80">de uso real de HubSpot. Ari lo confirmó: "lo usamos al 3%, lo mono".</p>
+        </div>
+        <div class="pillar">
+          <p class="font-mono text-[10px] uppercase tracking-wider text-cyan-300 mb-3">Volumen</p>
+          <p class="display text-4xl font-bold gradient-text mb-2">~200</p>
+          <p class="text-sm text-white/80">leads cargados que migramos a GHL sin perder data.</p>
+        </div>
+        <div class="pillar">
+          <p class="font-mono text-[10px] uppercase tracking-wider text-violet-300 mb-3">Equipo</p>
+          <p class="display text-4xl font-bold gradient-text mb-2">5</p>
+          <p class="text-sm text-white/80">personas en el orgánico — todas en cada sesión.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 03 · QUÉ ENTREGAMOS -->
+    <section id="entregamos" class="mb-20 md:mb-24 scroll-mt-12">
+      <p class="font-mono text-[11px] uppercase tracking-[0.2em] text-cyan-300 mb-3">03 · Qué entregamos</p>
+      <h2 class="display text-2xl md:text-4xl font-bold tracking-tight mb-3">El paquete del mes 1</h2>
+      <p class="serif-italic text-white/85 mb-8 max-w-3xl">Cuatro entregables tangibles que dejamos andando antes de que termine el mes.</p>
+
+      <div class="grid md:grid-cols-2 gap-4">
+        <div class="pillar">
+          <div class="pillar-icon mb-4" style="background: rgba(139, 92, 246, 0.15);">
+            <svg class="w-6 h-6 text-violet-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2 1 3 3 3h10c2 0 3-1 3-3V7c0-2-1-3-3-3H7C5 4 4 5 4 7z M4 9h16"/></svg>
+          </div>
+          <span class="pill pill-violet mb-2 inline-block">01 · Setup</span>
+          <h3 class="display font-semibold text-lg mb-2 mt-2">GHL operativo</h3>
+          <p class="text-sm text-white/80">Cuenta básica con hasta 10 usuarios. Branding aplicado. Los 5 del equipo dados de alta y entrenados.</p>
+        </div>
+        <div class="pillar">
+          <div class="pillar-icon mb-4" style="background: rgba(139, 92, 246, 0.15);">
+            <svg class="w-6 h-6 text-violet-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12h4l3-9 4 18 3-9h4"/></svg>
+          </div>
+          <span class="pill pill-violet mb-2 inline-block">02 · Migración</span>
+          <h3 class="display font-semibold text-lg mb-2 mt-2">Pipeline + 200 leads</h3>
+          <p class="text-sm text-white/80">El pipeline actual de HubSpot replicado en GHL con sus 200 leads importados. No reinventamos nada.</p>
+        </div>
+        <div class="pillar">
+          <div class="pillar-icon mb-4" style="background: rgba(6, 182, 212, 0.15);">
+            <svg class="w-6 h-6 text-cyan-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4-4 7-9 7-1.5 0-3-.3-4-.8L3 20l1-4c-.5-1-1-2.5-1-4 0-4 4-7 9-7s9 3 9 7z"/></svg>
+          </div>
+          <span class="pill pill-cyan mb-2 inline-block">03 · Bot</span>
+          <h3 class="display font-semibold text-lg mb-2 mt-2">Q&amp;A interno operativo</h3>
+          <p class="text-sm text-white/80">Bot que responde dudas de productos, técnicas y operativa a los asesores activos. Cargado con la KB del negocio.</p>
+        </div>
+        <div class="pillar">
+          <div class="pillar-icon mb-4" style="background: rgba(16, 185, 129, 0.15);">
+            <svg class="w-6 h-6 text-emerald-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5z M12 14l6.16-3.42a12 12 0 0 1 .84 4.42c0 4-3.5 7-7 7s-7-3-7-7c0-1.6.3-3.1.84-4.42L12 14z"/></svg>
+          </div>
+          <span class="pill pill-emerald mb-2 inline-block">04 · Mentoring</span>
+          <h3 class="display font-semibold text-lg mb-2 mt-2">5 clases + soporte WhatsApp</h3>
+          <p class="text-sm text-white/80">Una vez por semana, 60 min. Las 5 personas del equipo en cada sesión. Soporte continuo en grupo WhatsApp.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 04 · 5 SESIONES -->
+    <section id="sesiones" class="mb-20 md:mb-24 scroll-mt-12">
+      <p class="font-mono text-[11px] uppercase tracking-[0.2em] text-violet-300 mb-3">04 · 5 sesiones</p>
+      <h2 class="display text-2xl md:text-4xl font-bold tracking-tight mb-3">El recorrido del mes</h2>
+      <p class="serif-italic text-white/85 mb-8 max-w-3xl">Una sesión por semana. Cada una cierra con un deliverable concreto.</p>
+
+      <div class="diagram-card">
+        <div class="flex items-center justify-between mb-5">
+          <p class="font-mono text-[10px] uppercase tracking-[0.2em] text-white/60">Cronograma · 5 semanas</p>
+          <p class="font-mono text-[10px] text-white/40">scroll →</p>
+        </div>
+        <div class="overflow-x-auto pb-3 -mx-6 px-6 md:-mx-8 md:px-8">
+          <div class="flex gap-3 items-stretch min-w-max">
+
+            <div class="phase-card">
+              <span class="font-mono text-[10px] uppercase tracking-wider text-violet-300">S1</span>
+              <h3 class="display text-sm font-semibold text-white">Discovery + GHL</h3>
+              <span class="self-start pill pill-violet">Onboarding</span>
+              <p class="text-[11px] text-white/75 leading-relaxed mt-1">Tour GHL · walk-through pipeline · boceto v0.</p>
+            </div>
+            <div class="flex items-center text-white/30 px-1">▸</div>
+
+            <div class="phase-card">
+              <span class="font-mono text-[10px] uppercase tracking-wider text-violet-300">S2</span>
+              <h3 class="display text-sm font-semibold text-white">Pipeline + 200 leads</h3>
+              <span class="self-start pill pill-violet">Migración</span>
+              <p class="text-[11px] text-white/75 leading-relaxed mt-1">Pipeline · custom fields · import 200 leads · WhatsApp.</p>
+            </div>
+            <div class="flex items-center text-white/30 px-1">▸</div>
+
+            <div class="phase-card">
+              <span class="font-mono text-[10px] uppercase tracking-wider text-violet-300">S3</span>
+              <h3 class="display text-sm font-semibold text-white">Bot Q&amp;A + KB</h3>
+              <span class="self-start pill pill-violet">Bot</span>
+              <p class="text-[11px] text-white/75 leading-relaxed mt-1">Bot Goals V2 · KB cargada · test sandbox.</p>
+            </div>
+            <div class="flex items-center text-white/30 px-1">▸</div>
+
+            <div class="phase-card">
+              <span class="font-mono text-[10px] uppercase tracking-wider text-violet-300">S4</span>
+              <h3 class="display text-sm font-semibold text-white">Cursos + Workflows</h3>
+              <span class="self-start pill pill-violet">Automatización</span>
+              <p class="text-[11px] text-white/75 leading-relaxed mt-1">1 curso migrado · 3 workflows.</p>
+            </div>
+            <div class="flex items-center text-white/30 px-1">▸</div>
+
+            <div class="phase-card" style="border-color: rgba(16, 185, 129, 0.4); box-shadow: 0 0 20px -10px rgba(16, 185, 129, 0.3);">
+              <span class="font-mono text-[10px] uppercase tracking-wider text-emerald-300">S5</span>
+              <h3 class="display text-sm font-semibold text-white">Go live + Handoff</h3>
+              <span class="self-start pill pill-emerald">Cierre</span>
+              <p class="text-[11px] text-white/75 leading-relaxed mt-1">Bot a producción · pipeline end-to-end.</p>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 05 · INVERSIÓN -->
+    <section id="pricing" class="mb-20 md:mb-24 scroll-mt-12">
+      <p class="font-mono text-[11px] uppercase tracking-[0.2em] text-amber-300 mb-3">05 · Inversión</p>
+      <h2 class="display text-2xl md:text-4xl font-bold tracking-tight mb-3">Pricing transparente</h2>
+      <p class="serif-italic text-white/85 mb-8 max-w-3xl">Una inversión one-time del mes 1 + recurrente de software a partir del mes 2.</p>
+
+      <!-- Recurrente -->
+      <div class="diagram-card mb-5">
+        <div class="flex items-center justify-between mb-4 flex-wrap gap-2">
+          <div>
+            <span class="font-mono text-[10px] uppercase tracking-wider text-white/60">Recurrente</span>
+            <h3 class="display text-xl font-semibold mt-1">Mensual</h3>
+          </div>
+          <span class="pill pill-cyan">Solo lo que usen</span>
+        </div>
+        <div>
+          <div class="pricing-row">
+            <div>
+              <p class="font-medium">GHL · cuenta básica</p>
+              <p class="text-xs text-white/55 mt-0.5">Hasta 10 usuarios · plataforma cursos · clases jueves 7pm · soporte oficial</p>
+            </div>
+            <p class="font-mono text-lg font-semibold">USD 67<span class="text-xs text-white/55 font-normal">/mes</span></p>
+          </div>
+          <div class="pricing-row">
+            <div>
+              <p class="font-medium">WhatsApp <span class="text-xs text-white/55">(decisión con Ari pre-S1)</span></p>
+              <p class="text-xs text-white/55 mt-0.5">Oficial Meta USD 20/mes · No oficial USD 39/mes flat</p>
+            </div>
+            <p class="font-mono text-lg font-semibold">USD 20–39<span class="text-xs text-white/55 font-normal">/mes</span></p>
+          </div>
+        </div>
+      </div>
+
+      <!-- One-time -->
+      <div class="diagram-card relative overflow-hidden glow-violet" style="background: linear-gradient(135deg, rgba(124, 58, 237, 0.18), rgba(34, 211, 238, 0.06)); border-color: rgba(139, 92, 246, 0.4);">
+        <div class="absolute top-0 right-0 px-3 py-1 text-[10px] font-mono uppercase tracking-wider bg-violet-600 text-white rounded-bl-xl">Paquete mes 1</div>
+        <span class="font-mono text-[10px] uppercase tracking-wider text-violet-300">One-time</span>
+        <h3 class="display text-2xl md:text-3xl font-bold mt-1 mb-1">Mentoring Implementación</h3>
+        <p class="display text-5xl md:text-6xl font-bold tracking-tight mb-5"><span class="text-violet-200/80">USD</span> <span class="gradient-text">500</span></p>
+        <p class="text-sm text-white/80 mb-4 font-medium">Lo que está incluido:</p>
+        <div class="grid md:grid-cols-2 gap-2.5 text-sm">
+          <div class="flex gap-2"><span class="text-emerald-400 shrink-0 mt-0.5">✓</span><span>5 sesiones de 60 min en vivo</span></div>
+          <div class="flex gap-2"><span class="text-emerald-400 shrink-0 mt-0.5">✓</span><span>5 personas del equipo en cada sesión</span></div>
+          <div class="flex gap-2"><span class="text-emerald-400 shrink-0 mt-0.5">✓</span><span>Soporte WhatsApp todo el mes</span></div>
+          <div class="flex gap-2"><span class="text-emerald-400 shrink-0 mt-0.5">✓</span><span>Pipeline migrado + 200 leads importados</span></div>
+          <div class="flex gap-2"><span class="text-emerald-400 shrink-0 mt-0.5">✓</span><span>Bot Q&amp;A interno operativo en producción</span></div>
+          <div class="flex gap-2"><span class="text-emerald-400 shrink-0 mt-0.5">✓</span><span>1 curso migrado a GHL como modelo</span></div>
+          <div class="flex gap-2"><span class="text-emerald-400 shrink-0 mt-0.5">✓</span><span>Workflows básicos del proceso comercial</span></div>
+          <div class="flex gap-2"><span class="text-emerald-400 shrink-0 mt-0.5">✓</span><span>Sesiones grabadas + clases jueves 7pm</span></div>
+        </div>
+      </div>
+
+      <!-- Total -->
+      <div class="diagram-card mt-5 glow-emerald" style="border-color: rgba(16, 185, 129, 0.35);">
+        <div class="flex flex-wrap items-baseline justify-between gap-2 mb-1">
+          <p class="font-mono text-[10px] uppercase tracking-wider text-white/60">Total mes 1 (estimado WhatsApp oficial)</p>
+          <p class="display text-2xl md:text-3xl font-bold text-emerald-300">USD 587</p>
+        </div>
+        <p class="text-xs text-white/55">USD 67 GHL + USD 20 WhatsApp + USD 500 mentoring · A partir del mes 2 solo USD 87/mes recurrente.</p>
+      </div>
+    </section>
+
+    <!-- 06 · PRÓXIMOS PASOS -->
+    <section id="next" class="mb-20 md:mb-24 scroll-mt-12">
+      <p class="font-mono text-[11px] uppercase tracking-[0.2em] text-emerald-300 mb-3">06 · Próximos pasos</p>
+      <h2 class="display text-2xl md:text-4xl font-bold tracking-tight mb-3">Cómo empezamos</h2>
+      <p class="serif-italic text-white/85 mb-8 max-w-3xl">Pasos claros antes de S1. Todo asíncrono por el grupo de WhatsApp ya creado.</p>
+
+      <div class="space-y-3">
+        <div class="diagram-card flex items-start gap-4" style="padding: 18px;">
+          <span class="step-num">1</span>
+          <div class="flex-1 pt-1"><p class="text-sm">Confirman aceptación por el grupo de WhatsApp.</p></div>
+        </div>
+        <div class="diagram-card flex items-start gap-4" style="padding: 18px;">
+          <span class="step-num">2</span>
+          <div class="flex-1 pt-1"><p class="text-sm">Ari + Andrés cierran la decisión WhatsApp oficial vs no oficial.</p></div>
+        </div>
+        <div class="diagram-card flex items-start gap-4" style="padding: 18px;">
+          <span class="step-num">3</span>
+          <div class="flex-1 pt-1"><p class="text-sm">Andrés crea la subcuenta GHL + carga a los 5 del equipo.</p></div>
+        </div>
+        <div class="diagram-card flex items-start gap-4 glow-emerald" style="padding: 18px; border-color: rgba(16, 185, 129, 0.35);">
+          <span class="step-num" style="background: rgba(16,185,129,0.15); border-color: rgba(16,185,129,0.4); color: rgb(167,243,208);">4</span>
+          <div class="flex-1 pt-1"><p class="text-sm font-medium">Agendamos S1 — arranca el reloj del mes 1.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="mt-20 pt-10 border-t border-white/[0.06]">
+      <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+        <div>
+          <p class="display font-bold text-base">Andrés Linares</p>
+          <p class="text-sm text-white/65">ALCONSULTING · Implementación GHL/SHARP + IA</p>
+        </div>
+        <p class="font-mono text-[10px] uppercase tracking-wider text-white/40">Propuesta v1.0 · Tu Asesor Financiero · Mayo 2026</p>
+      </div>
+    </footer>
+
+  </main>
+
+</div>
+
+<!-- STICKY CTA MOBILE -->
+<div class="lg:hidden fixed bottom-0 inset-x-0 z-40 backdrop-blur-md border-t border-white/[0.06] p-3" style="background: rgba(10, 10, 15, 0.95);">
+  <a href="#pricing" class="flex items-center justify-center gap-2 w-full px-5 py-3 rounded-xl bg-violet-600 hover:bg-violet-500 text-white font-medium transition glow-violet">
+    Ver inversión
+    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+  </a>
+</div>
+
+</body>
+</html>

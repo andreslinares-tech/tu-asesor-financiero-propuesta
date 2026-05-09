@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="es" class="dark">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Propuesta · Tu Asesor Financiero × ALCONSULTING</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&family=Geist+Mono:wght@400;500&family=Source+Serif+4:ital,wght@1,400;1,500&display=swap" rel="stylesheet" />
+<style>
+  body { font-family: 'Inter', system-ui, sans-serif; background: #0a0a0f; color: #f5f5fa; -webkit-font-smoothing: antialiased; min-height: 100vh; }
+  .display { font-family: 'Space Grotesk', system-ui, sans-serif; }
+  .font-mono { font-family: 'Geist Mono', ui-monospace, monospace; }
+  .serif-italic { font-family: 'Source Serif 4', Georgia, serif; font-style: italic; }
+  .gradient-text { background: linear-gradient(135deg, #7c3aed 0%, #22d3ee 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+  .glow-violet { box-shadow: 0 0 60px -15px rgba(124, 58, 237, 0.5); }
+  .glow-cyan { box-shadow: 0 0 50px -15px rgba(34, 211, 238, 0.4); }
+  .grain { position: fixed; inset: 0; pointer-events: none; opacity: 0.025; background-image: radial-gradient(#fff 1px, transparent 1px); background-size: 4px 4px; z-index: 1; }
+  .pill { display: inline-block; padding: 3px 9px; border-radius: 6px; font-size: 11px; font-family: 'Geist Mono', ui-monospace, monospace; font-weight: 500; }
+  .pill-violet { background: rgba(139, 92, 246, 0.15); border: 1px solid rgba(139, 92, 246, 0.35); color: rgb(196, 181, 253); }
+  .pill-cyan { background: rgba(6, 182, 212, 0.15); border: 1px solid rgba(6, 182, 212, 0.35); color: rgb(165, 243, 252); }
+  .pill-emerald { background: rgba(16, 185, 129, 0.15); border: 1px solid rgba(16, 185, 129, 0.35); color: rgb(167, 243, 208); }
+  .option-card { background: rgba(20, 20, 28, 0.6); border: 1px solid rgba(255,255,255,0.08); border-radius: 24px; padding: 28px; transition: all 0.3s ease; backdrop-filter: blur(8px); display: block; }
+  .option-card:hover { transform: translateY(-4px); border-color: rgba(139, 92, 246, 0.45); }
+  @media (min-width: 768px) { .option-card { padding: 36px; } }
+</style>
+</head>
+<body>
+
+<div class="grain"></div>
+<div class="fixed inset-0 pointer-events-none z-0" style="background: radial-gradient(ellipse 80% 50% at 50% -10%, rgba(139, 92, 246, 0.14), transparent 60%);"></div>
+
+<div class="relative z-10 max-w-5xl mx-auto px-5 md:px-10 py-12 md:py-20">
+
+  <!-- HERO -->
+  <header class="mb-12 md:mb-16 text-center">
+    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/[0.04] border border-white/[0.08] text-xs text-white/80 mb-6">
+      <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+      <span class="font-mono text-[11px]">Mayo 2026 · Mentoring 1 mes · 5 sesiones</span>
+    </div>
+    <p class="font-mono text-[11px] uppercase tracking-[0.2em] text-violet-300 mb-4">Propuesta comercial</p>
+    <h1 class="display text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight leading-[1.05] mb-5">
+      Tu Asesor Financiero<br />
+      <span class="gradient-text">× ALCONSULTING</span>
+    </h1>
+    <p class="text-lg md:text-xl text-white/85 max-w-2xl mx-auto leading-relaxed serif-italic">
+      Hay dos versiones de la propuesta. Mismo precio, mismo alcance — distinto nivel de detalle.
+    </p>
+  </header>
+
+  <!-- OPTIONS -->
+  <div class="grid md:grid-cols-2 gap-5 md:gap-6 mb-12">
+
+    <!-- V1.0 -->
+    <a href="propuesta-v1.0.html" class="option-card group">
+      <div class="flex items-center gap-2 mb-4">
+        <span class="pill pill-violet">v1.0</span>
+        <span class="font-mono text-[10px] uppercase tracking-wider text-white/60">Esencial</span>
+      </div>
+      <h2 class="display text-2xl md:text-3xl font-bold mb-3 leading-tight">
+        De HubSpot al <span class="text-amber-300">3%</span><br />
+        a un proceso comercial<br />
+        <span class="gradient-text">que se opera solo</span>.
+      </h2>
+      <p class="text-sm text-white/75 leading-relaxed mb-5">
+        La versión directa al grano. 5 sesiones, sin detalle bloque-a-bloque. Pricing y próximos pasos. Lectura rápida en mobile.
+      </p>
+      <div class="flex flex-wrap gap-1.5 mb-5">
+        <span class="pill pill-violet">6 secciones</span>
+        <span class="pill pill-cyan">Mobile-first</span>
+        <span class="pill pill-emerald">Lectura ~3 min</span>
+      </div>
+      <div class="inline-flex items-center gap-2 text-violet-300 group-hover:text-violet-200 font-medium text-sm transition">
+        Abrir v1.0
+        <svg class="w-4 h-4 group-hover:translate-x-0.5 transition" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+      </div>
+    </a>
+
+    <!-- V2.0 -->
+    <a href="propuesta-v2.0.html" class="option-card group glow-violet" style="border-color: rgba(139, 92, 246, 0.45); background: linear-gradient(135deg, rgba(124, 58, 237, 0.12), rgba(34, 211, 238, 0.04));">
+      <div class="flex items-center gap-2 mb-4">
+        <span class="pill pill-cyan">v2.0</span>
+        <span class="font-mono text-[10px] uppercase tracking-wider text-cyan-300">★ Recomendada</span>
+      </div>
+      <h2 class="display text-2xl md:text-3xl font-bold mb-3 leading-tight">
+        Que la IA no <span class="gradient-text">los coma</span>.<br />
+        Que les <span class="gradient-text">devuelva tiempo</span>.
+      </h2>
+      <p class="text-sm text-white/75 leading-relaxed mb-5">
+        La versión completa. Detalle bloque-a-bloque por sesión, deliverables visualizados, horas/semana ahorradas estimadas, riesgos identificados.
+      </p>
+      <div class="flex flex-wrap gap-1.5 mb-5">
+        <span class="pill pill-cyan">10 secciones</span>
+        <span class="pill pill-violet">Sesiones expandibles</span>
+        <span class="pill pill-emerald">Lectura ~8 min</span>
+      </div>
+      <div class="inline-flex items-center gap-2 text-cyan-300 group-hover:text-cyan-200 font-medium text-sm transition">
+        Abrir v2.0
+        <svg class="w-4 h-4 group-hover:translate-x-0.5 transition" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+      </div>
+    </a>
+
+  </div>
+
+  <!-- SHARED INFO -->
+  <div class="rounded-2xl border border-white/[0.08] bg-white/[0.02] p-6 md:p-8 max-w-3xl mx-auto">
+    <p class="font-mono text-[10px] uppercase tracking-[0.2em] text-emerald-300 mb-3">Lo que ambas comparten</p>
+    <h3 class="display text-xl font-semibold mb-4">Mismo alcance, mismo precio</h3>
+    <div class="grid sm:grid-cols-2 gap-3 text-sm text-white/85">
+      <div class="flex gap-2"><span class="text-emerald-400 shrink-0 mt-0.5">✓</span><span>5 sesiones de 60 min en vivo</span></div>
+      <div class="flex gap-2"><span class="text-emerald-400 shrink-0 mt-0.5">✓</span><span>5 personas del equipo en cada sesión</span></div>
+      <div class="flex gap-2"><span class="text-emerald-400 shrink-0 mt-0.5">✓</span><span>Soporte WhatsApp todo el mes</span></div>
+      <div class="flex gap-2"><span class="text-emerald-400 shrink-0 mt-0.5">✓</span><span>Pipeline migrado + 200 leads importados</span></div>
+      <div class="flex gap-2"><span class="text-emerald-400 shrink-0 mt-0.5">✓</span><span>Bot Q&amp;A interno operativo en producción</span></div>
+      <div class="flex gap-2"><span class="text-emerald-400 shrink-0 mt-0.5">✓</span><span>1 curso migrado a GHL como modelo</span></div>
+    </div>
+    <div class="mt-6 pt-5 border-t border-white/[0.06] flex flex-wrap items-baseline justify-between gap-3">
+      <p class="font-mono text-[10px] uppercase tracking-wider text-white/55">Total mes 1</p>
+      <p class="display text-2xl md:text-3xl font-bold gradient-text">USD 587</p>
+    </div>
+    <p class="text-xs text-white/55 mt-1 text-right">USD 67 GHL + USD 20 WhatsApp + USD 500 mentoring · A partir del mes 2 solo USD 87/mes recurrente.</p>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="mt-16 pt-8 border-t border-white/[0.06]">
+    <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+      <div>
+        <p class="display font-bold text-base">Andrés Linares</p>
+        <p class="text-sm text-white/65">ALCONSULTING · Implementación GHL/SHARP + IA</p>
+      </div>
+      <p class="font-mono text-[10px] uppercase tracking-wider text-white/40">Tu Asesor Financiero · Mayo 2026</p>
+    </div>
+  </footer>
+
+</div>
+
+</body>
+</html>
