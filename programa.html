@@ -155,6 +155,21 @@
   .sub-list li { position: relative; padding-left: 16px; font-size: 12.5px; color: rgba(255,255,255,0.68); line-height: 1.55; margin-bottom: 3px; }
   .sub-list li::before { content: '–'; position: absolute; left: 0; color: rgba(255,255,255,0.38); }
 
+  /* Live checklist (checkboxes) */
+  .check-label { font-family: 'Geist Mono', monospace; font-size: 10px; text-transform: uppercase; letter-spacing: 0.12em; color: rgba(255,255,255,0.55); margin: 20px 0 10px; display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+  .check-progress { font-family: 'Geist Mono', monospace; font-size: 10px; padding: 2px 8px; border-radius: 6px; background: rgba(139,92,246,0.15); border: 1px solid rgba(139,92,246,0.35); color: rgb(196,181,253); }
+  .check-progress.done { background: rgba(16,185,129,0.15); border-color: rgba(16,185,129,0.4); color: rgb(167,243,208); }
+  .check-list { list-style: none; margin: 0; padding: 0; }
+  .check-list li { display: flex; align-items: flex-start; gap: 11px; padding: 9px 0; border-bottom: 1px solid rgba(255,255,255,0.04); font-size: 13.5px; line-height: 1.55; color: rgba(255,255,255,0.9); }
+  .check-list li:last-child { border-bottom: none; }
+  .check-list input[type=checkbox] { appearance: none; -webkit-appearance: none; width: 19px; height: 19px; flex-shrink: 0; margin-top: 1px; border-radius: 6px; border: 1px solid rgba(139,92,246,0.45); background: rgba(139,92,246,0.08); cursor: pointer; position: relative; transition: all .15s; }
+  .check-list input[type=checkbox]:hover { border-color: rgba(139,92,246,0.8); }
+  .check-list input[type=checkbox]:checked { background: rgba(16,185,129,0.25); border-color: rgba(16,185,129,0.6); }
+  .check-list input[type=checkbox]:checked::after { content: '✓'; position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 12px; color: rgb(167,243,208); font-weight: 700; }
+  .check-list input[type=checkbox]:checked + span { color: rgba(255,255,255,0.42); text-decoration: line-through; }
+  .check-list li b, .check-list li strong { color: #fff; font-weight: 600; }
+  .check-list input[type=checkbox]:checked + span b { color: rgba(255,255,255,0.42); font-weight: 600; }
+
   @media (max-width: 768px) { main { padding-bottom: 4rem; } }
 </style>
 </head>
@@ -538,6 +553,18 @@
               <tr><td>Boceto pipeline GHL v0 + cierre</td><td><span class="pill pill-amber">8 min</span></td><td>Dibujamos las etapas migradas en vivo + tarea por persona.</td></tr>
             </tbody>
           </table>
+
+          <p class="check-label">✓ Checklist en vivo <span class="check-progress">0/7</span></p>
+          <ul class="check-list">
+            <li><input type="checkbox" id="c1-1"><span><b>Pactar</b> acuerdos del mes + filosofía "que la IA no nos coma"</span></li>
+            <li><input type="checkbox" id="c1-2"><span><b>Crear la subcuenta GHL</b> + cargar los 5 usuarios (Ari, Ana, Eva, Cami, Mati)</span></li>
+            <li><input type="checkbox" id="c1-3"><span><b>Configurar negocio</b> — zona horaria (GMT-3), idioma español, logo + paleta de marca</span></li>
+            <li><input type="checkbox" id="c1-4"><span><b>Tour guiado</b> — Conversations, Contacts, Opportunities, Calendars, Automation</span></li>
+            <li><input type="checkbox" id="c1-5"><span><b>Walk-through</b> del pipeline actual de HubSpot (6 etapas + campos)</span></li>
+            <li><input type="checkbox" id="c1-6"><span><b>Bocetar</b> el pipeline GHL v0 + marcar zonas (bot / humano / cierre)</span></li>
+            <li><input type="checkbox" id="c1-7"><span><b>Asignar tareas</b> por persona para C2</span></li>
+          </ul>
+
           <div class="grid md:grid-cols-2 gap-3 mt-4">
             <div class="diagram-card" style="padding: 14px; border-color: rgba(6, 182, 212, 0.3);"><span class="pill pill-cyan mb-2">Deliverable</span><p class="text-sm text-white/90 mt-2">Workspace GHL operativo con 5 usuarios · boceto del pipeline validado.</p></div>
             <div class="diagram-card" style="padding: 14px;"><span class="pill pill-zinc mb-2">Tarea semana 1 · ~3-5h</span><p class="text-sm text-white/80 mt-2">Ari + Ana validan el boceto · Eva valida etapas de reclutamiento · Cami arma touchpoints de redes.</p></div>
@@ -568,6 +595,18 @@
               <tr><td>WhatsApp setup</td><td><span class="pill pill-amber">10 min</span></td><td>Conexión + 1 plantilla de saludo (decisión cerrada en C1).</td></tr>
             </tbody>
           </table>
+
+          <p class="check-label">✓ Checklist en vivo <span class="check-progress">0/7</span></p>
+          <ul class="check-list">
+            <li><input type="checkbox" id="c2-1"><span><b>Recap</b> tarea + confirmar las 6 etapas finales</span></li>
+            <li><input type="checkbox" id="c2-2"><span><b>Crear el pipeline</b> en GHL + las 6 etapas + colores (Background tint)</span></li>
+            <li><input type="checkbox" id="c2-3"><span><b>Crear custom fields</b> (fuente, líder, producto, licencia PAS…) en carpeta</span></li>
+            <li><input type="checkbox" id="c2-4"><span><b>Crear custom values</b> (correo_de_salida, link_calendario) + tags canónicas</span></li>
+            <li><input type="checkbox" id="c2-5"><span><b>Mapear el CSV</b> + dry-run con 10 leads de prueba</span></li>
+            <li><input type="checkbox" id="c2-6"><span><b>Import completo</b> ~200 leads + verificar 5 al azar (backup HubSpot intacto)</span></li>
+            <li><input type="checkbox" id="c2-7"><span><b>Conectar WhatsApp</b> + 1 plantilla de saludo + test de envío real</span></li>
+          </ul>
+
           <div class="grid md:grid-cols-2 gap-3 mt-4">
             <div class="diagram-card" style="padding: 14px; border-color: rgba(6, 182, 212, 0.3);"><span class="pill pill-cyan mb-2">Deliverable</span><p class="text-sm text-white/90 mt-2">Pipeline GHL operativo · ~200 leads migrados · WhatsApp conectado.</p></div>
             <div class="diagram-card" style="padding: 14px;"><span class="pill pill-zinc mb-2">Tarea semana 2 · ~3-5h</span><p class="text-sm text-white/80 mt-2">Eva redacta 20 Q&amp;As del bot · Ari revisa los prompts borrador con su ChatGPT entrenado.</p></div>
@@ -598,6 +637,17 @@
               <tr><td>Cierre + tarea</td><td><span class="pill pill-amber">5 min</span></td><td>Cómo entrenar con thumbs up/down.</td></tr>
             </tbody>
           </table>
+
+          <p class="check-label">✓ Checklist en vivo <span class="check-progress">0/6</span></p>
+          <ul class="check-list">
+            <li><input type="checkbox" id="c3-1"><span><b>Recap</b> de las FAQs + el material que mandaron</span></li>
+            <li><input type="checkbox" id="c3-2"><span><b>Crear el bot</b> (Bot Goals V2) + identidad/tono + prompt en 3 campos</span></li>
+            <li><input type="checkbox" id="c3-3"><span><b>Crear la KB</b> + cargar 20 FAQs + docs de productos + tabla de comisiones</span></li>
+            <li><input type="checkbox" id="c3-4"><span><b>Custom Bot Responses</b> para datos sensibles (comisiones, licencia PAS)</span></li>
+            <li><input type="checkbox" id="c3-5"><span><b>Reglas de escalado</b> — cuándo deriva a un humano</span></li>
+            <li><input type="checkbox" id="c3-6"><span><b>Test en sandbox</b> (5-10 preguntas reales) + mostrar entrenamiento 👍/👎</span></li>
+          </ul>
+
           <div class="grid md:grid-cols-2 gap-3 mt-4">
             <div class="diagram-card" style="padding: 14px; border-color: rgba(6, 182, 212, 0.3);"><span class="pill pill-cyan mb-2">Deliverable</span><p class="text-sm text-white/90 mt-2">Bot Q&amp;A operativo en sandbox · KB con 15-20 entries.</p></div>
             <div class="diagram-card" style="padding: 14px;"><span class="pill pill-zinc mb-2">Tarea semana 3 · ~4-6h</span><p class="text-sm text-white/80 mt-2">Eva + Mati prueban con 30 preguntas reales · Cami reformula respuestas malas · Ari agrega 10 entries.</p></div>
@@ -629,6 +679,17 @@
               <tr><td>Cierre + tarea</td><td><span class="pill pill-amber">10 min</span></td><td>Dudas del equipo + asignación.</td></tr>
             </tbody>
           </table>
+
+          <p class="check-label">✓ Checklist en vivo <span class="check-progress">0/6</span></p>
+          <ul class="check-list">
+            <li><input type="checkbox" id="c4-1"><span><b>WF 1</b> — Lead nuevo de redes → asignar al líder + tag + crear oportunidad</span></li>
+            <li><input type="checkbox" id="c4-2"><span><b>WF 2</b> — Cambio de etapa → WhatsApp + email contextual</span></li>
+            <li><input type="checkbox" id="c4-3"><span><b>WF 3</b> — Follow-up post-reunión 24h / 48h</span></li>
+            <li><input type="checkbox" id="c4-4"><span><b>WF 4</b> — Reactivación de los 160 leads en limbo</span></li>
+            <li><input type="checkbox" id="c4-5"><span><b>WF 5</b> — Cierre + nurturing post-venta</span></li>
+            <li><input type="checkbox" id="c4-6"><span><b>Repasar dudas</b> del equipo + asignar tarea de C5</span></li>
+          </ul>
+
           <div class="grid md:grid-cols-2 gap-3 mt-4">
             <div class="diagram-card" style="padding: 14px; border-color: rgba(6, 182, 212, 0.3);"><span class="pill pill-cyan mb-2">Deliverable</span><p class="text-sm text-white/90 mt-2">5 workflows operativos · pipeline automatizado de punta a punta.</p></div>
             <div class="diagram-card" style="padding: 14px;"><span class="pill pill-zinc mb-2">Tarea semana 4 · ~4-6h</span><p class="text-sm text-white/80 mt-2">El equipo prueba los workflows con leads reales · el bot Q&amp;A sigue entrenándose con thumbs · Eva agrega entries a la KB.</p></div>
@@ -659,6 +720,18 @@
               <tr><td>Cierre</td><td><span class="pill pill-amber">5 min</span></td><td>Próximos pasos opcionales (Bot 1, plataforma de cursos, ideas Gen Z).</td></tr>
             </tbody>
           </table>
+
+          <p class="check-label">✓ Checklist en vivo <span class="check-progress">0/7</span></p>
+          <ul class="check-list">
+            <li><input type="checkbox" id="c5-1"><span><b>Revisar thumbs</b> 👍/👎 + ajustar prompts del bot</span></li>
+            <li><input type="checkbox" id="c5-2"><span><b>Corregir</b> respuestas problemáticas + completar la KB</span></li>
+            <li><input type="checkbox" id="c5-3"><span><b>Bot → producción</b> (Bot Status a Live) + conectar al WhatsApp interno</span></li>
+            <li><input type="checkbox" id="c5-4"><span><b>Verificar</b> plantillas de WhatsApp aprobadas por Meta</span></li>
+            <li><input type="checkbox" id="c5-5"><span><b>Conectar los 5 workflows</b> como un flujo continuo + test end-to-end con lead real</span></li>
+            <li><input type="checkbox" id="c5-6"><span><b>Entregar</b> el doc "Cómo iteramos" + mostrar soporte (jueves 7pm + grupo)</span></li>
+            <li><input type="checkbox" id="c5-7"><span><b>Roadmap</b> fase siguiente (Bot 1, cursos GHL, formación Gen Z)</span></li>
+          </ul>
+
           <div class="grid md:grid-cols-2 gap-3 mt-4">
             <div class="diagram-card glow-emerald" style="padding: 14px; border-color: rgba(16, 185, 129, 0.4);"><span class="pill pill-emerald mb-2">Deliverable final</span><p class="text-sm text-white/90 mt-2">Bot Q&amp;A en producción · Pipeline end-to-end · Doc "Cómo iteramos".</p></div>
             <div class="diagram-card" style="padding: 14px;"><span class="pill pill-zinc mb-2">Después de C5</span><p class="text-sm text-white/80 mt-2">Acceso permanente a las clases de los jueves 7pm · soporte continuo en el grupo de WhatsApp.</p></div>
@@ -1004,6 +1077,30 @@
   </main>
 
 </div>
+
+<script>
+(function () {
+  function updateProgress(list) {
+    var box = list.parentElement.querySelector('.check-progress');
+    if (!box) return;
+    var all = list.querySelectorAll('input[type=checkbox]');
+    var done = list.querySelectorAll('input[type=checkbox]:checked');
+    box.textContent = done.length + '/' + all.length;
+    box.classList.toggle('done', done.length === all.length && all.length > 0);
+  }
+  document.querySelectorAll('.check-list').forEach(function (list) {
+    list.querySelectorAll('input[type=checkbox]').forEach(function (b) {
+      var key = 'taf-prog-' + b.id;
+      if (localStorage.getItem(key) === '1') b.checked = true;
+      b.addEventListener('change', function () {
+        localStorage.setItem(key, b.checked ? '1' : '0');
+        updateProgress(list);
+      });
+    });
+    updateProgress(list);
+  });
+})();
+</script>
 
 </body>
 </html>
