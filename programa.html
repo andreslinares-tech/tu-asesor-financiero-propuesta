@@ -1,0 +1,1040 @@
+<!DOCTYPE html>
+<html lang="es" class="dark">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Programa de implementación · Tu Asesor Financiero · ALCONSULTING</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&family=Geist+Mono:wght@400;500&family=Source+Serif+4:ital,wght@1,400;1,500&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: #0a0a0f;
+    --surface: #14141c;
+    --surface-2: #1a1a24;
+    --border: rgba(255,255,255,0.06);
+    --border-strong: rgba(255,255,255,0.10);
+    --violet: #7c3aed;
+    --violet-300: rgb(196, 181, 253);
+    --violet-400: rgb(167, 139, 250);
+    --cyan-300: rgb(165, 243, 252);
+    --emerald-300: rgb(167, 243, 208);
+    --amber-300: rgb(252, 211, 77);
+  }
+  body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg); color: #f5f5fa; -webkit-font-smoothing: antialiased; }
+  .display { font-family: 'Space Grotesk', system-ui, sans-serif; }
+  .font-mono { font-family: 'Geist Mono', ui-monospace, monospace; }
+  .serif-italic { font-family: 'Source Serif 4', Georgia, serif; font-style: italic; }
+  html { scroll-behavior: smooth; }
+
+  /* Grain dot pattern */
+  .grain { position: fixed; inset: 0; pointer-events: none; opacity: 0.025; background-image: radial-gradient(#fff 1px, transparent 1px); background-size: 4px 4px; z-index: 1; }
+
+  /* Hero gradient text */
+  .gradient-text { background: linear-gradient(135deg, #7c3aed 0%, #22d3ee 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+  .gradient-violet { background: linear-gradient(135deg, #c4b5fd 0%, #7c3aed 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+
+  /* Glow shadows */
+  .glow-violet { box-shadow: 0 0 60px -15px rgba(124, 58, 237, 0.5); }
+  .glow-cyan { box-shadow: 0 0 40px -15px rgba(34, 211, 238, 0.4); }
+  .glow-emerald { box-shadow: 0 0 30px -15px rgba(16, 185, 129, 0.4); }
+
+  .toc-link { transition: color 0.15s, border-color 0.15s; }
+  .toc-link:hover { color: rgb(255 255 255); border-left-color: rgb(139 92 246); }
+
+  /* Diagram cards */
+  .diagram-card { background: rgba(20, 20, 28, 0.6); border: 1px solid var(--border); border-radius: 24px; padding: 28px; backdrop-filter: blur(8px); }
+  @media (min-width: 768px) { .diagram-card { padding: 32px; } }
+
+  /* Pills */
+  .pill { display: inline-block; padding: 3px 9px; border-radius: 6px; font-size: 11px; font-family: 'Geist Mono', ui-monospace, monospace; font-weight: 500; }
+  .pill-violet  { background: rgba(139, 92, 246, 0.15); border: 1px solid rgba(139, 92, 246, 0.35); color: rgb(196, 181, 253); }
+  .pill-amber   { background: rgba(245, 158, 11, 0.15); border: 1px solid rgba(245, 158, 11, 0.35); color: rgb(252, 211, 77); }
+  .pill-cyan    { background: rgba(6, 182, 212, 0.15);  border: 1px solid rgba(6, 182, 212, 0.35);  color: rgb(165, 243, 252); }
+  .pill-emerald { background: rgba(16, 185, 129, 0.15); border: 1px solid rgba(16, 185, 129, 0.35); color: rgb(167, 243, 208); }
+  .pill-rose    { background: rgba(244, 63, 94, 0.15);  border: 1px solid rgba(244, 63, 94, 0.35);  color: rgb(253, 164, 175); }
+  .pill-blue    { background: rgba(59, 130, 246, 0.15); border: 1px solid rgba(59, 130, 246, 0.35); color: rgb(147, 197, 253); }
+  .pill-zinc    { background: rgba(113, 113, 122, 0.15); border: 1px solid rgba(113, 113, 122, 0.35); color: rgb(212, 212, 216); }
+
+  /* Expandable session cards */
+  details.wf-card {
+    background: rgba(20, 20, 28, 0.5);
+    border: 1px solid var(--border-strong);
+    border-radius: 16px;
+    margin-bottom: 14px; overflow: hidden;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  details.wf-card[open] { border-color: rgba(139, 92, 246, 0.4); box-shadow: 0 0 40px -15px rgba(124, 58, 237, 0.25); }
+  details.wf-card > summary {
+    padding: 18px 22px; cursor: pointer; list-style: none;
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 16px; flex-wrap: wrap;
+  }
+  details.wf-card > summary::-webkit-details-marker { display: none; }
+  details.wf-card > summary::after {
+    content: '＋'; font-family: 'Geist Mono', monospace;
+    color: rgb(167, 139, 250); font-size: 18px; flex-shrink: 0;
+  }
+  details.wf-card[open] > summary::after { content: '−'; }
+  details.wf-card > .wf-body {
+    padding: 0 22px 22px;
+    border-top: 1px solid rgba(255, 255, 255, 0.04);
+    padding-top: 18px;
+  }
+
+  /* Step tables */
+  .step-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  .step-table th {
+    text-align: left; font-family: 'Geist Mono', monospace;
+    font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em;
+    color: rgba(255, 255, 255, 0.6); padding: 10px 14px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06); font-weight: 500;
+  }
+  .step-table td {
+    padding: 12px 14px; vertical-align: top;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+    color: rgba(255, 255, 255, 0.92); line-height: 1.6;
+  }
+  .step-table td:first-child { font-weight: 500; width: 230px; font-family: 'Inter', sans-serif; color: #fff; }
+  .step-table tr:last-child td { border-bottom: none; }
+
+  /* Phase cards (horizontal scroll) */
+  .phase-card {
+    flex-shrink: 0; width: 220px; border-radius: 14px;
+    background: linear-gradient(135deg, #14141c 0%, #0c0c14 100%);
+    border: 1px solid var(--border-strong);
+    padding: 16px; display: flex; flex-direction: column; gap: 8px;
+    transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+  }
+  .phase-card:hover { transform: translateY(-3px); border-color: rgba(139, 92, 246, 0.4); box-shadow: 0 0 30px -15px rgba(124, 58, 237, 0.3); }
+
+  /* Pillar cards (with icons) */
+  .pillar { transition: all 0.25s ease; background: rgba(20, 20, 28, 0.6); border: 1px solid var(--border); border-radius: 18px; padding: 24px; }
+  .pillar:hover { transform: translateY(-4px); border-color: rgba(139, 92, 246, 0.4); box-shadow: 0 0 40px -15px rgba(124, 58, 237, 0.3); }
+  .pillar-icon { width: 44px; height: 44px; border-radius: 12px; display: flex; align-items: center; justify-content: center; }
+
+  /* Person cards */
+  .person-card { background: rgba(20, 20, 28, 0.6); border: 1px solid var(--border); border-radius: 16px; padding: 18px; transition: all 0.25s ease; }
+  .person-card:hover { transform: translateY(-3px); border-color: rgba(139, 92, 246, 0.4); }
+  .avatar { width: 40px; height: 40px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 15px; color: #fff; flex-shrink: 0; }
+
+  /* Step nums */
+  .step-num { width: 36px; height: 36px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-family: 'Geist Mono', monospace; font-weight: 600; font-size: 14px; background: rgba(139, 92, 246, 0.15); border: 1px solid rgba(139, 92, 246, 0.4); color: rgb(196, 181, 253); flex-shrink: 0; }
+
+  /* Pull quote */
+  blockquote.pull-quote {
+    border-left: 3px solid rgba(139, 92, 246, 0.6);
+    padding: 6px 0 6px 18px;
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-style: italic;
+    color: rgba(255, 255, 255, 0.92);
+    line-height: 1.65;
+    font-size: 1rem;
+  }
+  @media (min-width: 768px) { blockquote.pull-quote { font-size: 1.05rem; } }
+
+  /* Detailed step-by-step lists */
+  .detail-group { margin-bottom: 20px; }
+  .detail-group:last-child { margin-bottom: 0; }
+  .detail-group-label { font-family: 'Geist Mono', monospace; font-size: 10px; text-transform: uppercase; letter-spacing: 0.12em; color: rgba(255,255,255,0.55); margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
+  .detail-ol { counter-reset: step; list-style: none; padding: 0; margin: 0; }
+  .detail-ol > li { position: relative; padding-left: 36px; margin-bottom: 13px; font-size: 13.5px; line-height: 1.6; color: rgba(255,255,255,0.92); }
+  .detail-ol > li:last-child { margin-bottom: 0; }
+  .detail-ol > li::before {
+    counter-increment: step; content: counter(step);
+    position: absolute; left: 0; top: 1px; width: 23px; height: 23px; border-radius: 7px;
+    background: rgba(139,92,246,0.15); border: 1px solid rgba(139,92,246,0.35);
+    color: rgb(196,181,253); font-family: 'Geist Mono', monospace; font-size: 11px; font-weight: 600;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .detail-ol.emerald > li::before { background: rgba(16,185,129,0.15); border-color: rgba(16,185,129,0.35); color: rgb(167,243,208); }
+  .detail-ol.cyan > li::before { background: rgba(6,182,212,0.15); border-color: rgba(6,182,212,0.35); color: rgb(165,243,252); }
+  .detail-ol li b, .detail-ol li strong { color: #fff; font-weight: 600; }
+  .sub-list { list-style: none; margin: 7px 0 0; padding: 0; }
+  .sub-list li { position: relative; padding-left: 16px; font-size: 12.5px; color: rgba(255,255,255,0.68); line-height: 1.55; margin-bottom: 3px; }
+  .sub-list li::before { content: '–'; position: absolute; left: 0; color: rgba(255,255,255,0.38); }
+
+  @media (max-width: 768px) { main { padding-bottom: 4rem; } }
+</style>
+</head>
+<body class="antialiased min-h-screen relative">
+
+<div class="grain"></div>
+<div class="fixed inset-0 pointer-events-none z-0" style="background: radial-gradient(ellipse 80% 50% at 50% -10%, rgba(139, 92, 246, 0.12), transparent 60%);"></div>
+
+<div class="relative max-w-[1400px] mx-auto flex z-10">
+
+  <!-- TOC SIDEBAR (desktop) -->
+  <aside class="hidden lg:block w-60 shrink-0 sticky top-0 h-screen pt-20 px-6 overflow-y-auto bg-[#0c0c12]/80 backdrop-blur-md border-r border-white/[0.06]">
+    <div class="flex items-center gap-2 mb-5">
+      <div class="w-7 h-7 rounded-lg bg-gradient-to-br from-violet-500 to-cyan-400 flex items-center justify-center font-display font-bold text-bg text-xs text-black">AL</div>
+      <p class="font-mono text-[10px] uppercase tracking-[0.2em] text-white">Programa</p>
+    </div>
+    <nav class="space-y-0.5">
+      <a href="#quienes" class="toc-link block py-2 px-3 text-sm text-white/80 border-l border-transparent">01 · Quiénes</a>
+      <a href="#partida" class="toc-link block py-2 px-3 text-sm text-white/80 border-l border-transparent">02 · Punto de partida</a>
+      <a href="#destino" class="toc-link block py-2 px-3 text-sm text-white/80 border-l border-transparent">03 · El destino</a>
+      <a href="#sesiones" class="toc-link block py-2 px-3 text-sm text-white/80 border-l border-transparent">04 · Las 5 sesiones</a>
+      <a href="#detalle" class="toc-link block py-2 px-3 text-sm text-white/80 border-l border-transparent">05 · Qué hacemos por clase</a>
+      <a href="#pasoapaso" class="toc-link block py-2 px-3 text-sm text-white/80 border-l border-transparent">06 · Paso a paso detallado</a>
+      <a href="#activos" class="toc-link block py-2 px-3 text-sm text-white/80 border-l border-transparent">07 · Activos que cargamos</a>
+      <a href="#empezar" class="toc-link block py-2 px-3 text-sm text-white/80 border-l border-transparent">08 · Antes de empezar</a>
+    </nav>
+
+    <div class="mt-10 pt-6 border-t border-white/[0.06]">
+      <p class="font-mono text-[10px] uppercase tracking-wider text-white/60 mb-2">Cliente</p>
+      <p class="text-sm text-white">Tu Asesor Financiero</p>
+      <p class="text-xs text-white/60">Ari · Anabel · Eva · Cami · Mati</p>
+    </div>
+    <div class="mt-4">
+      <p class="font-mono text-[10px] uppercase tracking-wider text-white/60 mb-2">Stack destino</p>
+      <p class="text-sm text-white">GHL / SHARP</p>
+      <p class="text-xs text-white/60">Conversation AI V2 · WhatsApp</p>
+    </div>
+    <div class="mt-4">
+      <p class="font-mono text-[10px] uppercase tracking-wider text-white/60 mb-2">Mentor</p>
+      <p class="text-sm text-white">Andrés Linares</p>
+      <p class="text-xs text-white/60">ALCONSULTING</p>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="flex-1 px-5 md:px-10 py-10 md:py-20 max-w-[1100px]">
+
+    <!-- HEADER STICKY (mobile) -->
+    <div class="lg:hidden sticky top-0 z-50 -mx-5 mb-8 bg-bg/85 backdrop-blur-md border-b border-white/[0.06]">
+      <div class="px-5 py-3 flex items-center justify-between gap-4">
+        <div class="flex items-center gap-3 min-w-0">
+          <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-violet-500 to-cyan-400 flex items-center justify-center shrink-0 font-display font-bold text-black text-xs">AL</div>
+          <div class="min-w-0">
+            <div class="text-[10px] text-white/50 uppercase tracking-wider font-mono">Programa</div>
+            <div class="display font-semibold text-sm truncate">Tu Asesor Financiero</div>
+          </div>
+        </div>
+        <span class="shrink-0 pill pill-violet">5 clases</span>
+      </div>
+    </div>
+
+    <!-- HEADER HERO -->
+    <header class="mb-16 md:mb-24">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/[0.04] border border-white/[0.08] text-xs text-white/80 mb-6">
+        <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+        <span class="font-mono text-[11px]">Propuesta aceptada · Programa de implementación · 5 clases / 1 mes</span>
+      </div>
+      <p class="font-mono text-[11px] uppercase tracking-[0.2em] text-violet-300 mb-4">Tu Asesor Financiero × ALCONSULTING</p>
+      <h1 class="display text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight leading-[1.02]">
+        El mapa de las <span class="gradient-text">5 clases</span>.<br />
+        Qué hacemos, <span class="gradient-text">clase por clase</span>.
+      </h1>
+      <p class="mt-7 text-lg md:text-xl text-white/85 max-w-2xl leading-relaxed">
+        Arrancamos de cero — sin GHL, sin WhatsApp automatizado, sin nada montado. En 1 mes y 5 clases salimos con el CRM vivo, el bot Q&amp;A en producción, los leads migrados y el equipo entrenado para iterar solo.
+      </p>
+      <blockquote class="pull-quote mt-7 max-w-3xl">
+        Yo lo que quiero es que Ana, Eva, Mati, Cami y yo estemos laburando 20 o 25 horas por semana y el resto del tiempo estemos disfrutando de la vida.
+        <span class="block not-italic font-sans text-xs text-white/55 mt-2">— Ari · reunión 1</span>
+      </blockquote>
+      <div class="flex flex-wrap gap-2 mt-7">
+        <span class="pill pill-violet">5 clases · 60 min</span>
+        <span class="pill pill-cyan">5 personas en cada clase</span>
+        <span class="pill pill-emerald">~200 leads migrados</span>
+        <span class="pill pill-violet">Bot Q&amp;A interno</span>
+        <span class="pill pill-cyan">5 workflows críticos</span>
+        <span class="pill pill-amber">Soporte WhatsApp todo el mes</span>
+      </div>
+      <div class="flex flex-wrap gap-3 mt-8">
+        <a href="#sesiones" class="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-violet-600 hover:bg-violet-500 text-white font-medium transition glow-violet">
+          Ver el mapa de clases
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+        </a>
+        <a href="#empezar" class="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-white/[0.04] hover:bg-white/[0.08] border border-white/[0.10] text-white font-medium transition">
+          Antes de empezar
+        </a>
+      </div>
+    </header>
+
+    <!-- 01 · QUIÉNES -->
+    <section id="quienes" class="mb-20 md:mb-24 scroll-mt-12">
+      <p class="font-mono text-[11px] uppercase tracking-[0.2em] text-violet-300 mb-3">01 · Quiénes</p>
+      <h2 class="display text-2xl md:text-4xl font-bold tracking-tight mb-3">El equipo y la red</h2>
+      <p class="serif-italic text-white/85 mb-8 max-w-3xl">Asesoramiento financiero a personas + formación de asesores. Fundada en 2020 — 18 años de experiencia de Ari. Modelo único en el rubro: los líderes reciben asesores ya formados. Los 5 del equipo orgánico están en todas las clases.</p>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
+        <div class="person-card">
+          <div class="flex items-center gap-3 mb-3">
+            <div class="avatar" style="background: linear-gradient(135deg,#7c3aed,#a78bfa);">AD</div>
+            <div><p class="display font-semibold text-sm">Ariel "Ari" Di Giácomo</p><p class="text-xs text-white/55">Responsable General · socio mayoritario</p></div>
+          </div>
+          <p class="text-xs text-white/75 leading-relaxed">Decisor. Ingeniero químico, mentalidad de procesos. Atiende cartera propia + nuevas iniciativas. Aporta la narrativa del negocio.</p>
+        </div>
+        <div class="person-card">
+          <div class="flex items-center gap-3 mb-3">
+            <div class="avatar" style="background: linear-gradient(135deg,#06b6d4,#22d3ee);">AR</div>
+            <div><p class="display font-semibold text-sm">Anabel "Ana" Romano</p><p class="text-xs text-white/55">Responsable Operativa · socia</p></div>
+          </div>
+          <p class="text-xs text-white/75 leading-relaxed">Frente operativo del día a día. Aprende rápido y opera bien — interlocutora principal del setup.</p>
+        </div>
+        <div class="person-card">
+          <div class="flex items-center gap-3 mb-3">
+            <div class="avatar" style="background: linear-gradient(135deg,#10b981,#34d399);">EP</div>
+            <div><p class="display font-semibold text-sm">Evangelina "Eva" Pezzutti</p><p class="text-xs text-white/55">Capital Humano · socia</p></div>
+          </div>
+          <p class="text-xs text-white/75 leading-relaxed">Reclutamiento y onboarding de nuevos asesores. Dueña de las FAQs y el material que alimenta la Knowledge Base del bot.</p>
+        </div>
+        <div class="person-card">
+          <div class="flex items-center gap-3 mb-3">
+            <div class="avatar" style="background: linear-gradient(135deg,#f59e0b,#fbbf24);">CB</div>
+            <div><p class="display font-semibold text-sm">Camila "Cami" Bresciano</p><p class="text-xs text-white/55">Comunicación</p></div>
+          </div>
+          <p class="text-xs text-white/75 leading-relaxed">Contenido y touchpoints en redes (8 reels + 2 carruseles/mes). Reformula las respuestas del bot con voz de marca.</p>
+        </div>
+        <div class="person-card">
+          <div class="flex items-center gap-3 mb-3">
+            <div class="avatar" style="background: linear-gradient(135deg,#3b82f6,#60a5fa);">MS</div>
+            <div><p class="display font-semibold text-sm">Matías "Mati" Sanders</p><p class="text-xs text-white/55">Administración · IA</p></div>
+          </div>
+          <p class="text-xs text-white/75 leading-relaxed">Soporte administrativo a Ana + el referente de IA del equipo. Prueba y entrena el bot.</p>
+        </div>
+        <div class="person-card" style="border-color: rgba(6,182,212,0.25);">
+          <div class="flex items-center gap-3 mb-3">
+            <div class="avatar" style="background: linear-gradient(135deg,#14141c,#0c0c14); border:1px solid rgba(255,255,255,0.12);">AL</div>
+            <div><p class="display font-semibold text-sm">Andrés Linares</p><p class="text-xs text-white/55">Mentor · ALCONSULTING</p></div>
+          </div>
+          <p class="text-xs text-white/75 leading-relaxed">Implementación GHL/SHARP + IA. Arma la base en vivo y enseña a iterar — modelo mentoring, no "te hago todo".</p>
+        </div>
+      </div>
+
+      <div class="diagram-card">
+        <p class="font-mono text-[10px] uppercase tracking-wider text-white/60 mb-4">Ecosistema extendido · ~200 personas</p>
+        <div class="grid sm:grid-cols-3 gap-4">
+          <div class="text-center p-3 rounded-xl bg-white/[0.02] border border-white/[0.06]">
+            <p class="display text-3xl font-bold gradient-violet">40</p>
+            <p class="text-xs text-white/70 mt-1">Estructura propia</p>
+          </div>
+          <div class="text-center p-3 rounded-xl bg-white/[0.02] border border-white/[0.06]">
+            <p class="display text-3xl font-bold gradient-violet">35</p>
+            <p class="text-xs text-white/70 mt-1">Organización aliada CABA</p>
+          </div>
+          <div class="text-center p-3 rounded-xl bg-white/[0.02] border border-white/[0.06]">
+            <p class="display text-3xl font-bold gradient-violet">130</p>
+            <p class="text-xs text-white/70 mt-1">Organización aliada Colombia</p>
+          </div>
+        </div>
+        <p class="text-sm text-white/75 mt-4 leading-relaxed"><span class="text-white font-medium">9 líderes propios</span> que solo venden y mentorean — Tu Asesor Financiero les entrega los asesores ya formados. <span class="text-white/55">Es la única organización del rubro que lo hace.</span></p>
+      </div>
+    </section>
+
+    <!-- 02 · PUNTO DE PARTIDA -->
+    <section id="partida" class="mb-20 md:mb-24 scroll-mt-12">
+      <p class="font-mono text-[11px] uppercase tracking-[0.2em] text-violet-300 mb-3">02 · Punto de partida</p>
+      <h2 class="display text-2xl md:text-4xl font-bold tracking-tight mb-3">De dónde arrancamos</h2>
+      <p class="serif-italic text-white/85 mb-8 max-w-3xl">Hoy no hay nada montado en GHL ni WhatsApp automatizado. Todo se opera por afuera. Pero los activos para escalar con 5 personas ya están — solo falta la capa que orqueste.</p>
+
+      <div class="diagram-card mb-5">
+        <p class="font-mono text-[10px] uppercase tracking-wider text-white/60 mb-4">Stack actual</p>
+        <table class="step-table">
+          <tbody>
+            <tr><td>HubSpot</td><td><span class="pill pill-amber">al 3%</span> CRM con histórico de leads y estados — sin actualizar hace 4 años, lo usan como archivo.</td></tr>
+            <tr><td>Pauta en redes</td><td>IG/FB → comentarios en reels promocionados → DM → conversación. Funciona, sin automatizar.</td></tr>
+            <tr><td>WhatsApp</td><td><span class="pill pill-amber">manual</span> Recibe leads de pauta con automatismos arcaicos.</td></tr>
+            <tr><td>Formulario Google</td><td>Filtro/calificación manual y lento.</td></tr>
+            <tr><td>Moodle</td><td>Plataforma de cursos embebida — a reemplazar por la de GHL.</td></tr>
+            <tr><td>Loom</td><td><span class="pill pill-emerald">mantener</span> Grabación de cursos + transcripts.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-5">
+        <div class="diagram-card" style="border-color: rgba(16, 185, 129, 0.25);">
+          <div class="flex items-center gap-2 mb-4">
+            <span class="pill pill-emerald">✓ Ya tienen</span>
+            <span class="font-mono text-[10px] uppercase tracking-wider text-white/60">Activos validados</span>
+          </div>
+          <ul class="space-y-2.5 text-sm text-white/90">
+            <li class="flex gap-2"><span class="text-emerald-400 shrink-0 mt-0.5">›</span><span>ChatGPT entrenado por meses con narrativa, conceptos y algoritmos del negocio</span></li>
+            <li class="flex gap-2"><span class="text-emerald-400 shrink-0 mt-0.5">›</span><span>~200 leads en HubSpot con histórico de estados</span></li>
+            <li class="flex gap-2"><span class="text-emerald-400 shrink-0 mt-0.5">›</span><span>6 años de contenido formativo grabado en Loom + transcripts</span></li>
+            <li class="flex gap-2"><span class="text-emerald-400 shrink-0 mt-0.5">›</span><span>Pauta en redes funcionando + captación por comentarios en reels</span></li>
+            <li class="flex gap-2"><span class="text-emerald-400 shrink-0 mt-0.5">›</span><span>Modelo único · 9 líderes que reciben asesores ya formados</span></li>
+            <li class="flex gap-2"><span class="text-emerald-400 shrink-0 mt-0.5">›</span><span>~200 personas en el ecosistema extendido</span></li>
+          </ul>
+        </div>
+
+        <div class="diagram-card" style="border-color: rgba(245, 158, 11, 0.25);">
+          <div class="flex items-center gap-2 mb-4">
+            <span class="pill pill-amber">⚠ Falta montar</span>
+            <span class="font-mono text-[10px] uppercase tracking-wider text-white/60">Lo que cubre el programa</span>
+          </div>
+          <ul class="space-y-2.5 text-sm text-white/90">
+            <li class="flex gap-2"><span class="text-amber-400 shrink-0 mt-0.5">›</span><span>Cuenta GHL/SHARP desde cero — no tienen nada</span></li>
+            <li class="flex gap-2"><span class="text-amber-400 shrink-0 mt-0.5">›</span><span>WhatsApp conectado y automatizado (hoy es manual)</span></li>
+            <li class="flex gap-2"><span class="text-amber-400 shrink-0 mt-0.5">›</span><span>Pipeline vivo — el de HubSpot tiene 160 leads en limbo</span></li>
+            <li class="flex gap-2"><span class="text-amber-400 shrink-0 mt-0.5">›</span><span>Bot Q&amp;A que descomprima preguntas repetidas de asesores</span></li>
+            <li class="flex gap-2"><span class="text-amber-400 shrink-0 mt-0.5">›</span><span>Automatismos de cambio de etapa → comunicación</span></li>
+            <li class="flex gap-2"><span class="text-amber-400 shrink-0 mt-0.5">›</span><span>Plataforma de cursos en GHL (reemplaza Moodle)</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="diagram-card mt-5">
+        <p class="font-mono text-[10px] uppercase tracking-wider text-white/60 mb-4">Pipeline actual en HubSpot · lo que migramos</p>
+        <table class="step-table">
+          <thead><tr><th>Etapa</th><th>Probabilidad</th><th>Negocios</th></tr></thead>
+          <tbody>
+            <tr><td>1 · Curso habilitado</td><td><span class="pill pill-violet">20%</span></td><td>8</td></tr>
+            <tr><td>2 · Reunión</td><td><span class="pill pill-violet">40%</span></td><td>80</td></tr>
+            <tr><td>3 · Vendió póliza</td><td><span class="pill pill-cyan">80%</span></td><td>12</td></tr>
+            <tr><td>4 · Vendió +10 pólizas</td><td><span class="pill pill-emerald">Ganado · 100%</span></td><td>9</td></tr>
+            <tr><td>5 · Se ca… <span class="text-white/45">(nombre a confirmar)</span></td><td><span class="pill pill-rose">Perdido</span></td><td><span class="text-amber-300 font-semibold">160</span> ⚠</td></tr>
+            <tr><td>6 · Se canceló la gestión</td><td><span class="pill pill-rose">Perdido</span></td><td>15</td></tr>
+          </tbody>
+        </table>
+        <p class="text-xs text-white/55 mt-3">Acuerdo con Ari: no reinventamos la rueda — migramos este pipeline tal cual y automatizamos encima. Los 160 leads en limbo se recuperan con una secuencia de reactivación.</p>
+      </div>
+    </section>
+
+    <!-- 03 · EL DESTINO -->
+    <section id="destino" class="mb-20 md:mb-24 scroll-mt-12">
+      <p class="font-mono text-[11px] uppercase tracking-[0.2em] text-violet-300 mb-3">03 · El destino</p>
+      <h2 class="display text-2xl md:text-4xl font-bold tracking-tight mb-3">Qué montamos en el mes</h2>
+      <p class="serif-italic text-white/85 mb-8 max-w-3xl">Cuatro piezas que dejan el sistema andando solo. El alcance del mes 1 es el Bot Q&amp;A interno — el bot de reclutamiento queda planificado para la fase siguiente.</p>
+
+      <div class="grid md:grid-cols-2 gap-4 mb-6">
+        <div class="pillar">
+          <div class="pillar-icon mb-4" style="background: rgba(139, 92, 246, 0.15);">
+            <svg class="w-6 h-6 text-violet-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h7"/></svg>
+          </div>
+          <div class="flex items-center gap-2 mb-2"><span class="pill pill-violet">01</span><span class="font-mono text-[10px] uppercase tracking-wider text-white/50">Pieza</span></div>
+          <h3 class="display font-semibold text-base mb-2">Pipeline comercial en GHL</h3>
+          <p class="text-sm text-white/80 leading-relaxed">Las 6 etapas de HubSpot migradas + ~200 leads importados sin perder data. Custom fields y narrativa automatizada por etapa.</p>
+        </div>
+        <div class="pillar">
+          <div class="pillar-icon mb-4" style="background: rgba(6, 182, 212, 0.15);">
+            <svg class="w-6 h-6 text-cyan-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2h-5l-5 4v-4z"/></svg>
+          </div>
+          <div class="flex items-center gap-2 mb-2"><span class="pill pill-cyan">02</span><span class="font-mono text-[10px] uppercase tracking-wider text-white/50">Pieza estrella</span></div>
+          <h3 class="display font-semibold text-base mb-2">Bot Q&amp;A interno (Bot 2)</h3>
+          <p class="text-sm text-white/80 leading-relaxed">Soporte a asesores activos: productos, técnicas y dudas operativas. Cubre el 80% de las preguntas repetidas. Sin agenda — solo Q&amp;A.</p>
+        </div>
+        <div class="pillar">
+          <div class="pillar-icon mb-4" style="background: rgba(16, 185, 129, 0.15);">
+            <svg class="w-6 h-6 text-emerald-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+          </div>
+          <div class="flex items-center gap-2 mb-2"><span class="pill pill-emerald">03</span><span class="font-mono text-[10px] uppercase tracking-wider text-white/50">Pieza</span></div>
+          <h3 class="display font-semibold text-base mb-2">5 workflows críticos</h3>
+          <p class="text-sm text-white/80 leading-relaxed">Routing de lead nuevo, mensajes por cambio de etapa, follow-ups, reactivación de los 160 en limbo y post-venta. Lo manual deja de ser manual.</p>
+        </div>
+        <div class="pillar">
+          <div class="pillar-icon mb-4" style="background: rgba(59, 130, 246, 0.15);">
+            <svg class="w-6 h-6 text-blue-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13"/></svg>
+          </div>
+          <div class="flex items-center gap-2 mb-2"><span class="pill pill-blue">04</span><span class="font-mono text-[10px] uppercase tracking-wider text-white/50">Pieza</span></div>
+          <h3 class="display font-semibold text-base mb-2">Plataforma de cursos GHL</h3>
+          <p class="text-sm text-white/80 leading-relaxed">Reemplaza a Moodle. Tracking de progreso + comunidad + generación de credenciales al cambiar de etapa. Incluida sin costo extra.</p>
+        </div>
+      </div>
+
+      <div class="diagram-card" style="border-color: rgba(113,113,122,0.25);">
+        <div class="flex items-center gap-2 mb-3">
+          <span class="pill pill-zinc">Fase siguiente</span>
+          <span class="font-mono text-[10px] uppercase tracking-wider text-white/60">Fuera del alcance del mes 1 — planificado</span>
+        </div>
+        <div class="grid md:grid-cols-3 gap-3 text-sm text-white/80">
+          <div class="flex gap-2"><span class="text-violet-300 shrink-0">›</span><span><span class="text-white font-medium">Bot 1 · Reclutamiento</span> — capta candidatos, perfila y agenda con el líder.</span></div>
+          <div class="flex gap-2"><span class="text-violet-300 shrink-0">›</span><span><span class="text-white font-medium">Formación Gen Z</span> — cápsulas cortas gamificadas estilo Duolingo para asesores de 20.</span></div>
+          <div class="flex gap-2"><span class="text-violet-300 shrink-0">›</span><span><span class="text-white font-medium">Embudo desatendido + funnel internacional</span> — venta online multi-idioma.</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 04 · LAS 5 SESIONES -->
+    <section id="sesiones" class="mb-20 md:mb-24 scroll-mt-12">
+      <p class="font-mono text-[11px] uppercase tracking-[0.2em] text-violet-300 mb-3">04 · Las 5 clases</p>
+      <h2 class="display text-2xl md:text-4xl font-bold tracking-tight mb-3">El mapa del mes</h2>
+      <p class="serif-italic text-white/85 mb-8 max-w-3xl">Una clase de 60 min por semana, con los 5 del equipo. Tareas asíncronas entre clases. Soporte por WhatsApp durante todo el mes.</p>
+
+      <div class="diagram-card">
+        <div class="flex items-center justify-between mb-5">
+          <p class="font-mono text-[10px] uppercase tracking-[0.2em] text-white/60">Cronograma · 5 semanas</p>
+          <p class="font-mono text-[10px] text-white/40">scroll →</p>
+        </div>
+        <div class="overflow-x-auto pb-3 -mx-6 px-6 md:-mx-8 md:px-8">
+          <div class="flex gap-3 items-stretch min-w-max">
+
+            <div class="phase-card">
+              <span class="font-mono text-[10px] uppercase tracking-wider text-violet-300">C1 · Sem 1</span>
+              <h3 class="display text-sm font-semibold text-white">Arranque desde cero</h3>
+              <span class="self-start pill pill-violet">Onboarding</span>
+              <p class="text-[11px] text-white/75 leading-relaxed mt-1">Alta GHL · 5 usuarios · tour · walk-through pipeline · boceto v0.</p>
+            </div>
+            <div class="flex items-center text-white/30 px-1">▸</div>
+
+            <div class="phase-card">
+              <span class="font-mono text-[10px] uppercase tracking-wider text-violet-300">C2 · Sem 2</span>
+              <h3 class="display text-sm font-semibold text-white">Pipeline + 200 leads</h3>
+              <span class="self-start pill pill-violet">Migración</span>
+              <p class="text-[11px] text-white/75 leading-relaxed mt-1">Pipeline en GHL · custom fields · import 200 leads · WhatsApp.</p>
+            </div>
+            <div class="flex items-center text-white/30 px-1">▸</div>
+
+            <div class="phase-card">
+              <span class="font-mono text-[10px] uppercase tracking-wider text-violet-300">C3 · Sem 3</span>
+              <h3 class="display text-sm font-semibold text-white">Bot Q&amp;A + KB</h3>
+              <span class="self-start pill pill-violet">Bot</span>
+              <p class="text-[11px] text-white/75 leading-relaxed mt-1">Bot Goals V2 · KB cargada · test en sandbox.</p>
+            </div>
+            <div class="flex items-center text-white/30 px-1">▸</div>
+
+            <div class="phase-card">
+              <span class="font-mono text-[10px] uppercase tracking-wider text-violet-300">C4 · Sem 4</span>
+              <h3 class="display text-sm font-semibold text-white">Workflows críticos</h3>
+              <span class="self-start pill pill-violet">Automatización</span>
+              <p class="text-[11px] text-white/75 leading-relaxed mt-1">5 workflows · routing · follow-ups · reactivación.</p>
+            </div>
+            <div class="flex items-center text-white/30 px-1">▸</div>
+
+            <div class="phase-card" style="border-color: rgba(16, 185, 129, 0.4); box-shadow: 0 0 20px -10px rgba(16, 185, 129, 0.3);">
+              <span class="font-mono text-[10px] uppercase tracking-wider text-emerald-300">C5 · Sem 5</span>
+              <h3 class="display text-sm font-semibold text-white">Go live + Handoff</h3>
+              <span class="self-start pill pill-emerald">Cierre</span>
+              <p class="text-[11px] text-white/75 leading-relaxed mt-1">Bot a producción · pipeline end-to-end · doc handoff.</p>
+            </div>
+
+          </div>
+        </div>
+        <div class="flex flex-wrap items-center gap-6 mt-6 pt-4 border-t border-white/[0.04]">
+          <div class="flex items-center gap-2 text-xs"><span class="w-3 h-1.5 rounded-sm bg-violet-400/80"></span><span class="text-white/70">Clases (5)</span></div>
+          <div class="flex items-center gap-2 text-xs"><span class="w-3 h-1.5 rounded-sm bg-emerald-400/80"></span><span class="text-white/70">Cierre con sistema vivo</span></div>
+          <div class="flex items-center gap-2 text-xs"><span class="font-mono text-[10px] text-white/50">Soporte WhatsApp todo el mes</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 05 · QUÉ HACEMOS POR CLASE -->
+    <section id="detalle" class="mb-20 md:mb-24 scroll-mt-12">
+      <p class="font-mono text-[11px] uppercase tracking-[0.2em] text-violet-300 mb-3">05 · Qué hacemos por clase</p>
+      <h2 class="display text-2xl md:text-4xl font-bold tracking-tight mb-3">Adentro de cada clase</h2>
+      <p class="serif-italic text-white/85 mb-8 max-w-3xl">Tocá cada clase para abrir el detalle. Cada una dice qué traen ustedes, qué hacemos en vivo, con qué deliverable cierra y la tarea para iterar antes de la siguiente.</p>
+
+      <!-- C1 -->
+      <details class="wf-card" open>
+        <summary>
+          <div class="flex items-center gap-3 flex-wrap">
+            <span class="pill pill-violet">C1</span>
+            <h3 class="display text-base md:text-lg font-semibold">Arranque desde cero + GHL onboarding</h3>
+            <span class="pill pill-zinc">60 min</span>
+            <span class="pill pill-cyan">5 personas</span>
+          </div>
+        </summary>
+        <div class="wf-body">
+          <p class="text-sm text-white/75 mb-4 serif-italic">Es la "reunión 2" con el equipo completo que Ari pidió. Más lento que la reunión 1 — el equipo es mixto.</p>
+          <div class="diagram-card mb-4" style="padding:14px; border-color: rgba(245,158,11,0.25);"><span class="pill pill-amber mb-2">Traen ustedes</span><p class="text-sm text-white/85 mt-2">Decisión WhatsApp cerrada con Andrés (oficial vs no oficial) · acceso de lectura al HubSpot actual.</p></div>
+          <table class="step-table">
+            <thead><tr><th>Bloque</th><th>Tiempo</th><th>Contenido</th></tr></thead>
+            <tbody>
+              <tr><td>Bienvenida + filosofía + acuerdos</td><td><span class="pill pill-amber">5 min</span></td><td>Cómo funciona el mes. Filosofía "que la IA no nos coma".</td></tr>
+              <tr><td>Alta de la cuenta GHL + 5 usuarios</td><td><span class="pill pill-amber">15 min</span></td><td>Subcuenta creada en vivo. Cargamos a Ari, Ana, Eva, Cami y Mati.</td></tr>
+              <tr><td>Tour GHL guiado</td><td><span class="pill pill-amber">20 min</span></td><td>Conversaciones unificadas (IG/FB/WSP), contactos, calendario, opportunities.</td></tr>
+              <tr><td>Walk-through pipeline HubSpot</td><td><span class="pill pill-amber">12 min</span></td><td>Identificamos las 6 etapas y los custom fields existentes.</td></tr>
+              <tr><td>Boceto pipeline GHL v0 + cierre</td><td><span class="pill pill-amber">8 min</span></td><td>Dibujamos las etapas migradas en vivo + tarea por persona.</td></tr>
+            </tbody>
+          </table>
+          <div class="grid md:grid-cols-2 gap-3 mt-4">
+            <div class="diagram-card" style="padding: 14px; border-color: rgba(6, 182, 212, 0.3);"><span class="pill pill-cyan mb-2">Deliverable</span><p class="text-sm text-white/90 mt-2">Workspace GHL operativo con 5 usuarios · boceto del pipeline validado.</p></div>
+            <div class="diagram-card" style="padding: 14px;"><span class="pill pill-zinc mb-2">Tarea semana 1 · ~3-5h</span><p class="text-sm text-white/80 mt-2">Ari + Ana validan el boceto · Eva valida etapas de reclutamiento · Cami arma touchpoints de redes.</p></div>
+          </div>
+        </div>
+      </details>
+
+      <!-- C2 -->
+      <details class="wf-card">
+        <summary>
+          <div class="flex items-center gap-3 flex-wrap">
+            <span class="pill pill-violet">C2</span>
+            <h3 class="display text-base md:text-lg font-semibold">Pipeline migrado + 200 leads + WhatsApp</h3>
+            <span class="pill pill-zinc">60 min</span>
+            <span class="pill pill-emerald">Clase bisagra</span>
+          </div>
+        </summary>
+        <div class="wf-body">
+          <p class="text-sm text-white/75 mb-4 serif-italic">Salimos con el pipeline operativo, los ~200 leads importados y WhatsApp conectado.</p>
+          <div class="diagram-card mb-4" style="padding:14px; border-color: rgba(245,158,11,0.25);"><span class="pill pill-amber mb-2">Traen ustedes</span><p class="text-sm text-white/85 mt-2">Boceto del pipeline validado · export CSV de los leads de HubSpot · nombre completo de la etapa 5.</p></div>
+          <table class="step-table">
+            <thead><tr><th>Bloque</th><th>Tiempo</th><th>Contenido</th></tr></thead>
+            <tbody>
+              <tr><td>Recap tarea + ajustes pipeline</td><td><span class="pill pill-amber">10 min</span></td><td>Confirmamos las 6 etapas finales.</td></tr>
+              <tr><td>Crear pipeline en GHL en vivo</td><td><span class="pill pill-amber">15 min</span></td><td>Los 5 miran y anotan.</td></tr>
+              <tr><td>Custom fields + tags canónicos</td><td><span class="pill pill-amber">10 min</span></td><td>Migración de los campos clave de HubSpot.</td></tr>
+              <tr><td>Import ~200 leads HubSpot → GHL</td><td><span class="pill pill-amber">15 min</span></td><td>Dry-run con 10 leads + import completo. Backup en HubSpot intacto.</td></tr>
+              <tr><td>WhatsApp setup</td><td><span class="pill pill-amber">10 min</span></td><td>Conexión + 1 plantilla de saludo (decisión cerrada en C1).</td></tr>
+            </tbody>
+          </table>
+          <div class="grid md:grid-cols-2 gap-3 mt-4">
+            <div class="diagram-card" style="padding: 14px; border-color: rgba(6, 182, 212, 0.3);"><span class="pill pill-cyan mb-2">Deliverable</span><p class="text-sm text-white/90 mt-2">Pipeline GHL operativo · ~200 leads migrados · WhatsApp conectado.</p></div>
+            <div class="diagram-card" style="padding: 14px;"><span class="pill pill-zinc mb-2">Tarea semana 2 · ~3-5h</span><p class="text-sm text-white/80 mt-2">Eva redacta 20 Q&amp;As del bot · Ari revisa los prompts borrador con su ChatGPT entrenado.</p></div>
+          </div>
+        </div>
+      </details>
+
+      <!-- C3 -->
+      <details class="wf-card">
+        <summary>
+          <div class="flex items-center gap-3 flex-wrap">
+            <span class="pill pill-violet">C3</span>
+            <h3 class="display text-base md:text-lg font-semibold">Bot Q&amp;A interno + Knowledge Base</h3>
+            <span class="pill pill-zinc">60 min</span>
+            <span class="pill pill-emerald">Deliverable estrella</span>
+          </div>
+        </summary>
+        <div class="wf-body">
+          <p class="text-sm text-white/75 mb-4 serif-italic">El bot que descomprime al equipo. Diseñado en vivo, KB cargada, probado en sandbox.</p>
+          <div class="diagram-card mb-4" style="padding:14px; border-color: rgba(245,158,11,0.25);"><span class="pill pill-amber mb-2">Traen ustedes</span><p class="text-sm text-white/85 mt-2">Las 20 FAQs de Eva · export del ChatGPT en Markdown · material de productos (SMG, Balanz, Inviu, comisiones).</p></div>
+          <table class="step-table">
+            <thead><tr><th>Bloque</th><th>Tiempo</th><th>Contenido</th></tr></thead>
+            <tbody>
+              <tr><td>Recap KB cargada</td><td><span class="pill pill-amber">5 min</span></td><td>Revisión de las FAQs y el material que mandaron.</td></tr>
+              <tr><td>Diseño del bot en vivo (Bot Goals V2)</td><td><span class="pill pill-amber">20 min</span></td><td>Identidad, prompt de 3 campos, KB asignada.</td></tr>
+              <tr><td>Cargar Knowledge Base</td><td><span class="pill pill-amber">15 min</span></td><td>FAQs + docs de productos + tablas de comisiones.</td></tr>
+              <tr><td>Test del bot en sandbox</td><td><span class="pill pill-amber">15 min</span></td><td>Prueba con 5-10 preguntas reales de asesores.</td></tr>
+              <tr><td>Cierre + tarea</td><td><span class="pill pill-amber">5 min</span></td><td>Cómo entrenar con thumbs up/down.</td></tr>
+            </tbody>
+          </table>
+          <div class="grid md:grid-cols-2 gap-3 mt-4">
+            <div class="diagram-card" style="padding: 14px; border-color: rgba(6, 182, 212, 0.3);"><span class="pill pill-cyan mb-2">Deliverable</span><p class="text-sm text-white/90 mt-2">Bot Q&amp;A operativo en sandbox · KB con 15-20 entries.</p></div>
+            <div class="diagram-card" style="padding: 14px;"><span class="pill pill-zinc mb-2">Tarea semana 3 · ~4-6h</span><p class="text-sm text-white/80 mt-2">Eva + Mati prueban con 30 preguntas reales · Cami reformula respuestas malas · Ari agrega 10 entries.</p></div>
+          </div>
+        </div>
+      </details>
+
+      <!-- C4 -->
+      <details class="wf-card">
+        <summary>
+          <div class="flex items-center gap-3 flex-wrap">
+            <span class="pill pill-violet">C4</span>
+            <h3 class="display text-base md:text-lg font-semibold">Workflows críticos del proceso comercial</h3>
+            <span class="pill pill-zinc">60 min</span>
+            <span class="pill pill-cyan">Automatización</span>
+          </div>
+        </summary>
+        <div class="wf-body">
+          <p class="text-sm text-white/75 mb-4 serif-italic">Conectamos el pipeline con automatismos. Lo que hoy se hace a mano queda andando solo.</p>
+          <div class="diagram-card mb-4" style="padding:14px; border-color: rgba(245,158,11,0.25);"><span class="pill pill-amber mb-2">Traen ustedes</span><p class="text-sm text-white/85 mt-2">La narrativa de cada mensaje (qué decir en cada cambio de etapa) · quién es el líder responsable por fuente de lead.</p></div>
+          <table class="step-table">
+            <thead><tr><th>Workflow</th><th>Tiempo</th><th>Qué automatiza</th></tr></thead>
+            <tbody>
+              <tr><td>WF 1 · Lead nuevo redes → asignar líder</td><td><span class="pill pill-amber">10 min</span></td><td>Distribución automática al líder según fuente.</td></tr>
+              <tr><td>WF 2 · Cambio de etapa → mensaje contextual</td><td><span class="pill pill-amber">12 min</span></td><td>WhatsApp + email automatizado al cambiar de etapa.</td></tr>
+              <tr><td>WF 3 · Follow-up post-reunión 24h / 48h</td><td><span class="pill pill-amber">10 min</span></td><td>Que no se pierdan leads en el WhatsApp diario del líder.</td></tr>
+              <tr><td>WF 4 · Reactivación de leads en limbo</td><td><span class="pill pill-amber">10 min</span></td><td>Recupera los 160 leads perdidos con una secuencia.</td></tr>
+              <tr><td>WF 5 · Cierre + nurturing post-venta</td><td><span class="pill pill-amber">8 min</span></td><td>Customer journey post-firma del contrato.</td></tr>
+              <tr><td>Cierre + tarea</td><td><span class="pill pill-amber">10 min</span></td><td>Dudas del equipo + asignación.</td></tr>
+            </tbody>
+          </table>
+          <div class="grid md:grid-cols-2 gap-3 mt-4">
+            <div class="diagram-card" style="padding: 14px; border-color: rgba(6, 182, 212, 0.3);"><span class="pill pill-cyan mb-2">Deliverable</span><p class="text-sm text-white/90 mt-2">5 workflows operativos · pipeline automatizado de punta a punta.</p></div>
+            <div class="diagram-card" style="padding: 14px;"><span class="pill pill-zinc mb-2">Tarea semana 4 · ~4-6h</span><p class="text-sm text-white/80 mt-2">El equipo prueba los workflows con leads reales · el bot Q&amp;A sigue entrenándose con thumbs · Eva agrega entries a la KB.</p></div>
+          </div>
+        </div>
+      </details>
+
+      <!-- C5 -->
+      <details class="wf-card">
+        <summary>
+          <div class="flex items-center gap-3 flex-wrap">
+            <span class="pill pill-emerald">C5</span>
+            <h3 class="display text-base md:text-lg font-semibold">Bot Q&amp;A go live + Consolidación</h3>
+            <span class="pill pill-zinc">60 min</span>
+            <span class="pill pill-emerald">Cierre</span>
+          </div>
+        </summary>
+        <div class="wf-body">
+          <p class="text-sm text-white/75 mb-4 serif-italic">Que el equipo se sienta dueño del sistema. Ya no nos necesitan para iterar.</p>
+          <div class="diagram-card mb-4" style="padding:14px; border-color: rgba(245,158,11,0.25);"><span class="pill pill-amber mb-2">Traen ustedes</span><p class="text-sm text-white/85 mt-2">El bot ya entrenado con 30 preguntas reales · plantillas de WhatsApp aprobadas por Meta (si es API oficial).</p></div>
+          <table class="step-table">
+            <thead><tr><th>Bloque</th><th>Tiempo</th><th>Contenido</th></tr></thead>
+            <tbody>
+              <tr><td>Refinamiento profundo del bot Q&amp;A</td><td><span class="pill pill-amber">15 min</span></td><td>Revisar thumbs, ajustar prompts, corregir respuestas problemáticas.</td></tr>
+              <tr><td>Bot Q&amp;A → producción</td><td><span class="pill pill-amber">10 min</span></td><td>Lo sacamos de sandbox y lo conectamos al WhatsApp interno.</td></tr>
+              <tr><td>Pipeline → automatización end-to-end</td><td><span class="pill pill-amber">15 min</span></td><td>Conectamos los 5 workflows como un solo flujo continuo, de lead nuevo a post-venta.</td></tr>
+              <tr><td>Cómo siguen ustedes</td><td><span class="pill pill-amber">15 min</span></td><td>Doc "Cómo iteramos" + clases jueves 7pm + grupo WhatsApp de soporte.</td></tr>
+              <tr><td>Cierre</td><td><span class="pill pill-amber">5 min</span></td><td>Próximos pasos opcionales (Bot 1, plataforma de cursos, ideas Gen Z).</td></tr>
+            </tbody>
+          </table>
+          <div class="grid md:grid-cols-2 gap-3 mt-4">
+            <div class="diagram-card glow-emerald" style="padding: 14px; border-color: rgba(16, 185, 129, 0.4);"><span class="pill pill-emerald mb-2">Deliverable final</span><p class="text-sm text-white/90 mt-2">Bot Q&amp;A en producción · Pipeline end-to-end · Doc "Cómo iteramos".</p></div>
+            <div class="diagram-card" style="padding: 14px;"><span class="pill pill-zinc mb-2">Después de C5</span><p class="text-sm text-white/80 mt-2">Acceso permanente a las clases de los jueves 7pm · soporte continuo en el grupo de WhatsApp.</p></div>
+          </div>
+        </div>
+      </details>
+    </section>
+
+    <!-- 06 · PASO A PASO DETALLADO -->
+    <section id="pasoapaso" class="mb-20 md:mb-24 scroll-mt-12">
+      <p class="font-mono text-[11px] uppercase tracking-[0.2em] text-violet-300 mb-3">06 · Paso a paso detallado</p>
+      <h2 class="display text-2xl md:text-4xl font-bold tracking-tight mb-3">Punto por punto, clase por clase</h2>
+      <p class="serif-italic text-white/85 mb-8 max-w-3xl">El detalle fino de cada clase: cada acción concreta que se ejecuta en GHL, en orden. Tocá cada clase para abrir el checklist completo.</p>
+
+      <!-- C1 detalle -->
+      <details class="wf-card" open>
+        <summary>
+          <div class="flex items-center gap-3 flex-wrap">
+            <span class="pill pill-violet">C1</span>
+            <h3 class="display text-base md:text-lg font-semibold">Arranque desde cero + GHL onboarding</h3>
+            <span class="pill pill-zinc">60 min</span>
+          </div>
+        </summary>
+        <div class="wf-body">
+
+          <div class="detail-group">
+            <p class="detail-group-label"><span class="pill pill-amber">Antes de la clase</span></p>
+            <ul class="sub-list">
+              <li>Ari + Andrés cierran la decisión de WhatsApp (oficial Meta vs no oficial).</li>
+              <li>El equipo le da a Andrés acceso de lectura al HubSpot actual.</li>
+              <li>Las 5 personas conectadas, con cámara y para tomar nota (ritmo pausado).</li>
+            </ul>
+          </div>
+
+          <div class="detail-group">
+            <p class="detail-group-label">Durante la clase · en vivo</p>
+            <ol class="detail-ol">
+              <li><b>Acuerdos del mes</b> — cómo funciona el mentoring, tareas entre clases, filosofía "que la IA no nos coma". Pactamos: sin tarea hecha, la clase se reagenda.</li>
+              <li><b>Alta de la subcuenta GHL/SHARP</b> — creación de la cuenta del cliente desde cero.</li>
+              <li><b>Datos del negocio</b> — nombre, zona horaria Argentina (GMT-3), idioma español, moneda.</li>
+              <li><b>Identidad visual</b> — carga de logo + paleta de marca (coral institucional).</li>
+              <li><b>Crear los 5 usuarios</b> — Ari y Ana como admin; Eva, Cami y Mati como usuarios. Permisos por rol.
+                <ul class="sub-list"><li>Cada uno recibe su mail de invitación y setea contraseña en vivo.</li></ul>
+              </li>
+              <li><b>Tour de Conversations</b> — la bandeja unificada IG + Facebook + WhatsApp + TikTok en un solo lugar.</li>
+              <li><b>Tour de Contacts + Smart Lists</b> — dónde viven los contactos y cómo se segmentan.</li>
+              <li><b>Tour de Opportunities</b> — qué es un pipeline, una etapa y una oportunidad.</li>
+              <li><b>Tour de Calendars</b> — agenda nativa (la van a usar para el bot de reclutamiento en la fase siguiente).</li>
+              <li><b>Tour de Automation</b> — qué es un workflow, vista general (se construyen en C4).</li>
+              <li><b>Walk-through del pipeline HubSpot</b> — Ari comparte pantalla / Loom; identificamos las 6 etapas, los campos que pide cada una y las automatizaciones existentes.</li>
+              <li><b>Boceto del pipeline GHL v0</b> — dibujamos en vivo las 6 etapas migradas y marcamos zonas: bot / humano / cierre.</li>
+              <li><b>Asignación de tareas</b> — quién hace qué antes de C2.</li>
+            </ol>
+          </div>
+
+          <div class="grid md:grid-cols-2 gap-3">
+            <div class="diagram-card" style="padding: 14px; border-color: rgba(6, 182, 212, 0.3);"><span class="pill pill-cyan mb-2">Sale de C1</span><p class="text-sm text-white/90 mt-2">Workspace GHL vivo con 5 usuarios cargados · boceto del pipeline validado por Ari + Ana.</p></div>
+            <div class="diagram-card" style="padding: 14px;"><span class="pill pill-zinc mb-2">Tarea para C2 · ~3-5h</span><p class="text-sm text-white/80 mt-2">Ari + Ana validan boceto · Eva valida etapas de reclutamiento · Cami arma touchpoints de redes · Ari exporta el CSV de leads de HubSpot.</p></div>
+          </div>
+        </div>
+      </details>
+
+      <!-- C2 detalle -->
+      <details class="wf-card">
+        <summary>
+          <div class="flex items-center gap-3 flex-wrap">
+            <span class="pill pill-violet">C2</span>
+            <h3 class="display text-base md:text-lg font-semibold">Pipeline migrado + 200 leads + WhatsApp</h3>
+            <span class="pill pill-zinc">60 min</span>
+          </div>
+        </summary>
+        <div class="wf-body">
+
+          <div class="detail-group">
+            <p class="detail-group-label"><span class="pill pill-amber">Antes de la clase</span></p>
+            <ul class="sub-list">
+              <li>Boceto del pipeline validado por Ari + Ana.</li>
+              <li>Export CSV de los leads de HubSpot en mano.</li>
+              <li>Nombre completo de la etapa 5 ("Se ca…") confirmado.</li>
+            </ul>
+          </div>
+
+          <div class="detail-group">
+            <p class="detail-group-label">Durante la clase · en vivo</p>
+            <ol class="detail-ol">
+              <li><b>Recap + ajustes</b> — confirmamos las 6 etapas finales del pipeline.</li>
+              <li><b>Crear el Pipeline</b> — Opportunities → Pipelines → Create. Lo armamos mientras los 5 miran.</li>
+              <li><b>Crear las 6 etapas</b> — Curso habilitado · Reunión · Vendió póliza · Vendió +10 pólizas · Perdido · Canceló gestión.</li>
+              <li><b>Colores por etapa</b> — modo Background tint para distinguir visualmente bot / humano / cierre.</li>
+              <li><b>Custom Fields del contacto</b> — creados y agrupados en una carpeta:
+                <ul class="sub-list">
+                  <li>Fuente del lead · Líder asignado · Producto/ramo de interés</li>
+                  <li>Estado de licencia PAS · Fecha de ingreso · Notas de calificación</li>
+                </ul>
+              </li>
+              <li><b>Custom Values del subaccount</b> — constantes reutilizables: <span class="font-mono text-[11px]">correo_de_salida</span>, <span class="font-mono text-[11px]">link_calendario</span>.</li>
+              <li><b>Tags canónicas</b> — fuente_ig, fuente_fb, fuente_referido, etc. (para reportería, no para gatillar workflows).</li>
+              <li><b>Mapear el CSV</b> — emparejamos cada columna de HubSpot con su campo en GHL.</li>
+              <li><b>Dry-run de import</b> — importamos 10 leads de prueba y verificamos que la data entró bien.</li>
+              <li><b>Import completo</b> — los ~200 leads, asignados a la etapa que les corresponde. Backup de HubSpot intacto.</li>
+              <li><b>Verificación</b> — spot-check de 5 contactos al azar (teléfono, mail, etapa, campos).</li>
+              <li><b>Conectar WhatsApp</b> — según la decisión de C1 (Meta Business API o proveedor externo).</li>
+              <li><b>Plantilla de saludo</b> — creamos 1 plantilla inicial + test de envío real.</li>
+            </ol>
+          </div>
+
+          <div class="grid md:grid-cols-2 gap-3">
+            <div class="diagram-card" style="padding: 14px; border-color: rgba(6, 182, 212, 0.3);"><span class="pill pill-cyan mb-2">Sale de C2</span><p class="text-sm text-white/90 mt-2">Pipeline operativo · ~200 leads migrados y verificados · WhatsApp conectado y probado.</p></div>
+            <div class="diagram-card" style="padding: 14px;"><span class="pill pill-zinc mb-2">Tarea para C3 · ~3-5h</span><p class="text-sm text-white/80 mt-2">Eva redacta 20 Q&amp;As de asesores · Ari exporta el ChatGPT entrenado a Markdown · juntan el material de productos (SMG, Balanz, Inviu, comisiones).</p></div>
+          </div>
+        </div>
+      </details>
+
+      <!-- C3 detalle -->
+      <details class="wf-card">
+        <summary>
+          <div class="flex items-center gap-3 flex-wrap">
+            <span class="pill pill-violet">C3</span>
+            <h3 class="display text-base md:text-lg font-semibold">Bot Q&amp;A interno + Knowledge Base</h3>
+            <span class="pill pill-zinc">60 min</span>
+          </div>
+        </summary>
+        <div class="wf-body">
+
+          <div class="detail-group">
+            <p class="detail-group-label"><span class="pill pill-amber">Antes de la clase</span></p>
+            <ul class="sub-list">
+              <li>20 FAQs de Eva listas.</li>
+              <li>Export del ChatGPT entrenado en Markdown.</li>
+              <li>Material de productos + tabla de comisiones.</li>
+            </ul>
+          </div>
+
+          <div class="detail-group">
+            <p class="detail-group-label">Durante la clase · en vivo</p>
+            <ol class="detail-ol">
+              <li><b>Recap del material</b> — revisamos las FAQs y el export que mandaron.</li>
+              <li><b>Crear el bot</b> — Conversation AI → arquitectura Bot Goals V2.</li>
+              <li><b>Identidad del bot</b> — nombre y persona; tono humano, profesional, claro y cercano (voz de marca del export).</li>
+              <li><b>Prompt en 3 campos</b> — Personality (quién es) · Intent (a qué ayuda: dudas de productos, técnicas, operativa) · Additional context (qué NO hace).</li>
+              <li><b>Crear la Knowledge Base</b> — el contenedor de conocimiento del bot.</li>
+              <li><b>Cargar las 20 FAQs</b> — como entries de la KB.</li>
+              <li><b>Cargar docs de productos</b> — SMG (vida/retiro), Balanz, Inviu, IQ Soluciones, Dominion.</li>
+              <li><b>Cargar tabla de comisiones</b> — como CSV / tabla en la KB.</li>
+              <li><b>Custom Bot Responses</b> — para datos sensibles (escalera 40→85%, licencia PAS) el bot responde literal, sin inventar.</li>
+              <li><b>Reglas de escalado</b> — cuándo levanta la mano y deriva a un humano (consultas fuera de su alcance).</li>
+              <li><b>Asignar la KB al bot</b> + dejarlo en modo sandbox (todavía no producción).</li>
+              <li><b>Test en sandbox</b> — 5-10 preguntas reales de asesores; corregimos en vivo lo que responde mal.</li>
+              <li><b>Entrenamiento</b> — mostramos cómo usar 👍/👎 para mejorar sin tocar código.</li>
+            </ol>
+          </div>
+
+          <div class="grid md:grid-cols-2 gap-3">
+            <div class="diagram-card" style="padding: 14px; border-color: rgba(6, 182, 212, 0.3);"><span class="pill pill-cyan mb-2">Sale de C3</span><p class="text-sm text-white/90 mt-2">Bot Q&amp;A operativo en sandbox · KB con 15-20 entries · datos sensibles con respuesta fija.</p></div>
+            <div class="diagram-card" style="padding: 14px;"><span class="pill pill-zinc mb-2">Tarea para C4 · ~4-6h</span><p class="text-sm text-white/80 mt-2">Eva + Mati prueban con 30 preguntas reales · Cami reformula las respuestas malas con voz de marca · Ari suma 10 entries.</p></div>
+          </div>
+        </div>
+      </details>
+
+      <!-- C4 detalle -->
+      <details class="wf-card">
+        <summary>
+          <div class="flex items-center gap-3 flex-wrap">
+            <span class="pill pill-violet">C4</span>
+            <h3 class="display text-base md:text-lg font-semibold">Workflows críticos del proceso comercial</h3>
+            <span class="pill pill-zinc">60 min</span>
+          </div>
+        </summary>
+        <div class="wf-body">
+
+          <div class="detail-group">
+            <p class="detail-group-label"><span class="pill pill-amber">Antes de la clase</span></p>
+            <ul class="sub-list">
+              <li>La narrativa de cada mensaje (qué dice el WhatsApp/email en cada cambio de etapa).</li>
+              <li>Quién es el líder responsable según la fuente del lead.</li>
+            </ul>
+          </div>
+
+          <div class="detail-group">
+            <p class="detail-group-label">Workflow 1 · Lead nuevo → asignar líder</p>
+            <ol class="detail-ol">
+              <li><b>Trigger</b> — contacto nuevo / mensaje entrante desde IG, FB o WhatsApp.</li>
+              <li><b>Acción</b> — asignar al líder responsable según la fuente.</li>
+              <li><b>Acción</b> — agregar tag de fuente + crear la oportunidad en la etapa 1.</li>
+              <li><b>Acción</b> — notificación interna al líder asignado.</li>
+            </ol>
+          </div>
+
+          <div class="detail-group">
+            <p class="detail-group-label">Workflow 2 · Cambio de etapa → mensaje contextual</p>
+            <ol class="detail-ol cyan">
+              <li><b>Trigger</b> — la oportunidad cambia de etapa en el pipeline.</li>
+              <li><b>Acción</b> — enviar el WhatsApp + email correspondiente a esa etapa (la narrativa que trajeron).</li>
+              <li><b>Detalle</b> — usa <span class="font-mono text-[11px]">{{custom_values.correo_de_salida}}</span>, nunca un mail hardcodeado.</li>
+            </ol>
+          </div>
+
+          <div class="detail-group">
+            <p class="detail-group-label">Workflow 3 · Follow-up post-reunión 24h / 48h</p>
+            <ol class="detail-ol cyan">
+              <li><b>Trigger</b> — la oportunidad entra a la etapa "Reunión".</li>
+              <li><b>Wait</b> — 24h.</li>
+              <li><b>Condición</b> — ¿el lead respondió? Si no, sigue.</li>
+              <li><b>Acción</b> — mensaje de follow-up automático para que no se caiga del radar del líder.</li>
+            </ol>
+          </div>
+
+          <div class="detail-group">
+            <p class="detail-group-label">Workflow 4 · Reactivación de los 160 leads en limbo</p>
+            <ol class="detail-ol cyan">
+              <li><b>Segmento</b> — armamos una Smart List con los leads de la etapa "Perdido".</li>
+              <li><b>Trigger</b> — entrada manual / bulk a la secuencia de reactivación.</li>
+              <li><b>Acción</b> — secuencia de 2-3 mensajes espaciados para recuperar interés.</li>
+              <li><b>Acción</b> — si responde, vuelve al pipeline y se reasigna a un líder.</li>
+            </ol>
+          </div>
+
+          <div class="detail-group">
+            <p class="detail-group-label">Workflow 5 · Cierre + nurturing post-venta</p>
+            <ol class="detail-ol cyan">
+              <li><b>Trigger</b> — la oportunidad pasa a "Vendió póliza" / Ganado.</li>
+              <li><b>Acción</b> — mensaje de bienvenida + arranque del onboarding del asesor (curso + credenciales).</li>
+              <li><b>Acción</b> — secuencia de nurturing post-firma.</li>
+            </ol>
+          </div>
+
+          <div class="grid md:grid-cols-2 gap-3">
+            <div class="diagram-card" style="padding: 14px; border-color: rgba(6, 182, 212, 0.3);"><span class="pill pill-cyan mb-2">Sale de C4</span><p class="text-sm text-white/90 mt-2">5 workflows operativos · pipeline automatizado de punta a punta · los 160 leads en limbo en reactivación.</p></div>
+            <div class="diagram-card" style="padding: 14px;"><span class="pill pill-zinc mb-2">Tarea para C5 · ~4-6h</span><p class="text-sm text-white/80 mt-2">El equipo prueba los workflows con leads reales · el bot sigue entrenándose con 👍/👎 · Eva agrega entries a la KB.</p></div>
+          </div>
+        </div>
+      </details>
+
+      <!-- C5 detalle -->
+      <details class="wf-card">
+        <summary>
+          <div class="flex items-center gap-3 flex-wrap">
+            <span class="pill pill-emerald">C5</span>
+            <h3 class="display text-base md:text-lg font-semibold">Bot Q&amp;A go live + Consolidación</h3>
+            <span class="pill pill-zinc">60 min</span>
+          </div>
+        </summary>
+        <div class="wf-body">
+
+          <div class="detail-group">
+            <p class="detail-group-label"><span class="pill pill-amber">Antes de la clase</span></p>
+            <ul class="sub-list">
+              <li>El bot ya entrenado con 30 preguntas reales.</li>
+              <li>Plantillas de WhatsApp aprobadas por Meta (si es API oficial — tarda 1-3 días).</li>
+            </ul>
+          </div>
+
+          <div class="detail-group">
+            <p class="detail-group-label">Durante la clase · en vivo</p>
+            <ol class="detail-ol emerald">
+              <li><b>Revisión de thumbs</b> — repasamos los 👍/👎 que dejó el equipo durante la semana.</li>
+              <li><b>Ajuste de prompts</b> — afinamos los 3 campos del bot según lo aprendido.</li>
+              <li><b>Corregir respuestas problemáticas</b> — las que dieron 👎 se reescriben o se cubren con un Custom Bot Response.</li>
+              <li><b>Completar la KB</b> — sumamos las entries que faltaron.</li>
+              <li><b>Bot → producción</b> — cambiamos el Bot Status de sandbox a Live.</li>
+              <li><b>Conectar al canal</b> — el bot queda atendiendo el WhatsApp interno de asesores.</li>
+              <li><b>Verificar plantillas WhatsApp</b> — confirmamos que las de Meta estén aprobadas y mapeadas.</li>
+              <li><b>Conectar los 5 workflows</b> — los revisamos como un solo flujo continuo, de lead nuevo a post-venta, y chequeamos que no se pisen.</li>
+              <li><b>Test end-to-end</b> — pasamos un lead real por todo el embudo de punta a punta.</li>
+              <li><b>Doc "Cómo iteramos"</b> — entregamos el manual: cómo entrenar el bot, agregar entries, editar workflows y mensajes.</li>
+              <li><b>Soporte continuo</b> — mostramos las clases de los jueves 7pm + el grupo de WhatsApp de soporte.</li>
+              <li><b>Roadmap fase siguiente</b> — Bot 1 de reclutamiento, plataforma de cursos, formación Gen Z.</li>
+            </ol>
+          </div>
+
+          <div class="diagram-card glow-emerald" style="padding: 16px; border-color: rgba(16, 185, 129, 0.4);"><span class="pill pill-emerald mb-2">Deliverable final del mes</span><p class="text-sm text-white/90 mt-2">Bot Q&amp;A en producción · pipeline end-to-end automatizado · 160 leads en reactivación · equipo autónomo para iterar + doc de handoff.</p></div>
+        </div>
+      </details>
+    </section>
+
+    <!-- 07 · ACTIVOS QUE CARGAMOS -->
+    <section id="activos" class="mb-20 md:mb-24 scroll-mt-12">
+      <p class="font-mono text-[11px] uppercase tracking-[0.2em] text-cyan-300 mb-3">07 · Activos que cargamos</p>
+      <h2 class="display text-2xl md:text-4xl font-bold tracking-tight mb-3">Su data alimenta el sistema</h2>
+      <p class="serif-italic text-white/85 mb-8 max-w-3xl">No partimos de una hoja en blanco. Toda la información que ya tienen entra al CRM y al bot. Esto es lo que cargamos y de dónde sale.</p>
+
+      <div class="diagram-card mb-5">
+        <table class="step-table">
+          <thead><tr><th>Activo del cliente</th><th>Entra como</th><th>En qué clase</th></tr></thead>
+          <tbody>
+            <tr><td>Export ChatGPT entrenado (narrativa, conceptos, algoritmos del negocio)</td><td>Prompt + Knowledge Base del bot</td><td><span class="pill pill-violet">C3</span></td></tr>
+            <tr><td>20 FAQs de asesores (Eva)</td><td>Custom Bot Responses + KB</td><td><span class="pill pill-violet">C3</span></td></tr>
+            <tr><td>Pipeline HubSpot · 6 etapas + ~200 leads</td><td>Pipeline GHL + import de contactos</td><td><span class="pill pill-violet">C2</span></td></tr>
+            <tr><td>Material de cursos Loom (6 años, con transcripts)</td><td>Plataforma de cursos GHL</td><td><span class="pill pill-blue">Fase siguiente</span></td></tr>
+            <tr><td>Narrativa de marca + tono (humano, profesional, cercano)</td><td>Voz del bot + mensajes de workflows</td><td><span class="pill pill-violet">C3</span> <span class="pill pill-violet">C4</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-5">
+        <div class="diagram-card">
+          <p class="font-mono text-[10px] uppercase tracking-wider text-white/60 mb-4">Productos / áreas de capacitación</p>
+          <ul class="space-y-2 text-sm text-white/90">
+            <li class="flex gap-2"><span class="text-cyan-300 shrink-0">›</span><span>Comercial</span></li>
+            <li class="flex gap-2"><span class="text-cyan-300 shrink-0">›</span><span>Formativo de inversiones</span></li>
+            <li class="flex gap-2"><span class="text-cyan-300 shrink-0">›</span><span>Formativo de largo plazo</span></li>
+            <li class="flex gap-2"><span class="text-cyan-300 shrink-0">›</span><span>Formativo de protección / seguro de vida</span></li>
+            <li class="flex gap-2"><span class="text-cyan-300 shrink-0">›</span><span>Cada marca propia con su material</span></li>
+          </ul>
+          <p class="font-mono text-[10px] uppercase tracking-wider text-white/60 mt-5 mb-2">Proveedores (multimarca)</p>
+          <div class="flex flex-wrap gap-1.5">
+            <span class="pill pill-zinc">Swiss Medical Seguros</span>
+            <span class="pill pill-zinc">Balanz</span>
+            <span class="pill pill-zinc">Inviu</span>
+            <span class="pill pill-zinc">IQ Soluciones</span>
+            <span class="pill pill-zinc">Dominion</span>
+          </div>
+        </div>
+        <div class="diagram-card">
+          <p class="font-mono text-[10px] uppercase tracking-wider text-white/60 mb-4">Escalera de comisiones</p>
+          <p class="text-sm text-white/75 mb-4 leading-relaxed">Dato sensible que vive en la KB como FAQ con respuesta fija — el bot la responde literal, sin inventar.</p>
+          <div class="flex flex-wrap gap-1.5">
+            <span class="pill pill-emerald">40%</span>
+            <span class="pill pill-emerald">50%</span>
+            <span class="pill pill-emerald">60%</span>
+            <span class="pill pill-emerald">65%</span>
+            <span class="pill pill-emerald">70%</span>
+            <span class="pill pill-emerald">75%</span>
+            <span class="pill pill-emerald">80%</span>
+            <span class="pill pill-emerald">85%</span>
+          </div>
+          <p class="text-xs text-white/55 mt-4">Reclutadores con experiencia pueden ingresar en niveles superiores (60-70%). Licencia: matrícula PAS de la SSN, a rendir dentro de 6 meses.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 07 · ANTES DE EMPEZAR -->
+    <section id="empezar" class="mb-20 md:mb-24 scroll-mt-12">
+      <p class="font-mono text-[11px] uppercase tracking-[0.2em] text-emerald-300 mb-3">08 · Antes de empezar</p>
+      <h2 class="display text-2xl md:text-4xl font-bold tracking-tight mb-3">Cómo arrancamos C1</h2>
+      <p class="serif-italic text-white/85 mb-8 max-w-3xl">Pasos claros antes de la primera clase. Todo asíncrono por el grupo de WhatsApp.</p>
+
+      <div class="space-y-3">
+        <div class="diagram-card flex items-start gap-4" style="padding: 18px;">
+          <span class="step-num">1</span>
+          <div class="flex-1 pt-1"><p class="text-sm">Ana arma el grupo de WhatsApp con Ari + Andrés. Después sumamos a Eva, Cami y Mati.</p></div>
+        </div>
+        <div class="diagram-card flex items-start gap-4" style="padding: 18px;">
+          <span class="step-num">2</span>
+          <div class="flex-1 pt-1"><p class="text-sm">Ari + Andrés cierran la decisión de WhatsApp: oficial Meta (USD 20/mes) vs no oficial (USD 39/mes flat).</p></div>
+        </div>
+        <div class="diagram-card flex items-start gap-4" style="padding: 18px;">
+          <span class="step-num">3</span>
+          <div class="flex-1 pt-1"><p class="text-sm">Ari graba un Loom mostrando el pipeline actual de HubSpot + manda el nombre completo de la etapa 5.</p></div>
+        </div>
+        <div class="diagram-card flex items-start gap-4" style="padding: 18px;">
+          <span class="step-num">4</span>
+          <div class="flex-1 pt-1"><p class="text-sm">Ari exporta el ChatGPT entrenado a Markdown y se lo pasa a Andrés para la base del bot.</p></div>
+        </div>
+        <div class="diagram-card flex items-start gap-4 glow-emerald" style="padding: 18px; border-color: rgba(16, 185, 129, 0.35);">
+          <span class="step-num" style="background: rgba(16,185,129,0.15); border-color: rgba(16,185,129,0.4); color: rgb(167,243,208);">5</span>
+          <div class="flex-1 pt-1"><p class="text-sm font-medium">Agendamos C1 con el equipo completo (los 5) — arranca el reloj del mes 1.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="mt-20 pt-10 border-t border-white/[0.06]">
+      <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+        <div>
+          <p class="display font-bold text-base">Andrés Linares</p>
+          <p class="text-sm text-white/65">ALCONSULTING · Implementación GHL/SHARP + IA</p>
+        </div>
+        <p class="font-mono text-[10px] uppercase tracking-wider text-white/40">Programa de implementación · Tu Asesor Financiero · 2026</p>
+      </div>
+    </footer>
+
+  </main>
+
+</div>
+
+</body>
+</html>
