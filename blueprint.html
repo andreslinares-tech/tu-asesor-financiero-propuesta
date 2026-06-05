@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tu Asesor Financiero — Cómo va a funcionar tu proceso en SHARP</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --coral:#C85C73; --coral-d:#803B4A; --coral-l:#F1D5DA;
+    --naranja:#F7995B; --amarillo:#E8A33D; --verde:#5BA874; --azul:#5B8DBE;
+    --ink:#3A322E; --ink-soft:#7A6E68; --line:#ECE1DB;
+    --cream:#FBF7F4; --white:#ffffff;
+    --shadow:0 1px 2px rgba(128,59,74,.05), 0 8px 24px -12px rgba(128,59,74,.18);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Inter',system-ui,sans-serif;background:var(--cream);color:var(--ink);line-height:1.6;
+    background-image:radial-gradient(circle at 12% 0%, rgba(247,153,91,.06), transparent 45%),radial-gradient(circle at 90% 8%, rgba(200,92,115,.06), transparent 40%);}
+  .wrap{max-width:860px;margin:0 auto;padding:40px 20px 80px}
+  h1,h2,h3{font-family:'Poppins',sans-serif;line-height:1.25}
+  /* HERO */
+  .hero{text-align:center;padding:24px 0 12px}
+  .kicker{display:inline-block;font-size:12px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--coral);background:var(--coral-l);padding:6px 14px;border-radius:999px;margin-bottom:18px}
+  h1{font-size:clamp(28px,5vw,40px);font-weight:700;color:var(--ink)}
+  h1 .g{background:linear-gradient(100deg,var(--coral),var(--naranja));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+  .sub{font-size:16px;color:var(--ink-soft);max-width:620px;margin:16px auto 0}
+  /* CALLOUT intro */
+  .how{background:var(--white);border:1px solid var(--line);border-radius:16px;padding:22px 24px;margin:32px 0;box-shadow:var(--shadow)}
+  .how h3{font-size:16px;margin-bottom:8px;color:var(--coral-d)}
+  .how p{font-size:14.5px;color:var(--ink-soft)}
+  .how .pill{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;font-weight:600;color:var(--ink);background:var(--cream);border:1px solid var(--line);border-radius:8px;padding:4px 10px;margin:3px 4px 0 0}
+  /* legend */
+  .legend{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:20px 0 8px}
+  .legend span{display:inline-flex;align-items:center;gap:7px;font-size:12.5px;color:var(--ink-soft);background:var(--white);border:1px solid var(--line);border-radius:999px;padding:5px 12px}
+  .dot{width:10px;height:10px;border-radius:50%;display:inline-block}
+  /* pipeline header */
+  .pl-head{margin:54px 0 8px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+  .pl-badge{font-family:'Poppins';font-weight:700;font-size:13px;color:var(--white);background:var(--coral);width:34px;height:34px;border-radius:10px;display:grid;place-items:center;flex:none}
+  .pl-head h2{font-size:23px;font-weight:700}
+  .pl-desc{font-size:14.5px;color:var(--ink-soft);margin:2px 0 26px}
+  /* timeline */
+  .tl{position:relative;padding-left:8px}
+  .stage{position:relative;display:flex;gap:16px;padding-bottom:18px}
+  .stage:last-child{padding-bottom:0}
+  .rail{flex:none;display:flex;flex-direction:column;align-items:center;width:40px}
+  .num{width:40px;height:40px;border-radius:12px;display:grid;place-items:center;font-family:'Poppins';font-weight:700;font-size:15px;color:var(--white);box-shadow:var(--shadow);z-index:1}
+  .line{flex:1;width:2px;background:var(--line);margin:4px 0}
+  .stage:last-child .line{display:none}
+  .card{flex:1;background:var(--white);border:1px solid var(--line);border-radius:14px;padding:16px 18px;box-shadow:var(--shadow);margin-bottom:4px}
+  .card-top{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:6px}
+  .card h3{font-size:16px;font-weight:600}
+  .zona{font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;padding:3px 9px;border-radius:999px}
+  .who{font-size:12px;color:var(--ink-soft);margin-left:auto}
+  .ocurre{font-size:14px;color:var(--ink);margin-bottom:4px}
+  /* message bubble (texto real) */
+  .msg{margin-top:12px;border-radius:12px;padding:12px 14px;font-size:13.5px;position:relative}
+  .msg.ready{background:#EAF6EE;border:1px solid #BCE3C9}
+  .msg.ready .lbl{color:#3B7E55}
+  .msg .lbl{display:flex;align-items:center;gap:6px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;margin-bottom:7px}
+  .bubble{background:#DCF8C6;border-radius:10px 10px 10px 2px;padding:10px 12px;color:#1f2d17;font-size:13.5px;white-space:pre-line;max-width:90%}
+  /* ask (necesitamos) */
+  .msg.ask{background:#FFF6EC;border:1px dashed var(--naranja)}
+  .msg.ask .lbl{color:#B5652A}
+  .msg.ask ul{margin:2px 0 0 2px;list-style:none}
+  .msg.ask li{font-size:13.5px;color:var(--ink);padding:5px 0 5px 22px;position:relative}
+  .msg.ask li::before{content:'✍️';position:absolute;left:0;top:4px;font-size:13px}
+  .msg.ask .q{font-weight:600;color:var(--coral-d)}
+  .msg.none{background:var(--cream);border:1px solid var(--line);color:var(--ink-soft);font-size:13px}
+  .msg.none .lbl{color:var(--ink-soft)}
+  /* salidas */
+  .outs{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+  .out{font-size:12.5px;border-radius:10px;padding:8px 12px;border:1px solid var(--line);background:var(--cream);flex:1;min-width:150px}
+  .out b{display:block;font-family:'Poppins';font-size:12px;margin-bottom:2px}
+  .out.win b{color:var(--verde)} .out.lost b{color:var(--coral)} .out.posp b{color:var(--amarillo)}
+  /* checklist final */
+  .check{background:linear-gradient(160deg,#fff,#FFF6EC);border:1px solid var(--line);border-radius:18px;padding:28px 26px;margin-top:56px;box-shadow:var(--shadow)}
+  .check h2{font-size:21px;margin-bottom:6px}
+  .check .lead{font-size:14.5px;color:var(--ink-soft);margin-bottom:18px}
+  .check h4{font-family:'Poppins';font-size:13px;color:var(--coral-d);text-transform:uppercase;letter-spacing:.6px;margin:18px 0 8px}
+  .check ol{margin-left:18px}
+  .check li{font-size:14px;padding:4px 0}
+  .foot{text-align:center;color:var(--ink-soft);font-size:13px;margin-top:40px}
+  .foot b{color:var(--coral)}
+  @media(max-width:560px){
+    .wrap{padding:28px 14px 60px}
+    .who{margin-left:0;width:100%}
+    .rail{width:34px}.num{width:34px;height:34px;font-size:13px}
+    .bubble{max-width:100%}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="hero">
+    <span class="kicker">Tu Asesor Financiero · Proceso comercial en SHARP</span>
+    <h1>Así va a funcionar <span class="g">tu proceso</span>, paso a paso</h1>
+    <p class="sub">Este es el recorrido que va a hacer cada persona desde que escribe hasta que queda adentro — con lo que ocurre en cada etapa y lo que necesitamos que ustedes definan. Léanlo tranquilos: donde diga <b style="color:#B5652A">✍️ necesitamos de ustedes</b>, ahí decidimos juntos qué pasa.</p>
+  </div>
+
+  <div class="how">
+    <h3>Cómo leer esto</h3>
+    <p>Armamos <b>dos recorridos separados</b> según quién escribe: alguien que quiere <b>sumarse como asesor</b> o alguien que quiere <b>asesorarse como cliente</b>. Cada tarjeta es una etapa. Cuando movemos a una persona de una etapa a la siguiente, el sistema dispara solo el WhatsApp y el correo que hoy mandan a mano.</p>
+    <div style="margin-top:12px">
+      <span class="pill">🟢 Texto listo = ya lo tenemos cargado</span>
+      <span class="pill">✍️ Necesitamos de ustedes = falta que lo definan</span>
+      <span class="pill">⚙️ Automático = lo hace el sistema solo</span>
+    </div>
+  </div>
+
+  <div class="legend">
+    <span><i class="dot" style="background:var(--coral)"></i> Captación / Bot</span>
+    <span><i class="dot" style="background:var(--azul)"></i> Eva (Capital Humano)</span>
+    <span><i class="dot" style="background:var(--amarillo)"></i> Formación</span>
+    <span><i class="dot" style="background:var(--naranja)"></i> Contrato</span>
+    <span><i class="dot" style="background:var(--verde)"></i> Producción / cierre</span>
+  </div>
+
+  <!-- ============ PIPELINE 1 ============ -->
+  <div class="pl-head">
+    <div class="pl-badge">1</div>
+    <h2>Recorrido del candidato a asesor</h2>
+  </div>
+  <p class="pl-desc">Desde que alguien interesado en sumarse escribe por un anuncio o las redes, hasta que queda contratado, asignado a un líder y produciendo. La responsable de este recorrido es <b>Eva</b>.</p>
+
+  <div class="tl">
+
+    <!-- 1 -->
+    <div class="stage">
+      <div class="rail"><div class="num" style="background:var(--coral)">1</div><div class="line"></div></div>
+      <div class="card">
+        <div class="card-top"><h3>Llega un interesado</h3><span class="zona" style="background:var(--coral-l);color:var(--coral-d)">Captación</span><span class="who">⚙️ Automático</span></div>
+        <p class="ocurre">La persona escribe por el anuncio de Facebook/Instagram o por redes. Entra sola al sistema con su nombre y número, y queda asignada a Eva desde el primer segundo.</p>
+        <div class="msg ready">
+          <div class="lbl">🟢 Saludo automático (lo da Facebook)</div>
+          <div class="bubble">¡Hola! ¿Cómo podemos ayudarte?</div>
+        </div>
+        <div class="msg ask">
+          <div class="lbl">✍️ Necesitamos de ustedes</div>
+          <ul><li><span class="q">¿Mantenemos ese saludo automático de Facebook o quieren cambiarlo?</span> Si lo cambian, pásennos el texto.</li></ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2 -->
+    <div class="stage">
+      <div class="rail"><div class="num" style="background:var(--coral)">2</div><div class="line"></div></div>
+      <div class="card">
+        <div class="card-top"><h3>Entendemos qué busca</h3><span class="zona" style="background:var(--coral-l);color:var(--coral-d)">Captación</span><span class="who">Eva / IA</span></div>
+        <p class="ocurre">Se conversa para confirmar si la persona quiere <b>sumarse como asesor</b> (sigue por acá) o quiere <b>asesorarse como cliente</b> (pasa al Recorrido 2). Más adelante esto lo puede hacer un asistente con IA.</p>
+        <div class="msg ask">
+          <div class="lbl">✍️ Necesitamos de ustedes</div>
+          <ul><li><span class="q">¿Cómo se dan cuenta hoy si alguien quiere ser asesor o ser cliente?</span> Contarnos cómo lo distinguen así lo enseñamos al sistema.</li></ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3 -->
+    <div class="stage">
+      <div class="rail"><div class="num" style="background:var(--coral)">3</div><div class="line"></div></div>
+      <div class="card">
+        <div class="card-top"><h3>Le pedimos el formulario + CV</h3><span class="zona" style="background:var(--coral-l);color:var(--coral-d)">Captación</span><span class="who">⚙️ Automático</span></div>
+        <p class="ocurre">Se le manda el mensaje de Eva con el link del formulario, por WhatsApp y correo. El sistema lo acompaña hasta que lo completa.</p>
+        <div class="msg ready">
+          <div class="lbl">🟢 Texto listo (el que ya usan)</div>
+          <div class="bubble">Hola 😊 ¿Cómo estás?
+Por acá Evangelina, Responsable de Capital Humano de Tu Asesor Financiero.
+El primer paso para avanzar es completar este formulario: [link del formulario]
+Una vez que lo recibamos, voy a estar revisando tu perfil y, si hay compatibilidad con la propuesta, me volveré a comunicar con vos para contarte los próximos pasos.
+¡Gracias por tu interés! ✨</div>
+        </div>
+        <div class="msg ask">
+          <div class="lbl">✍️ Necesitamos de ustedes</div>
+          <ul>
+            <li><span class="q">El formulario de Google: ¿ya incluye la carga del CV</span> o el CV lo piden aparte? (Después lo pasamos al formulario de SHARP.)</li>
+            <li><span class="q">¿Quieren que se mande también por correo</span> además del WhatsApp, o solo WhatsApp?</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4 -->
+    <div class="stage">
+      <div class="rail"><div class="num" style="background:var(--coral)">4</div><div class="line"></div></div>
+      <div class="card">
+        <div class="card-top"><h3>Completó el formulario</h3><span class="zona" style="background:var(--coral-l);color:var(--coral-d)">Captación</span><span class="who">⚙️ Automático</span></div>
+        <p class="ocurre">Cuando lo completa, le avisa a Eva y le crea una tarea para revisar el perfil. Toda la info del formulario queda guardada en la ficha de la persona.</p>
+        <div class="msg ask">
+          <div class="lbl">✍️ Necesitamos de ustedes</div>
+          <ul><li><span class="q">¿Quieren que la persona reciba un “recibimos tu info, ya la estamos viendo”</span> automático? Si sí, pásennos el texto.</li></ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5 -->
+    <div class="stage">
+      <div class="rail"><div class="num" style="background:var(--azul)">5</div><div class="line"></div></div>
+      <div class="card">
+        <div class="card-top"><h3>Eva revisa el perfil</h3><span class="zona" style="background:#E4EEF6;color:#3F6A93">Eva</span><span class="who">Decisión humana</span></div>
+        <p class="ocurre">Eva mira el formulario y el CV y decide si el perfil encaja. Si encaja, avanza a la entrevista; si no, lo descarta amablemente.</p>
+        <div class="msg ask">
+          <div class="lbl">✍️ Necesitamos de ustedes</div>
+          <ul><li><span class="q">¿Qué mira Eva para decir “este avanza”?</span> (experiencia, edad, zona, matrícula, etc.) Sirve para que en el futuro el sistema preordene los mejores.</li></ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- 6 -->
+    <div class="stage">
+      <div class="rail"><div class="num" style="background:var(--azul)">6</div><div class="line"></div></div>
+      <div class="card">
+        <div class="card-top"><h3>Entrevista agendada</h3><span class="zona" style="background:#E4EEF6;color:#3F6A93">Eva</span><span class="who">⚙️ Automático</span></div>
+        <p class="ocurre">La persona agenda con el calendario de Eva. El sistema confirma y manda recordatorios solo (para que no falte a la entrevista).</p>
+        <div class="msg ask">
+          <div class="lbl">✍️ Necesitamos de ustedes</div>
+          <ul>
+            <li><span class="q">Texto de confirmación de la entrevista</span> (qué recibe al agendar).</li>
+            <li><span class="q">¿Quieren recordatorio 24 h y 2 h antes?</span> Si sí, qué dicen.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- 7 -->
+    <div class="stage">
+      <div class="rail"><div class="num" style="background:var(--amarillo)">7</div><div class="line"></div></div>
+      <div class="card">
+        <div class="card-top"><h3>Después de la entrevista</h3><span class="zona" style="background:#FBF0D6;color:#9A7320">Decisión</span><span class="who">Eva</span></div>
+        <p class="ocurre">Según cómo salió la entrevista, la persona toma uno de tres caminos:</p>
+        <div class="outs">
+          <div class="out win"><b>Avanza</b>Sigue a formación / contrato</div>
+          <div class="out posp"><b>Pospone</b>Interesado, pero más adelante</div>
+          <div class="out lost"><b>Descarta</b>No encaja por ahora</div>
+        </div>
+        <div class="msg ask">
+          <div class="lbl">✍️ Necesitamos de ustedes (un texto por camino)</div>
+          <ul>
+            <li><span class="q">Mensaje cuando AVANZA</span> (“¡seguimos juntos!, estos son los próximos pasos…”).</li>
+            <li><span class="q">Mensaje cuando POSPONE</span> + ¿en cuánto tiempo lo recontactamos?</li>
+            <li><span class="q">Mensaje cuando DESCARTA</span> (cierre amable y respetuoso).</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- 8 -->
+    <div class="stage">
+      <div class="rail"><div class="num" style="background:var(--amarillo)">8</div><div class="line"></div></div>
+      <div class="card">
+        <div class="card-top"><h3>Formación (curso)</h3><span class="zona" style="background:#FBF0D6;color:#9A7320">Formación</span><span class="who">⚙️ Automático</span></div>
+        <p class="ocurre">Si la persona no tiene matrícula de productor, se le habilita el curso con credenciales automáticas (por mail y WhatsApp) y se sigue su avance. Esto reemplaza el alta manual de Moodle.</p>
+        <div class="msg ask">
+          <div class="lbl">✍️ Necesitamos de ustedes</div>
+          <ul>
+            <li><span class="q">Texto del mensaje de acceso al curso</span> (bienvenida + credenciales).</li>
+            <li><span class="q">Si a los X días no arrancó el curso, ¿qué le decimos para empujarlo?</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- 9 -->
+    <div class="stage">
+      <div class="rail"><div class="num" style="background:var(--naranja)">9</div><div class="line"></div></div>
+      <div class="card">
+        <div class="card-top"><h3>Gestión del contrato</h3><span class="zona" style="background:#FCE7D6;color:#A5571F">Contrato</span><span class="who">Ana / proveedor</span></div>
+        <p class="ocurre">Se hace el alta con la compañía y la firma digital va y viene por el sistema del proveedor. Acá esperamos los tiempos de la compañía.</p>
+        <div class="msg ask">
+          <div class="lbl">✍️ Necesitamos de ustedes</div>
+          <ul>
+            <li><span class="q">¿Qué quieren que pase en esta etapa?</span> ¿Avisarle a la persona en qué estado va su contrato? ¿Cada cuánto?</li>
+            <li>¿Quieren que más adelante conectemos el chat con el proveedor para destrabar contratos demorados?</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- 10 -->
+    <div class="stage">
+      <div class="rail"><div class="num" style="background:var(--verde)">10</div><div class="line"></div></div>
+      <div class="card">
+        <div class="card-top"><h3>Asignación de líder + plan ✓</h3><span class="zona" style="background:#DCF0E4;color:#3B7E55">Logrado</span><span class="who">Eva → Líder</span></div>
+        <p class="ocurre">Eva define con qué líder va a trabajar y le traspasa la persona: <b>el líder hereda toda la historia</b> (conversaciones, formulario, documentos) sin tener que explicarle nada. Tienen la reunión de plan de trabajo. <b>Acá consideramos ganado el reclutamiento.</b></p>
+        <div class="msg ask">
+          <div class="lbl">✍️ Necesitamos de ustedes</div>
+          <ul>
+            <li><span class="q">Mensaje que recibe el asesor nuevo presentándole a su líder.</span></li>
+            <li>¿Con contrato el líder se define antes, y sin contrato se sigue evaluando? (Confirmar la regla.)</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- 11 -->
+    <div class="stage">
+      <div class="rail"><div class="num" style="background:var(--verde)">11</div><div class="line"></div></div>
+      <div class="card">
+        <div class="card-top"><h3>Ya produciendo</h3><span class="zona" style="background:#DCF0E4;color:#3B7E55">Producción</span><span class="who">Líder</span></div>
+        <p class="ocurre">Seguimos la actividad del asesor: empezó reuniones → vendió su primera póliza → superó las 10 pólizas. Igual que lo venían viendo en HubSpot, pero ahora dentro del mismo sistema.</p>
+        <div class="msg ask">
+          <div class="lbl">✍️ Necesitamos de ustedes (opcional)</div>
+          <ul><li><span class="q">¿Quieren un mensaje de felicitación</span> al cerrar la primera póliza y al llegar a 10? Si sí, pásennos el texto.</li></ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- pospuesto -->
+    <div class="stage">
+      <div class="rail"><div class="num" style="background:var(--amarillo)">↺</div></div>
+      <div class="card" style="border-style:dashed">
+        <div class="card-top"><h3>Si pospusieron (reactivación)</h3><span class="zona" style="background:#FBF0D6;color:#9A7320">Nurturing</span><span class="who">⚙️ Automático</span></div>
+        <p class="ocurre">A quien dijo “más adelante”, el sistema lo mantiene tibio y lo vuelve a contactar solo, sin que ustedes tengan que acordarse. Si responde, vuelve a entrevista.</p>
+        <div class="msg ask">
+          <div class="lbl">✍️ Necesitamos de ustedes</div>
+          <ul><li><span class="q">Mensaje de reactivación</span> + cada cuánto lo mandamos (30 / 60 / 90 días).</li></ul>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ============ PIPELINE 2 ============ -->
+  <div class="pl-head">
+    <div class="pl-badge" style="background:var(--azul)">2</div>
+    <h2>Recorrido del cliente final</h2>
+  </div>
+  <p class="pl-desc">Para quien escribe queriendo <b>asesorarse</b> (ser cliente de un asesor formado). Eva lo califica y lo conecta con el asesor que mejor le encaja, que recibe toda su historia.</p>
+
+  <div class="tl">
+
+    <!-- 1 -->
+    <div class="stage">
+      <div class="rail"><div class="num" style="background:var(--coral)">1</div><div class="line"></div></div>
+      <div class="card">
+        <div class="card-top"><h3>Llega un interesado en asesorarse</h3><span class="zona" style="background:var(--coral-l);color:var(--coral-d)">Captación</span><span class="who">⚙️ Automático</span></div>
+        <p class="ocurre">Entra solo al sistema y queda asignado a Eva para hacer el match.</p>
+        <div class="msg ask">
+          <div class="lbl">✍️ Necesitamos de ustedes</div>
+          <ul>
+            <li><span class="q">¿Tienen un saludo distinto para clientes</span> (no asesores)? ¿Entran por el mismo anuncio o por otro?</li>
+            <li><span class="q">Mensaje de bienvenida para el cliente.</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2 -->
+    <div class="stage">
+      <div class="rail"><div class="num" style="background:var(--coral)">2</div><div class="line"></div></div>
+      <div class="card">
+        <div class="card-top"><h3>Le pedimos el formulario de calificación</h3><span class="zona" style="background:var(--coral-l);color:var(--coral-d)">Captación</span><span class="who">⚙️ Automático</span></div>
+        <p class="ocurre">Se le manda el link de un formulario corto para entender su perfil (qué busca, capacidad, horizonte).</p>
+        <div class="msg ask">
+          <div class="lbl">✍️ Necesitamos de ustedes</div>
+          <ul>
+            <li><span class="q">Mensaje de pedido del formulario</span> (estilo el de Eva, pero para clientes).</li>
+            <li><span class="q">¿Qué preguntas debe tener ese formulario</span> de calificación?</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3 -->
+    <div class="stage">
+      <div class="rail"><div class="num" style="background:var(--azul)">3</div><div class="line"></div></div>
+      <div class="card">
+        <div class="card-top"><h3>Eva define el asesor (match)</h3><span class="zona" style="background:#E4EEF6;color:#3F6A93">Eva</span><span class="who">Decisión humana</span></div>
+        <p class="ocurre">Con las respuestas del formulario, Eva elige con qué asesor encaja mejor el cliente.</p>
+        <div class="msg ask">
+          <div class="lbl">✍️ Necesitamos de ustedes</div>
+          <ul><li><span class="q">¿Con qué criterio se asigna el asesor?</span> (perfil de riesgo, monto, zona, idioma, especialidad…)</li></ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4 -->
+    <div class="stage">
+      <div class="rail"><div class="num" style="background:var(--azul)">4</div><div class="line"></div></div>
+      <div class="card">
+        <div class="card-top"><h3>Se lo pasamos al asesor</h3><span class="zona" style="background:#E4EEF6;color:#3F6A93">Eva → Asesor</span><span class="who">⚙️ Automático</span></div>
+        <p class="ocurre">El cliente queda en manos del asesor, que recibe <b>todo su historial y el formulario</b>. Se le avisa al asesor y al cliente.</p>
+        <div class="msg ask">
+          <div class="lbl">✍️ Necesitamos de ustedes</div>
+          <ul>
+            <li><span class="q">Mensaje al cliente presentándole a su asesor</span> + link para agendar.</li>
+            <li>¿La reunión se agenda en el calendario del asesor o en uno central?</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5 -->
+    <div class="stage">
+      <div class="rail"><div class="num" style="background:var(--verde)">5</div><div class="line"></div></div>
+      <div class="card">
+        <div class="card-top"><h3>Reunión y cierre ✓</h3><span class="zona" style="background:#DCF0E4;color:#3B7E55">Cierre</span><span class="who">Asesor</span></div>
+        <p class="ocurre">El asesor tiene la reunión; según cómo va, el cliente avanza y contrata (queda como cliente) o queda en seguimiento.</p>
+        <div class="msg ask">
+          <div class="lbl">✍️ Necesitamos de ustedes</div>
+          <ul>
+            <li><span class="q">¿Qué pasa si avanza y qué pasa si no?</span> (mensajes de cada caso.)</li>
+            <li><span class="q">¿Mensaje de bienvenida cuando queda como cliente?</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ============ CHECKLIST ============ -->
+  <div class="check">
+    <h2>📋 Resumen: qué necesitamos de ustedes</h2>
+    <p class="lead">No hace falta tenerlo todo ya. Para arrancar nos alcanza con lo del Recorrido 1 hasta la entrevista. Lo demás lo van pasando de a poco — donde no decidan nada, dejamos esa etapa sin mensaje automático y listo.</p>
+
+    <h4>Para arrancar (Recorrido 1)</h4>
+    <ol>
+      <li>Confirmar si el formulario de Google ya incluye el CV (o si se pide aparte).</li>
+      <li>Texto de confirmación de entrevista + recordatorios (24 h / 2 h).</li>
+      <li>Los 3 mensajes post-entrevista: <b>avanza</b>, <b>pospone</b> (+ cada cuánto recontactar), <b>descarta</b>.</li>
+    </ol>
+
+    <h4>Segunda tanda (Recorrido 1)</h4>
+    <ol start="4">
+      <li>Mensaje de acceso al curso + empujón si no arranca.</li>
+      <li>Qué avisar durante la gestión del contrato.</li>
+      <li>Mensaje de presentación del líder al asesor nuevo.</li>
+      <li>Mensaje de reactivación para los pospuestos.</li>
+      <li>(Opcional) Felicitaciones por primera póliza / 10 pólizas.</li>
+    </ol>
+
+    <h4>Cuando quieran activar el Recorrido 2 (clientes)</h4>
+    <ol start="9">
+      <li>Saludo y bienvenida para clientes.</li>
+      <li>Mensaje + preguntas del formulario de calificación.</li>
+      <li>Criterio para asignar asesor.</li>
+      <li>Mensaje de presentación del asesor + mensajes de cierre.</li>
+    </ol>
+
+    <h4>Definiciones generales</h4>
+    <ol start="13">
+      <li>WhatsApp: ¿usamos la línea oficial (Meta) o la no oficial? (Cambia el formato de los mensajes.)</li>
+      <li>Cómo distinguir hoy “quiere ser asesor” vs “quiere ser cliente”.</li>
+    </ol>
+  </div>
+
+  <p class="foot">Cualquier duda, lo vemos en la próxima sesión 💬 — <b>Tu Asesor Financiero</b> · proceso en SHARP</p>
+
+</div>
+</body>
+</html>
