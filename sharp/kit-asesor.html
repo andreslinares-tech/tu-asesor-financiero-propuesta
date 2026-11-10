@@ -1,0 +1,308 @@
+o <!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TAF · Kit Asesor</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="deck.css">
+<style>
+:root{
+  --bg:#fffaf9;--ink:#313128;--dim:#7a6a6d;--hair:#ecd9dd;
+  --accent:#C85C73;--dark:#803B4A;--light:#F1D5DA;--coral:#FF7E6B;--yellow:#EDBF4D;--green:#3f9e6b;--violet:#7c3aed;
+  --font:"Montserrat",-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif;
+}
+#bar{background:var(--accent)}
+h1,h2{color:var(--ink)}
+h2 em,h1 em{font-style:normal;color:var(--accent)}
+.note{font-size:1.5vh;color:var(--dim);margin-top:2.4vh}
+.pill{display:inline-block;font-size:1.3vh;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:.6vh 1vw;border-radius:99vh;background:var(--light);color:var(--dark)}
+.pill.ej{background:#fff3cf;color:#8a6a10}
+
+/* portada */
+.cover-art{position:absolute;right:8vw;top:50%;transform:translateY(-50%);width:28vw}
+.cover-art .ring{width:100%;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle at 35% 30%,var(--coral),var(--accent) 55%,var(--dark));box-shadow:0 4vh 10vh rgba(200,92,115,.35);display:flex;align-items:center;justify-content:center}
+.cover-art .ring b{font-size:11vh;color:#fff;letter-spacing:-.05em;font-weight:800}
+
+/* flujo */
+.flow{display:grid;grid-template-columns:repeat(5,1fr);gap:1vw;margin-top:3.4vh}
+.st{border-top:2px solid var(--hair);padding-top:1.6vh}
+.st>b{display:block;font-size:1.3vh;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:700;margin-bottom:1.2vh}
+.nd{font-size:1.5vh;line-height:1.35;border-radius:1.2vh;padding:1.2vh .8vw;margin-bottom:1vh;font-weight:600;text-align:center}
+.nd small{display:block;font-weight:400;color:var(--dim);font-size:1.25vh;margin-top:.3vh}
+.nd.tr{background:var(--light);border:1.5px solid var(--accent);border-radius:99vh}
+.nd.au{background:#efe7dc;border:1px solid #d9cdbb}
+.nd.wt{background:#fff;border:1.5px dashed #c9bcc0;color:#5d5a52}
+.nd.dc{background:#efe7dc;border:1px solid #d9cdbb;clip-path:polygon(8% 0,92% 0,100% 50%,92% 100%,8% 100%,0 50%)}
+.nd.cl{background:#e4efe7;border:1.5px solid var(--green);border-radius:99vh}
+.nd.ds{background:#f1ecec;border:1px solid #b99;border-radius:99vh;color:#7a6a6d}
+.nd.nw{background:#fff;border:1.5px solid var(--violet);color:var(--violet)}
+.chip{display:inline-block;font-size:1.15vh;font-weight:700;letter-spacing:.06em;padding:.3vh .6vw;border-radius:99vh;color:#fff;margin-top:.5vh}
+.chip.ia{background:var(--violet)}.chip.rp{background:#3b82f6}
+.legend{display:flex;gap:1.6vw;flex-wrap:wrap;margin-top:1.6vh;font-size:1.4vh;color:var(--dim);align-items:center}
+
+/* chat */
+.live{display:grid;grid-template-columns:1fr 1fr;gap:3.4vw;margin-top:3.4vh;align-items:start}
+.phone{background:#fff;border:1px solid var(--hair);border-radius:2.4vh;padding:2vh 1.4vw;box-shadow:0 2vh 5vh rgba(128,59,74,.08)}
+.phone .hd{display:flex;align-items:center;gap:.9vw;padding-bottom:1.4vh;border-bottom:1px solid #f4e6e9;margin-bottom:1vh}
+.phone .av{width:4.2vh;height:4.2vh;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:1.9vh}
+.phone .hd b{font-size:1.8vh}.phone .hd span{display:block;font-size:1.3vh;color:var(--dim)}
+.msg{max-width:82%;font-size:1.6vh;line-height:1.4;padding:1.1vh 1vw;border-radius:1.4vh;margin:.9vh 0}
+.msg.l{background:#f4f1ee;color:var(--ink)}
+.msg.b{background:var(--light);color:var(--dark);margin-left:auto}
+.fic{background:#fff;border:1px solid var(--hair);border-radius:2vh;padding:2.2vh 1.6vw}
+.fic h3{font-size:1.8vh;font-weight:700;margin-bottom:1.4vh}
+.fic .r{display:flex;justify-content:space-between;font-size:1.6vh;padding:1.1vh 0;border-top:1px solid #f4e6e9}
+.fic .r span{color:var(--dim)}.fic .r b{font-weight:600}
+.fic .ok{color:var(--green)}
+
+/* reporte */
+.rep{background:#fff;border:1px solid var(--hair);border-radius:2vh;padding:2.4vh 2vw;margin-top:3.4vh;box-shadow:0 2vh 5vh rgba(128,59,74,.08)}
+.rep .hd{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:2vh}
+.rep .hd b{font-size:2.1vh}.rep .hd span{font-size:1.4vh;color:var(--dim)}
+.kp{display:grid;grid-template-columns:repeat(6,1fr);gap:1vw}
+.kp div{background:#fbf3f4;border-radius:1.4vh;padding:1.6vh .8vw;text-align:center}
+.kp b{display:block;font-size:4.2vh;font-weight:800;color:var(--accent);line-height:1}
+.kp span{font-size:1.3vh;color:var(--dim)}
+.rep .two{display:grid;grid-template-columns:1fr 1fr;gap:2vw;margin-top:2.2vh}
+.rep h4{font-size:1.3vh;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin-bottom:.8vh}
+.rep li{list-style:none;font-size:1.55vh;padding:.8vh 0;border-top:1px solid #f4e6e9;line-height:1.35}
+
+/* incluye */
+.inc{display:grid;grid-template-columns:1fr 1fr;gap:0 4vw;margin-top:4vh}
+.inc li{list-style:none;display:flex;gap:1.2vw;padding:1.7vh 0;border-top:1px solid var(--hair);font-size:2vh;line-height:1.3}
+.inc li::before{content:"✓";color:var(--accent);font-weight:800}
+.inc small{display:block;font-size:1.5vh;color:var(--dim);font-weight:400;margin-top:.4vh}
+
+/* precio */
+.price{display:flex;align-items:flex-end;gap:2vw;margin-top:3vh}
+.price .n{font-size:17vh;line-height:.9;font-weight:800;letter-spacing:-.05em;color:var(--accent)}
+.price .u{font-size:2.6vh;color:var(--dim);padding-bottom:1.6vh;line-height:1.3}
+.price s{color:#b0a0a3}
+.two2{display:grid;grid-template-columns:1fr 1fr;gap:4vw;margin-top:4vh}
+.two2 h3{font-size:1.5vh;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin-bottom:1.2vh}
+.two2 li{list-style:none;font-size:1.85vh;line-height:1.4;padding:1vh 0;border-top:1px solid var(--hair)}
+.steps2{display:flex;gap:1.4vw;margin-top:3.4vh}
+.steps2 div{flex:1;font-size:1.7vh;line-height:1.4;border-top:3px solid var(--accent);padding-top:1.4vh}
+.steps2 b{display:block;font-size:1.3vh;letter-spacing:.14em;color:var(--accent);margin-bottom:.6vh}
+</style>
+</head>
+<body>
+<div id="deck">
+
+<!-- 1 PORTADA -->
+<section class="slide on" style="position:relative">
+  <p class="kicker"><span class="dot"></span>Propuesta para Tu Asesor Financiero</p>
+  <h1>Kit Asesor: tu flujo<br>de prospectos, <em>andando</em></h1>
+  <p class="lede">El flujo que armaste, listo para clonar con la marca de cada asesor, con un bot de IA y reportes que muestran qué funciona.</p>
+  <p class="foot">Andrés Linares · noviembre 2026</p>
+  <div class="cover-art"><div class="ring"><b>TAF</b></div></div>
+</section>
+
+<!-- 2 LO QUE PEDISTE -->
+<section class="slide">
+  <p class="kicker"><span class="dot"></span>Lo que me pediste</p>
+  <h2>Un sistema que cada asesor<br>pueda usar <em>con su marca</em></h2>
+  <div class="cols" style="grid-template-columns:repeat(3,1fr)">
+    <div><h3>Kit clonable</h3><p>Flujo de prospectos, secuencias y mensajes listos. La marca del asesor es lo único que cambia.</p></div>
+    <div><h3>Pilotos reales</h3><p>Bruno y Euge arrancan en diciembre y prueban todo antes de abrirlo a la red.</p></div>
+    <div><h3>Lanzamiento a la red</h3><p>Del 15 de febrero al 1 de marzo, con el kit ya probado.</p></div>
+  </div>
+</section>
+
+<!-- 3 FLUJO -->
+<section class="slide">
+  <p class="kicker"><span class="dot"></span>Tu borrador, tal cual</p>
+  <h2>El flujo que mandaste, <em>automatizado</em></h2>
+  <div class="flow">
+    <div class="st"><b>Captación</b>
+      <div class="nd tr">Lead entra por redes<small>Instagram / Facebook</small></div>
+      <div class="nd au">Automatización envía el Formulario</div>
+      <span class="chip ia">IA responde al instante</span>
+    </div>
+    <div class="st"><b>Calificación</b>
+      <div class="nd wt">Espera el Formulario<small>no responde → nutrición</small></div>
+      <div class="nd dc">¿Calificado?<small>evalúa el asesor</small></div>
+      <div class="nd ds">Descartado</div>
+      <span class="chip ia">IA propone calificación</span>
+    </div>
+    <div class="st"><b>Reunión 1</b>
+      <div class="nd au">Email + WhatsApp: agenda Reunión 1</div>
+      <div class="nd wt">Espera agenda<small>no agenda → nutrición</small></div>
+      <div class="nd dc">¿Avanza? ¿Cerró?</div>
+    </div>
+    <div class="st"><b>Reunión 2</b>
+      <div class="nd au">Email + WhatsApp: agenda Reunión 2</div>
+      <div class="nd wt">Espera agenda<small>no agenda → nutrición</small></div>
+      <div class="nd dc">¿Cerró?</div>
+    </div>
+    <div class="st"><b>Cierre</b>
+      <div class="nd cl">Cliente<small>cargar productos y parámetros</small></div>
+      <div class="nd ds">Descartado<small>sin respuesta / post-reunión</small></div>
+      <div class="nd nw">Suma: pedido de referidos<small>después de cerrar</small></div>
+    </div>
+  </div>
+  <div class="legend"><span>Nutrición escalonada en cada espera. Si agota los pasos sin respuesta, descarte automático.</span><span class="chip rp">Reporte semanal mide cada etapa</span></div>
+</section>
+
+<!-- 4 BOT IA -->
+<section class="slide">
+  <p class="kicker"><span class="dot"></span>Suma 1 · Bot de IA</p>
+  <h2>El primer filtro lo hace el bot,<br>el asesor entra <em>a vender</em></h2>
+  <div class="live">
+    <div class="phone">
+      <div class="hd"><div class="av">S</div><div><b>Asistente de [Marca del asesor]</b><span>en línea</span></div></div>
+      <div class="msg l">Hola, vi la publicación sobre planificación financiera</div>
+      <div class="msg b">¡Hola! Soy el asistente de [Marca]. Te hago 3 preguntas para orientarte: ¿qué te interesa más, protección familiar, ahorro o retiro?</div>
+      <div class="msg l">Protección familiar</div>
+      <div class="msg b">Perfecto. Te reservo una charla con [Asesor]: jueves 16:00 o viernes 10:00.</div>
+    </div>
+    <div class="fic">
+      <span class="pill ej">Ejemplo ilustrativo</span>
+      <h3 style="margin-top:1.4vh">Ficha que completa sola</h3>
+      <div class="r"><span>Nombre</span><b>Laura G.</b></div>
+      <div class="r"><span>Interés</span><b>Protección familiar</b></div>
+      <div class="r"><span>Zona</span><b>Corrientes</b></div>
+      <div class="r"><span>Disponibilidad</span><b>Jueves 16:00</b></div>
+      <div class="r"><span>Calificación sugerida</span><b class="ok">Calificado · el asesor confirma</b></div>
+    </div>
+  </div>
+</section>
+
+<!-- 5 REPORTES -->
+<section class="slide">
+  <p class="kicker"><span class="dot"></span>Suma 2 · Reportes</p>
+  <h2>Cada lunes sabés qué funciona<br>y <em>qué hacer esta semana</em></h2>
+  <div class="rep">
+    <div class="hd"><b>Reporte semanal · [Asesor]</b><span>llega por WhatsApp o mail cada lunes · <span class="pill ej">Ejemplo ilustrativo</span></span></div>
+    <div class="kp">
+      <div><b>24</b><span>Leads</span></div>
+      <div><b>11</b><span>Calificados</span></div>
+      <div><b>7</b><span>Reunión 1</span></div>
+      <div><b>4</b><span>Reunión 2</span></div>
+      <div><b>2</b><span>Clientes</span></div>
+      <div><b>6</b><span>Sin respuesta</span></div>
+    </div>
+    <div class="two">
+      <div><h4>Para esta semana</h4><ul><li>3 prospectos esperan respuesta hace más de 3 días</li><li>2 Reuniones 1 sin definir si avanza</li></ul></div>
+      <div><h4>Qué anuncio trae más</h4><ul><li>Reel "Mi primer seguro": 9 leads, 4 calificados</li><li>Historia de testimonios: 3 leads, 1 calificado</li></ul></div>
+    </div>
+  </div>
+  <p class="note">Cada asesor recibe el suyo. Vos recibís copia de los pilotos.</p>
+</section>
+
+<!-- 6 QUE INCLUYE -->
+<section class="slide">
+  <p class="kicker"><span class="dot"></span>Qué incluye el Kit</p>
+  <h2>Lo que en tu borrador quedó<br>"para diseñar juntos", <em>lo entregamos hecho</em></h2>
+  <ul class="inc">
+    <li><div>Formulario con sus campos<small>contenido y campos definidos</small></div></li>
+    <li><div>Nutrición escalonada<small>cantidad y cadencia de pasos en cada espera</small></div></li>
+    <li><div>Textos de correo y WhatsApp<small>incluidos los 3 mensajes de descarte</small></div></li>
+    <li><div>Marca como variable<small>nombre, logo, WhatsApp, calendario y firma</small></div></li>
+    <li><div>Bot de IA<small>responde, completa la ficha y propone calificación</small></div></li>
+    <li><div>Reporte semanal<small>por etapa y por anuncio de origen</small></div></li>
+    <li><div>Pedido de referidos<small>después de cerrar, el paso que hoy se pierde</small></div></li>
+    <li><div>Pilotos Bruno y Euge<small>arranque y ajustes</small></div></li>
+  </ul>
+</section>
+
+<!-- 7 HITOS -->
+<section class="slide">
+  <p class="kicker"><span class="dot"></span>Calendario · 3 meses: diciembre, enero y febrero</p>
+  <h2>Mientras TAF descansa,<br>el <em>kit se prueba y se pule</em></h2>
+  <ol class="steps">
+    <li><span class="n">20/11</span><span class="t"><b>Clon andando</b> en la cuenta de prueba</span></li>
+    <li><span class="n">31/12</span><span class="t"><b>Bot y reportes v1</b> andando con Bruno y Euge</span></li>
+    <li><span class="n">31/01</span><span class="t"><b>Pilotos con leads entrando</b> y medidos</span></li>
+    <li><span class="n">10/02</span><span class="t"><b>Kit v2</b> con manual y video de recorrido</span></li>
+    <li><span class="n">01/03</span><span class="t"><b>Lanzamiento</b> a la primera tanda de asesores</span></li>
+  </ol>
+  <p class="note" style="font-size:2vh;color:var(--dark);font-weight:600">Cuando TAF no está, yo asisto al equipo y a los pilotos para que sigan avanzando.</p>
+</section>
+
+<!-- 8 ACOMPAÑAMIENTO -->
+<section class="slide">
+  <p class="kicker"><span class="dot"></span>Programa de acompañamiento</p>
+  <h2>No te dejo con un sistema,<br>te acompaño <em>a usarlo</em></h2>
+  <div class="cols">
+    <div><h3>Los nuevos y el equipo</h3><p>Cuando TAF no está, yo asisto al equipo y a Bruno y Euge para que avancen. Y después, a cada tanda.</p></div>
+    <div><h3>2 clases por mes</h3><p>Hasta 90 minutos, grabadas, con el tema que definamos juntos.</p></div>
+    <div><h3>Jueves</h3><p>La clase de los jueves que ya tienen, para dudas y práctica.</p></div>
+    <div><h3>Soporte por WhatsApp</h3><p>Un solo canal, días hábiles, respuesta en 24 horas.</p></div>
+  </div>
+</section>
+
+<!-- 8b CRECEMOS JUNTOS -->
+<section class="slide">
+  <p class="kicker"><span class="dot"></span>Cómo crecemos juntos</p>
+  <h2>No quiero ser un proveedor más,<br>quiero que <em>la red crezca</em></h2>
+  <div class="cols" style="grid-template-columns:repeat(3,1fr)">
+    <div><h3>Yo pongo</h3><p>La tecnología, el kit, el soporte y el acompañamiento. Y la mejora continua a partir de lo que mida el reporte.</p></div>
+    <div><h3>TAF pone</h3><p>La marca, el método de venta y la red de asesores.</p></div>
+    <div><h3>Juntos</h3><p>Cada asesor paga solo su plataforma: USD 60 por mes entre Sharp y WhatsApp. Sin cargo extra para TAF. Mi ingreso crece cuando crece tu red.</p></div>
+  </div>
+  <p class="note">Si una cuenta se pausa, no paga ni suma. Nadie paga de más mientras la red arranca.</p>
+</section>
+
+<!-- 8c COSTOS DE REFERENCIA -->
+<section class="slide">
+  <p class="kicker"><span class="dot"></span>Costos de referencia por asesor</p>
+  <h2>Cuánto cuesta que el bot trabaje,<br><em>por asesor y por mes</em></h2>
+  <div class="cols" style="grid-template-columns:repeat(3,1fr);margin-top:3vh">
+    <div><h3>Respuesta del bot de IA</h3><p><b>~USD 0,008</b> cada una. Unos USD 8 cada 1.000 respuestas.</p></div>
+    <div><h3>Automatización con IA</h3><p><b>~USD 0,015</b> por ejecución.</p></div>
+    <div><h3>Correo electrónico</h3><p><b>~USD 0,001</b> por envío.</p></div>
+  </div>
+  <table class="mx" style="margin-top:3vh">
+    <tr><th>Escenario</th><th>Leads por mes</th><th>IA del bot</th><th>Plataforma (Sharp + WhatsApp)</th><th>Total aproximado</th></tr>
+    <tr><td>Bajo</td><td>50</td><td>~USD 6</td><td>USD 60</td><td class="y">~USD 66</td></tr>
+    <tr><td>Medio</td><td>100</td><td>~USD 12</td><td>USD 60</td><td class="y">~USD 72</td></tr>
+    <tr><td>Alto</td><td>200</td><td>~USD 23</td><td>USD 60</td><td class="y">~USD 83</td></tr>
+  </table>
+  <p class="note">Referencia medida en una cuenta real: ~USD 0,008 por respuesta del bot, con un promedio de "unas 15 conversaciones" de la IA por lead, más o menos. Si las conversaciones son más largas, puede subir. Se afina con los pilotos de Bruno y Euge antes del lanzamiento de marzo. Cada subcuenta carga USD 10 en su monedero para poder usar todo. No es un cargo mensual: el saldo se usa hasta que se gasta y, con poco volumen, puede durar varios meses. Cuando se acaba, se recarga. Precios medidos en una cuenta real de Sharp, sujetos a cambios del proveedor.</p>
+</section>
+
+<!-- 9 PRECIO -->
+<section class="slide">
+  <p class="kicker"><span class="dot"></span>Inversión</p>
+  <h2>Una recurrencia mensual,<br>todo incluido</h2>
+  <div class="price"><div class="n">250</div><div class="u">USD por mes, por 3 meses<br>diciembre, enero y febrero<br><s>valor de lista USD 400</s></div></div>
+  <div class="two2">
+    <div><h3>Incluye</h3><ul><li>Kit Asesor completo, con bot y reportes</li><li>Pilotos y lanzamiento</li><li>Programa de acompañamiento</li><li>1 o 2 mejoras por mes al kit</li></ul></div>
+    <div><h3>Se cotiza aparte</h3><ul><li>Plataforma por asesor: USD 60 por mes (Sharp 40 y WhatsApp 20), la paga cada asesor</li><li>Pauta en Meta y Google</li><li>Panel central de la red</li><li>Pedidos personales de un asesor</li></ul></div>
+  </div>
+  <p class="note">Acuerdo por 3 meses. Precio de lanzamiento hasta el 28 de febrero. En marzo lo revisamos juntos: si seguimos, se recalcula según los asesores que entren.</p>
+</section>
+
+<!-- 9b VISIBILIDAD SEO GEO AEO -->
+<section class="slide">
+  <p class="kicker"><span class="dot"></span>Opcional · Visibilidad</p>
+  <h2>Que te encuentren en Google<br>y <em>en las IA</em></h2>
+  <div class="price"><div class="n">100</div><div class="u">USD por mes, por 3 meses<br>diciembre, enero y febrero<br><s>valor de lista USD 300</s></div></div>
+  <div class="two2">
+    <div><h3>Incluye</h3><ul><li>Mes 1: base técnica de la web, Search Console y arreglo de dominio</li><li>2 páginas por mes que responden lo que busca un futuro asesor, con preguntas frecuentes</li><li>Control mensual: visitas, búsquedas y si las IA nombran a TAF</li></ul></div>
+    <div><h3>No incluye</h3><ul><li>Rediseño de la web</li><li>Pauta en Meta y Google</li><li>Compra de dominios</li><li>Fichas de Google de cada asesor</li></ul></div>
+  </div>
+  <p class="note">Se suma a los USD 250 si lo querés. No prometo posiciones ni menciones en las IA. Cada texto lo aprueba TAF antes de publicarse. La web trabaja sola mientras el equipo descansa.</p>
+</section>
+
+<!-- 10 PROXIMOS PASOS -->
+<section class="slide">
+  <p class="kicker"><span class="dot"></span>Próximos pasos</p>
+  <h2>Si estás de acuerdo,<br><em>arrancamos esta semana</em></h2>
+  <div class="steps2">
+    <div><b>1</b>Tu OK a la propuesta</div>
+    <div><b>2</b>Reunión con Bruno y Euge</div>
+    <div><b>3</b>20 de noviembre: clon andando</div>
+    <div><b>4</b>Diciembre: arrancan los pilotos</div>
+  </div>
+  <p class="note">Los datos de ejemplo de esta presentación son ilustrativos. Los reales salen de la cuenta.</p>
+</section>
+
+</div>
+<div id="bar"></div><div id="num"></div><div id="hint">← → para navegar · Cmd + / − para el zoom</div>
+<script src="deck.js"></script>
+</body>
+</html>
