@@ -1,0 +1,188 @@
+o <!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sharp · Tu asistente de ventas</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="deck.css">
+<style>
+:root{
+  --bg:#fffaf9;--ink:#313128;--dim:#7a6a6d;--hair:#ecd9dd;
+  --accent:#C85C73;--dark:#803B4A;--light:#F1D5DA;--coral:#FF7E6B;--yellow:#EDBF4D;--green:#3f9e6b;--violet:#7c3aed;
+  --font:"Montserrat",-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif;
+}
+#bar{background:var(--accent)}
+h1,h2{color:var(--ink)}
+h2 em,h1 em{font-style:normal;color:var(--accent)}
+.note{font-size:1.5vh;color:var(--dim);margin-top:2.4vh}
+.pill{display:inline-block;font-size:1.3vh;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:.6vh 1vw;border-radius:99vh;background:var(--light);color:var(--dark)}
+.pill.ej{background:#fff3cf;color:#8a6a10}
+
+/* portada */
+.cover-art{position:absolute;right:8vw;top:50%;transform:translateY(-50%);width:28vw}
+.cover-art .ring{width:100%;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle at 35% 30%,var(--coral),var(--accent) 55%,var(--dark));box-shadow:0 4vh 10vh rgba(200,92,115,.35);display:flex;align-items:center;justify-content:center}
+.cover-art .ring b{font-size:11vh;color:#fff;letter-spacing:-.05em;font-weight:800}
+
+/* chat */
+.live{display:grid;grid-template-columns:1fr 1fr;gap:3.4vw;margin-top:3.4vh;align-items:start}
+.phone{background:#fff;border:1px solid var(--hair);border-radius:2.4vh;padding:2vh 1.4vw;box-shadow:0 2vh 5vh rgba(128,59,74,.08)}
+.phone .hd{display:flex;align-items:center;gap:.9vw;padding-bottom:1.4vh;border-bottom:1px solid #f4e6e9;margin-bottom:1vh}
+.phone .av{width:4.2vh;height:4.2vh;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:1.9vh}
+.phone .hd b{font-size:1.8vh}.phone .hd span{display:block;font-size:1.3vh;color:var(--dim)}
+.msg{max-width:82%;font-size:1.6vh;line-height:1.4;padding:1.1vh 1vw;border-radius:1.4vh;margin:.9vh 0}
+.msg.l{background:#f4f1ee;color:var(--ink)}
+.msg.b{background:var(--light);color:var(--dark);margin-left:auto}
+.fic{background:#fff;border:1px solid var(--hair);border-radius:2vh;padding:2.2vh 1.6vw}
+.fic h3{font-size:1.8vh;font-weight:700;margin-bottom:1.4vh}
+.fic .r{display:flex;justify-content:space-between;font-size:1.6vh;padding:1.1vh 0;border-top:1px solid #f4e6e9}
+.fic .r span{color:var(--dim)}.fic .r b{font-weight:600}
+.fic .ok{color:var(--green)}
+
+
+.cols.c3{grid-template-columns:repeat(3,1fr)}
+.cols p{font-size:1.7vh;line-height:1.45;color:var(--dim)}
+.tag{display:inline-block;font-size:1.2vh;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-bottom:.8vh}
+.big{font-size:12vh;font-weight:800;letter-spacing:-.04em;color:var(--accent);line-height:1}
+/* pipeline */
+.kb{display:grid;grid-template-columns:repeat(5,1fr);gap:1vw;margin-top:3.4vh}
+.kc{background:#f8efef;border-radius:1.6vh;padding:1.4vh .8vw;min-height:30vh}
+.kc>b{display:block;font-size:1.25vh;letter-spacing:.12em;text-transform:uppercase;color:var(--dark);font-weight:700;margin-bottom:1.2vh}
+.ca{background:#fff;border:1px solid var(--hair);border-radius:1.2vh;padding:1.1vh .7vw;margin-bottom:1vh;font-size:1.5vh;font-weight:600;box-shadow:0 .6vh 1.6vh rgba(128,59,74,.06)}
+.ca small{display:block;font-weight:400;color:var(--dim);font-size:1.25vh;margin-top:.3vh}
+.ca i{display:inline-block;font-style:normal;font-size:1.1vh;font-weight:700;color:#fff;background:var(--violet);border-radius:99vh;padding:.3vh .55vw;margin-top:.6vh}
+.ca.w{border-color:var(--green)}
+</style>
+</head>
+<body>
+<div id="deck">
+
+<section class="slide on" style="position:relative">
+  <p class="kicker"><span class="dot"></span>Para asesores de Tu Asesor Financiero</p>
+  <h1>Tu sistema de ventas,<br>con un <em>asistente de IA</em><br>que trabaja por vos</h1>
+  <p class="lede">Sharp: dónde está cada prospecto, qué sigue con cada uno y quién le responde mientras vos no podés.</p>
+  <div class="cover-art"><div class="ring"><b>TAF</b></div></div>
+</section>
+
+<section class="slide">
+  <p class="kicker"><span class="dot"></span>El problema de siempre</p>
+  <h2>Los prospectos se pierden<br>por <em>falta de seguimiento</em></h2>
+  <div class="cols c3">
+    <div><h3>Escriben y nadie contesta a tiempo</h3><p>Un mensaje de Instagram a las 22:00 se responde al otro día. Para entonces ya se enfrió.</p></div>
+    <div><h3>Los datos quedan en mil lugares</h3><p>Anotaciones, chats, planillas, la memoria. Cuando hace falta algo, no aparece.</p></div>
+    <div><h3>Nadie sabe qué viene después</h3><p>No hay un orden claro de a quién llamar hoy, a quién escribirle y a quién cerrar.</p></div>
+  </div>
+</section>
+
+<section class="slide">
+  <p class="kicker"><span class="dot"></span>Qué es Sharp</p>
+  <h2>Un lugar donde está <em>todo tu negocio</em></h2>
+  <div class="cols">
+    <div><span class="tag">1</span><h3>Tus prospectos</h3><p>Cada persona con su historial, su teléfono y todo lo que se habló.</p></div>
+    <div><span class="tag">2</span><h3>Tus mensajes</h3><p>Instagram, Facebook y WhatsApp en una sola bandeja.</p></div>
+    <div><span class="tag">3</span><h3>Tu agenda</h3><p>El prospecto elige horario y le llega el recordatorio.</p></div>
+    <div><span class="tag">4</span><h3>Tu asistente de IA</h3><p>Atiende, pregunta y completa la ficha por vos.</p></div>
+  </div>
+  <p class="note">No necesitás saber de tecnología. El sistema viene armado y listo para usar.</p>
+</section>
+
+<section class="slide">
+  <p class="kicker"><span class="dot"></span>Tu pipeline</p>
+  <h2>Ves en una pantalla <em>en qué está cada prospecto</em></h2>
+  <div class="kb">
+    <div class="kc"><b>Nuevo contacto</b>
+      <div class="ca">Laura G.<small>Instagram · hoy 22:10</small><i>IA ya respondió</i></div>
+      <div class="ca">Martín R.<small>Facebook · hoy 18:45</small><i>IA ya respondió</i></div>
+    </div>
+    <div class="kc"><b>Conversando</b>
+      <div class="ca">Sofía P.<small>Quiere ahorro para retiro</small><i>Ficha completa</i></div>
+    </div>
+    <div class="kc"><b>Reunión agendada</b>
+      <div class="ca w">Diego M.<small>Jueves 16:00</small><i>Recordatorio enviado</i></div>
+      <div class="ca w">Carla T.<small>Viernes 10:00</small><i>Recordatorio enviado</i></div>
+    </div>
+    <div class="kc"><b>Propuesta</b>
+      <div class="ca">Julián A.<small>Protección familiar</small></div>
+    </div>
+    <div class="kc"><b>Cliente</b>
+      <div class="ca w">Marta L.<small>Cerrado este mes</small></div>
+    </div>
+  </div>
+  <p class="note">Ejemplo ilustrativo. Cada tarjeta se mueve sola cuando el prospecto avanza: no tenés que cargar nada a mano.</p>
+</section>
+
+<section class="slide">
+  <p class="kicker"><span class="dot"></span>Tu agente de IA</p>
+  <h2>Contesta al instante y <em>completa la ficha solo</em></h2>
+  <div class="live">
+    <div class="phone">
+      <div class="hd"><div class="av">S</div><div><b>Asistente de [tu marca]</b><span>en línea</span></div></div>
+      <div class="msg l">Hola, vi la publicación sobre planificación financiera</div>
+      <div class="msg b">¡Hola! Soy el asistente de [tu marca]. Te hago 3 preguntas para orientarte: ¿qué te interesa más, protección familiar, ahorro o retiro?</div>
+      <div class="msg l">Protección familiar</div>
+      <div class="msg b">Perfecto. Te reservo una charla con [vos]: jueves 16:00 o viernes 10:00.</div>
+    </div>
+    <div class="fic">
+      <span class="pill ej">Ejemplo ilustrativo</span>
+      <h3 style="margin-top:1.4vh">La ficha se completa sola</h3>
+      <div class="r"><span>Nombre</span><b>Laura G.</b></div>
+      <div class="r"><span>Interés</span><b>Protección familiar</b></div>
+      <div class="r"><span>Zona</span><b>Corrientes</b></div>
+      <div class="r"><span>Disponibilidad</span><b>Jueves 16:00</b></div>
+      <div class="r"><span>Calificación sugerida</span><b class="ok">Calificado · vos confirmás</b></div>
+    </div>
+  </div>
+  <p class="note">Responde de día, de noche y los fines de semana. Cuando el prospecto necesita a una persona, te avisa y te pasa todo lo que se habló.</p>
+</section>
+
+<section class="slide">
+  <p class="kicker"><span class="dot"></span>WhatsApp</p>
+  <h2>Conectá <em>hasta 5 números</em> de WhatsApp</h2>
+  <div class="cols c3">
+    <div><div class="big">USD 20</div><p style="margin-top:1.6vh">por mes por la conexión oficial de WhatsApp a tu cuenta.</p></div>
+    <div><h3>Hasta 5 números</h3><p>Podés conectar el tuyo y los de tu equipo, y todos los mensajes entran a la misma bandeja.</p></div>
+    <div><h3>Todo ordenado</h3><p>Cada conversación queda en la ficha del prospecto, sin pasar capturas ni reenviar chats.</p></div>
+  </div>
+  <p class="note">Los mensajes que cobra Meta por WhatsApp se cotizan aparte.</p>
+</section>
+
+<section class="slide">
+  <p class="kicker"><span class="dot"></span>No arrancás solo</p>
+  <h2>Te acompañamos para que <em>lo uses de verdad</em></h2>
+  <div class="cols c3">
+    <div><h3>Soporte por WhatsApp</h3><p>Si algo no te sale o no entendés cómo se hace, escribís y te ayudamos.</p></div>
+    <div><h3>Clase los jueves</h3><p>Un espacio fijo cada semana para sacar dudas y hacer consultas en vivo.</p></div>
+    <div><h3>Todo viene armado</h3><p>El pipeline, el asistente y los mensajes ya están listos. Lo único que se cambia es tu marca.</p></div>
+  </div>
+</section>
+
+<section class="slide">
+  <p class="kicker"><span class="dot"></span>Lo que pagás</p>
+  <h2>USD 60 por mes, <em>más la IA según uso</em></h2>
+  <table class="mx" style="margin-top:4vh">
+    <tr><th>Concepto</th><th>Qué incluye</th><th>Por mes</th></tr>
+    <tr><td>Sharp</td><td>Pipeline, bandeja de mensajes, agenda y asistente de IA</td><td class="y">USD 40</td></tr>
+    <tr><td>WhatsApp</td><td>Conexión oficial, hasta 5 números</td><td class="y">USD 20</td></tr>
+    <tr><td>Soporte y clase</td><td>Soporte por WhatsApp y clase de los jueves</td><td class="y">Incluido</td></tr>
+    <tr><td>Uso de la IA</td><td>Unos USD 0,008 por respuesta. Se carga un saldo de USD 10 que se usa hasta que se gasta</td><td>Según uso</td></tr>
+  </table>
+  <p class="note">Con 100 prospectos por mes, la IA cuesta unos USD 12. Precios de la plataforma sujetos a cambios del proveedor.</p>
+</section>
+
+<section class="slide">
+  <p class="kicker"><span class="dot"></span>Cómo empezás</p>
+  <h2>En <em>tres pasos</em></h2>
+  <div class="cols c3">
+    <div><h3>1 · Te armamos la cuenta</h3><p>Con el sistema listo y tu marca.</p></div>
+    <div><h3>2 · Conectás tu WhatsApp</h3><p>Te guiamos paso a paso.</p></div>
+    <div><h3>3 · Empezás a recibir prospectos</h3><p>El asistente atiende y vos entrás a vender.</p></div>
+  </div>
+  <p class="note">Los datos de ejemplo de esta presentación son ilustrativos.</p>
+</section>
+
+</div>
+<div id="bar"></div><div id="num"></div><div id="hint">← → para navegar · Cmd + / − para el zoom</div>
+<script src="deck.js"></script>
+</body>
+</html>
