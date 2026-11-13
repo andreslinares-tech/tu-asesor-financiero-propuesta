@@ -225,6 +225,28 @@ ol.q li small{display:block;font-size:1.5vh;color:var(--dim);margin-top:.4vh}
 .next{display:grid;grid-template-columns:1fr 1fr;gap:.8vw;margin-top:1.4vh}
 .next div{border:1.5px dashed var(--violet);border-radius:1.4vh;padding:1.2vh .8vw;font-size:1.45vh;color:var(--violet);font-weight:600;background:#fff}
 .next small{display:block;font-weight:400;color:var(--dim);font-size:1.2vh;margin-top:.3vh}
+
+/* ---------- propuesta de Ariel ---------- */
+.three{display:grid;grid-template-columns:repeat(3,1fr);gap:2.4vw;margin-top:5vh}
+.three>div{border-top:2px solid var(--accent);padding-top:2.2vh}
+.three b{display:block;font-size:6vh;font-weight:800;color:var(--accent);letter-spacing:-.04em;line-height:1}
+.three h3{font-size:2.4vh;font-weight:700;margin:1.2vh 0 .8vh}
+.three p{font-size:1.75vh;color:var(--dim);line-height:1.5}
+.bb.m{margin-left:auto;background:#dcf5e3;color:#1f3d2a}
+.flist div{display:flex;justify-content:space-between;gap:.6vw;padding:.85vh 0;border-top:1px solid var(--hair);font-size:1.4vh}
+.flist div span{color:var(--dim);font-size:1.15vh;white-space:nowrap}
+.chips em.on{background:var(--accent);color:#fff}
+.seq{display:grid;grid-template-columns:repeat(3,1fr);gap:1.4vw;width:40vw}
+.seq>div>b{display:block;font-size:1.2vh;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);font-weight:700;margin-bottom:.4vh}
+.seq>div>small{display:block;font-size:1.25vh;color:var(--dim);margin-bottom:1.2vh;min-height:3.2vh}
+.sp{display:flex;justify-content:space-between;align-items:center;padding:.85vh .6vw;border:1px solid var(--hair);border-radius:1vh;background:#fff;margin-bottom:.7vh;font-size:1.45vh;font-weight:600}
+.ce{font-style:normal;font-size:1.05vh;font-weight:700;padding:.25vh .5vw;border-radius:99vh;color:#fff;background:#6b7280}
+.ce.w{background:#25a35a}
+.seq .nd{font-size:1.35vh;margin-top:.4vh}
+.st3{display:inline-block;font-size:1.3vh;font-weight:700;padding:.8vh 1.1vw;border-radius:99vh;background:#e4efe7;color:var(--green);border:1.5px solid var(--green);white-space:nowrap}
+.st3.half{background:#fff3cf;color:#8a6a10;border-color:var(--yellow)}
+.chk button.sel{background:var(--ink);border-color:var(--ink);color:#fff}
+.chk button{white-space:nowrap}
 </style>
 </head>
 <body>
@@ -234,8 +256,8 @@ ol.q li small{display:block;font-size:1.5vh;color:var(--dim);margin-top:.4vh}
 <section class="slide on" style="position:relative">
   <p class="kicker"><span class="dot"></span>Kit Asesor · Clase 1</p>
   <h1>Cómo trabajan<br><em>hoy</em></h1>
-  <p class="lede">Hoy no les muestro nada terminado. Les pregunto cómo hacen hoy, lo alineamos con el flujo de Ariel y con eso armo su primera versión para que la prueben.</p>
-  <p class="foot">Bruno · Euge · Andrés — noviembre 2026</p>
+  <p class="lede">Ariel ya trajo el formulario, los mensajes y el seguimiento. Hoy lo validamos con cómo trabajan ustedes y cerramos lo que falta para construirlo.</p>
+  <p class="foot">Ariel · Bruno · Euge · Andrés — 13 de noviembre de 2026</p>
   <div class="cover-art"><div class="ring"><b>01</b><span>relevamiento</span></div></div>
 </section>
 
@@ -289,9 +311,21 @@ ol.q li small{display:block;font-size:1.5vh;color:var(--dim);margin-top:.4vh}
         <li>Reunión 2 <small>cierra o se descarta</small></li>
         <li>Cierre <small>cliente con sus productos</small></li>
       </ol>
-      <p class="note">Lo vemos etapa por etapa: primero el dibujo, después cómo lo hacen hoy.</p>
+      <p class="note">Lo vemos etapa por etapa: el dibujo, lo que Ariel ya definió y cómo lo hacen hoy.</p>
     </div>
   </div>
+</section>
+
+<!-- 4b PROPUESTA DE ARIEL -->
+<section class="slide">
+  <p class="kicker"><span class="dot"></span>Lo que trajo Ariel · 13 de noviembre</p>
+  <h2>El flujo ya tiene<br><em>formulario, mensajes y seguimiento</em></h2>
+  <div class="three">
+    <div><b>10</b><h3>campos en el formulario</h3><p>Antes eran 19. Se completa en 1 o 2 minutos: contacto, edad, provincia, qué le interesa y rango de ingresos. Lo profundo pasa a la primera reunión.</p></div>
+    <div><b>5</b><h3>mensajes clave</h3><p>Invitación al formulario · no calificado · invitación a R1 · cierre después de una reunión · invitación a R2. Cada uno por email y WhatsApp.</p></div>
+    <div><b>3</b><h3>secuencias de seguimiento</h3><p>Una por cada espera, con días y canal definidos. Si se agotan los pasos, el prospecto se descarta solo.</p></div>
+  </div>
+  <p class="note" style="font-size:1.8vh;margin-top:4vh">Hoy: ¿esto se parece a cómo trabajan ustedes? Y 4 decisiones para poder construirlo.</p>
 </section>
 
 <section class="slide">
@@ -299,7 +333,7 @@ ol.q li small{display:block;font-size:1.5vh;color:var(--dim);margin-top:.4vh}
   <h2>Entra por redes,<br><em>recibe el formulario</em></h2>
   <div class="dg">
     <div class="mf"><div class="row"><div class="nd tr">Lead entra por redes<small>Instagram / Facebook</small></div></div><div class="dn"></div><div class="row"><div class="nd au">Automatización envía<br>el Formulario</div></div><div class="dn"></div><div class="end">→ Calificación</div></div>
-    <div class="dgr"><h3>Lo que dice el dibujo</h3><ul><li>Cada asesor conecta <b>sus propias redes</b>.</li><li>Apenas entra el lead, se le manda el formulario <b>solo</b>, sin que el asesor haga nada.</li></ul><h3 class="op">Lo que hay que definir hoy</h3><ul><li>¿Por dónde entra exactamente: comentario, mensaje directo, anuncio con formulario, WhatsApp?</li><li>¿Por qué canal le llega el formulario?</li><li>¿Qué pasa si escribe directo al WhatsApp del asesor?</li></ul></div>
+    <div class="dgr"><h3>Lo que dice el dibujo</h3><ul><li>Cada asesor conecta <b>sus propias redes</b>.</li><li>Apenas entra el lead, le llega el <b>Mensaje 0</b> por email y WhatsApp con el link al formulario.</li></ul><h3 class="op">Lo que hay que definir hoy</h3><ul><li>¿Por dónde entra exactamente: comentario, mensaje directo, anuncio con formulario, WhatsApp?</li><li>Si escribe por mensaje directo <b>no tenemos su email</b>. ¿Cómo le llega el Mensaje 0?</li><li>¿Qué pasa si escribe directo al WhatsApp del asesor?</li></ul></div>
   </div>
 </section>
 
@@ -342,9 +376,9 @@ ol.q li small{display:block;font-size:1.5vh;color:var(--dim);margin-top:.4vh}
   <div class="qa">
     <div>
     <ol class="q">
-      <li><span>¿Quién responde y cuánto tarda?</span></li>
-      <li><span>¿Qué le dicen en el primer mensaje?<small>Si lo tienen guardado, mándenmelo tal cual.</small></span></li>
-      <li><span>¿Usan un formulario hoy? ¿Qué preguntas tiene?</span></li>
+      <li><span>¿Hoy quién responde y cuánto tarda?</span></li>
+      <li><span>¿El primer mensaje de Ariel suena a ustedes?<small>Lo leemos juntos. ¿Cambiarían algo?</small></span></li>
+      <li><span>¿El formulario nuevo les alcanza?<small>10 campos, 1 o 2 minutos. Lo profundo queda para la primera reunión.</small></span></li>
       <li><span>¿Qué WhatsApp usan, personal o Business? ¿Es el número que quieren usar?</span></li>
       <li><span>¿Qué preguntas les hacen siempre los prospectos?<small>Eso es lo primero que va a responder el bot.</small></span></li>
     </ol></div>
@@ -352,18 +386,20 @@ ol.q li small{display:block;font-size:1.5vh;color:var(--dim);margin-top:.4vh}
   <div class="card ph">
     <div class="hd"><div class="av">S</div><div><b>[Asesor]</b><span>en línea</span></div></div>
     <div class="bb l">Hola! Vi la publicación, quiero info 🙂</div>
-    <div style="display:flex"><span class="timer">⏱ ¿en cuánto responden?</span></div>
-    <div class="bb r">¿Qué le responden hoy?</div>
-    <div class="bb f">📋 Formulario de [Asesor]<small>completalo y te contacto</small></div>
+    <div style="display:flex"><span class="timer">⏱ sale solo, al instante</span></div>
+    <div class="bb m">¡Hola, [nombre]! 😊 Soy [asesor], de Tu Asesor Financiero. Para conocerte un poco mejor, completá este formulario breve (2 minutos): [link] ✨</div>
   </div>
-  <div class="card frm"><h4>Formulario</h4>
-    <div class="fl"><span>Pregunta 1</span><i>?</i></div>
-    <div class="fl"><span>Pregunta 2</span><i>?</i></div>
-    <div class="fl"><span>Pregunta 3</span><i>?</i></div>
-    <div class="fl" style="margin:0"><span>Las que se repiten siempre</span><i>?</i></div>
+  <div class="card frm flist"><h4>Formulario · 10 campos</h4>
+    <div>Nombre y apellido<span>obligatorio</span></div>
+    <div>Email y teléfono<span>obligatorio</span></div>
+    <div>Edad<span>obligatorio</span></div>
+    <div>Provincia · localidad<span>localidad opcional</span></div>
+    <div>¿Qué te gustaría trabajar?<span>varias opciones</span></div>
+    <div>Rango de ingresos<span>4 rangos</span></div>
+    <div>Autorización de datos<span>Ley 25.326</span></div>
   </div>
 </div>
-<p class="cap">El primer mensaje y el formulario salen solos. Hoy definimos qué dicen.</p></div>
+<p class="cap">Mensaje 0 y formulario, tal como los escribió Ariel.</p></div>
   </div>
 </section>
 
@@ -372,7 +408,7 @@ ol.q li small{display:block;font-size:1.5vh;color:var(--dim);margin-top:.4vh}
   <h2>Responde el formulario<br>y <em>decide el asesor</em></h2>
   <div class="dg">
     <div class="mf"><div class="row"><div class="nd wt">Espera respuesta<br>del Formulario</div><div class="ar nu"><span>No responde</span></div><div class="side"><div class="nd nu">Nutrición escalonada</div><i>agota pasos ↓</i><div class="nd ds">Descartado<small>sin respuesta</small></div></div></div><div class="dn"><span>Responde</span></div><div class="row"><div class="nd dc">¿Prospecto calificado?<small>evalúa el asesor</small></div><div class="ar"><span>No calificado</span></div><div class="side"><div class="nd ds">Descartado<small>no calificado</small></div></div></div><div class="dn"><span>Calificado</span></div><div class="end">→ Reunión 1</div></div>
-    <div class="dgr"><h3>Lo que dice el dibujo</h3><ul><li>Si no completa el formulario, entra en <b>nutrición</b>. Si se agotan los pasos, se descarta solo.</li><li><b>El asesor</b> decide si califica, no la máquina.</li><li>El no calificado tiene su <b>propio mensaje</b> de despedida.</li></ul><h3 class="op">Lo que hay que definir hoy</h3><ul><li>Las preguntas del formulario.</li><li>Qué hace que alguien sea "calificado".</li><li>El mensaje para el que no califica.</li></ul></div>
+    <div class="dgr"><h3>Lo que dice el dibujo</h3><ul><li>Si no completa el formulario, entra en <b>nutrición</b>. Si se agotan los pasos, se descarta solo.</li><li><b>El asesor</b> decide si califica, no la máquina.</li><li>El no calificado recibe su <b>mensaje de despedida</b>. Ariel ya lo escribió.</li></ul><h3 class="op">Lo que hay que definir hoy</h3><ul><li>Con qué respuestas del formulario alguien califica.</li><li>Cuánto tarda el asesor en decidir después de que llega el formulario.</li></ul></div>
   </div>
 </section>
 
@@ -384,20 +420,19 @@ ol.q li small{display:block;font-size:1.5vh;color:var(--dim);margin-top:.4vh}
     <div>
     <ol class="q">
       <li><span>¿Qué tiene que tener alguien para que valga la pena reunirse?</span></li>
-      <li><span>¿Qué datos necesitan saber antes de la reunión?<small>Edad, familia, ingresos, objetivo, zona…</small></span></li>
-      <li><span>¿Qué productos ofrecen más y a quién?<small>Protección familiar, ahorro, retiro…</small></span></li>
-      <li><span>¿A quién descartan? ¿Se lo dicen o dejan de responder?</span></li>
+      <li><span>¿Con edad, interés y rango de ingresos les alcanza para decidir?<small>Es lo que trae el formulario nuevo.</small></span></li>
+      <li><span>¿Desde qué rango de ingresos vale la pena reunirse?</span></li>
+      <li><span>¿Qué productos ofrecen más y a quién?<small>Protección, ahorro, inversión, retiro…</small></span></li>
       <li><span>¿Lo deciden ustedes solos o lo consultan con alguien?</span></li>
     </ol>
     <p class="ariel"><b>Ariel:</b> el asesor decide si califica. La IA solo propone.</p></div>
     <div class="vis"><div class="card fx">
-  <div class="top"><div class="av">LG</div><div><b>Laura G.</b><span>Prospecto · llegó por Instagram</span></div></div>
-  <div class="r"><span>Edad</span><span class="qv">?</span></div>
-  <div class="r"><span>Familia</span><span class="qv">?</span></div>
-  <div class="r"><span>Ingresos</span><span class="qv">?</span></div>
-  <div class="r"><span>Objetivo</span><span class="qv">?</span></div>
-  <div class="r"><span>Producto de interés</span><div class="chips"><em>Protección</em><em>Ahorro</em><em>Retiro</em></div></div>
-  <div class="r"><span>¿Qué más necesitan saber?</span><span class="qv">?</span></div>
+  <div class="top"><div class="av">LG</div><div><b>Laura G.</b><span>Completó el formulario · ejemplo</span></div></div>
+  <div class="r"><span>Edad</span><b>34</b></div>
+  <div class="r"><span>Provincia · localidad</span><b>Corrientes · Bella Vista</b></div>
+  <div class="r"><span>Quiere trabajar</span><div class="chips"><em class="on">Protección</em><em>Ahorro</em><em class="on">Retiro</em><em>Inversión</em></div></div>
+  <div class="r"><span>Ingresos mensuales</span><div class="chips"><em>hasta 1,5 M</em><em class="on">1,5–3 M</em><em>3–5 M</em><em>+5 M</em></div></div>
+  <div class="r"><span>¿Califica con esto?</span><span class="qv">?</span></div>
   <div class="dec"><div class="y">Calificado</div><div class="n">No calificado</div></div>
   <p class="cap" style="text-align:center;margin-top:1.2vh">El asesor toca uno de los dos. El resto es automático.</p>
 </div></div>
@@ -409,7 +444,7 @@ ol.q li small{display:block;font-size:1.5vh;color:var(--dim);margin-top:.4vh}
   <h2>Agenda, reunión<br>y <em>tres caminos</em></h2>
   <div class="dg">
     <div class="mf"><div class="row"><div class="nd au">Envía email + WhatsApp:<br>agenda Reunión 1</div></div><div class="dn"></div><div class="row"><div class="nd wt">Espera agenda /<br>realización Reunión 1</div><div class="ar nu"><span>No agenda</span></div><div class="side"><div class="nd nu">Nutrición escalonada</div><i>agota pasos ↓</i><div class="nd ds">Descartado<small>sin respuesta</small></div></div></div><div class="dn"><span>Se realiza la reunión</span></div><div class="row"><div class="nd dc">¿Avanza tras Reunión 1?</div><div class="ar"><span>Descartar</span></div><div class="side"><div class="nd ds">Descartado<small>post-reunión</small></div></div></div><div class="dn"><span>Avanza</span></div><div class="row"><div class="nd dc">¿Cerró en Reunión 1?</div><div class="ar"><span>Sí, cerró</span></div><div class="side"><div class="nd cl">Cliente<small>cargar productos y parámetros</small></div></div></div><div class="dn"><span>No cerró</span></div><div class="end">→ Reunión 2</div></div>
-    <div class="dgr"><h3>Lo que dice el dibujo</h3><ul><li>La invitación a agendar sale <b>por email y WhatsApp</b> a la vez.</li><li>Después de la reunión el asesor marca uno de 3 caminos: <b>descartar, cerró, o sigue a R2</b>.</li></ul><h3 class="op">Lo que hay que definir hoy</h3><ul><li>Con qué agenda se reserva (link, horarios, duración).</li><li>Si no se presenta, ¿cuenta como "no agenda" y vuelve a nutrición?</li><li>¿Recordatorio antes de la reunión?</li></ul></div>
+    <div class="dgr"><h3>Lo que dice el dibujo</h3><ul><li>La invitación a agendar sale <b>por email y WhatsApp</b> a la vez.</li><li>Después de la reunión el asesor marca uno de 3 caminos: <b>descartar, cerró, o sigue a R2</b>.</li><li>Ariel ya escribió la invitación a R1, la de R2 y el cierre post-reunión. Si cierra en el acto, <b>no sale mensaje</b>.</li></ul><h3 class="op">Lo que hay que definir hoy</h3><ul><li>Con qué agenda se reserva (link, horarios, duración).</li><li>Si no se presenta, ¿cuenta como "no agenda" y vuelve a nutrición?</li><li>¿Recordatorio antes de la reunión?</li></ul></div>
   </div>
 </section>
 
@@ -418,7 +453,7 @@ ol.q li small{display:block;font-size:1.5vh;color:var(--dim);margin-top:.4vh}
   <h2>La última oportunidad:<br><em>cierra o se despide</em></h2>
   <div class="dg">
     <div class="mf"><div class="row"><div class="nd au">Envía email + WhatsApp:<br>agenda Reunión 2</div></div><div class="dn"></div><div class="row"><div class="nd wt">Espera agenda /<br>realización Reunión 2</div><div class="ar nu"><span>No agenda</span></div><div class="side"><div class="nd nu">Nutrición escalonada</div><i>agota pasos ↓</i><div class="nd ds">Descartado<small>sin respuesta</small></div></div></div><div class="dn"><span>Se realiza la reunión</span></div><div class="row"><div class="nd dc">¿Cerró en Reunión 2?</div><div class="ar"><span>No cerró</span></div><div class="side"><div class="nd ds">Descartado<small>post-reunión</small></div></div></div><div class="dn"><span>Sí, cerró</span></div><div class="row"><div class="nd cl">Cliente: cargar productos<small>cerrados y sus parámetros</small></div></div></div>
-    <div class="dgr"><h3>Lo que dice el dibujo</h3><ul><li>Misma mecánica que la R1: email + WhatsApp, espera con nutrición.</li><li><b>No hay Reunión 3.</b> Después de la R2, cliente o descartado.</li></ul><h3 class="op">Lo que hay que definir hoy</h3><ul><li>¿Cuánto tiempo pasa entre la R1 y la R2?</li><li>¿Qué se hace distinto en la R2?</li><li>El mensaje para el que no cierra.</li></ul></div>
+    <div class="dgr"><h3>Lo que dice el dibujo</h3><ul><li>Misma mecánica que la R1: email + WhatsApp, espera con nutrición.</li><li><b>No hay Reunión 3.</b> Después de la R2, cliente o descartado.</li><li>El que no cierra recibe el mismo cierre post-reunión que en la R1.</li></ul><h3 class="op">Lo que hay que definir hoy</h3><ul><li>¿Cuánto tiempo pasa entre la R1 y la R2?</li><li>¿Qué se hace distinto en la R2?</li></ul></div>
   </div>
 </section>
 
@@ -459,11 +494,11 @@ ol.q li small{display:block;font-size:1.5vh;color:var(--dim);margin-top:.4vh}
 </section>
 
 <section class="slide">
-  <p class="kicker"><span class="dot"></span>En cada espera · el dibujo de Ariel</p>
-  <h2>Tres esperas,<br><em>tres secuencias de seguimiento</em></h2>
+  <p class="kicker"><span class="dot"></span>En cada espera · la propuesta de Ariel</p>
+  <h2>Tres esperas,<br><em>así las armó Ariel</em></h2>
   <div class="dg">
-    <div class="mf"><div class="waits" style="width:38vw;margin-top:0"><div><b>Calificación</b><div class="nd wt">Espera el formulario</div><i>no responde ⇢</i><div class="nd nu">Nutrición escalonada</div><i class="g">agota pasos ↓</i><div class="nd ds">Descartado<small>sin respuesta</small></div></div><div><b>Reunión 1</b><div class="nd wt">Espera agenda R1</div><i>no responde ⇢</i><div class="nd nu">Nutrición escalonada</div><i class="g">agota pasos ↓</i><div class="nd ds">Descartado<small>sin respuesta</small></div></div><div><b>Reunión 2</b><div class="nd wt">Espera agenda R2</div><i>no responde ⇢</i><div class="nd nu">Nutrición escalonada</div><i class="g">agota pasos ↓</i><div class="nd ds">Descartado<small>sin respuesta</small></div></div></div></div>
-    <div class="dgr"><h3>Lo que dice el dibujo</h3><ul><li>Cada espera tiene <b>su propia secuencia</b>: puede tener distinta cantidad de pasos y cadencia.</li><li>Si el prospecto responde en cualquier paso, <b>sale de la secuencia</b> y sigue el flujo.</li><li>Si se agotan los pasos, <b>se descarta solo</b>.</li></ul><h3 class="op">Lo que hay que definir hoy</h3><ul><li>Cuántos mensajes en cada espera y cada cuánto.</li><li>Por qué canal: WhatsApp, email o los dos.</li><li>Los textos de cada paso.</li></ul></div>
+    <div class="mf"><div class="seq"><div><b>Nutrición 1</b><small>no completó el formulario</small><div class="sp">Día 3<em class="ce">Email</em></div><div class="sp">Día 10<em class="ce">Email</em></div><div class="sp">Día 21<em class="ce">Email</em></div><div class="sp">Día 35<em class="ce">Email</em></div><div class="nd ds">Descartado<small>después del día 35</small></div></div><div><b>Nutrición 2</b><small>calificado, no agendó la R1</small><div class="sp">Día 3<em class="ce w">WhatsApp</em></div><div class="sp">Día 8<em class="ce">Email</em></div><div class="sp">Día 15<em class="ce w">WhatsApp</em></div><div class="sp">Día 25<em class="ce">Email</em></div><div class="nd ds">Descartado<small>después del día 25</small></div></div><div><b>Nutrición 3</b><small>no agendó la R2</small><div class="sp">Día 3<em class="ce w">WhatsApp</em></div><div class="sp">Día 8<em class="ce">Email</em></div><div class="sp">Día 15<em class="ce w">WhatsApp</em></div><div class="nd ds">Descartado<small>después del día 15</small></div></div></div></div>
+    <div class="dgr"><h3>Lo que propone Ariel</h3><ul><li>Al que no completó el formulario, <b>solo email</b>: no se usa el WhatsApp con alguien que no dio el primer paso.</li><li>Desde que califica se suma WhatsApp: <b>2 por secuencia</b>, siempre con un email en el medio.</li><li>El último paso avisa que se cierra. Después, <b>se descarta solo</b>.</li></ul><h3 class="op">Lo que hay que definir hoy</h3><ul><li>¿El ritmo les parece bien, o es mucho o poco?</li><li>Si agendó y no vino, ¿vuelve a la secuencia?</li></ul></div>
   </div>
 </section>
 
@@ -474,19 +509,21 @@ ol.q li small{display:block;font-size:1.5vh;color:var(--dim);margin-top:.4vh}
   <div class="qa">
     <div>
     <ol class="q">
-      <li><span>¿Cuántas veces le insisten? ¿Cada cuánto?</span></li>
-      <li><span>¿Por dónde? WhatsApp, llamada, mail…</span></li>
-      <li><span>¿Qué le escriben para insistir?<small>Mándenme los mensajes reales.</small></span></li>
-      <li><span>¿Cuándo lo dan por perdido?</span></li>
-      <li><span>¿Vuelven a contactar a los viejos? ¿Cada cuánto?</span></li>
+      <li><span>¿Hoy cuántas veces insisten y cada cuánto?<small>Para comparar con lo de Ariel.</small></span></li>
+      <li><span>4 emails en 35 días al que no completa el formulario: ¿mucho o poco?</span></li>
+      <li><span>¿Les parece bien usar WhatsApp recién cuando califica?</span></li>
+      <li><span>¿Se animan a escribir ustedes el último WhatsApp de la R2?<small>Ariel quiere que suene en primera persona, no a sistema.</small></span></li>
+      <li><span>¿Quieren un recordatorio antes de cada reunión?</span></li>
     </ol>
-    <p class="ariel"><b>Ariel:</b> la insistencia puede ser distinta en cada espera (formulario, R1, R2).</p></div>
+    <p class="ariel"><b>Ariel:</b> si se agota la secuencia, se descarta solo, sin que el asesor haga nada.</p></div>
     <div class="vis"><div class="tlv">
-  <div class="st2"><span class="d">DÍA 0</span><div class="m">Le llega el formulario <span>automático</span></div></div>
-  <div class="st2"><span class="d">DÍA <span class="qv">?</span></span><div class="m q">Primer recordatorio <span>¿WhatsApp o email?</span></div></div>
-  <div class="st2"><span class="d">DÍA <span class="qv">?</span></span><div class="m q">Segundo intento <span>¿qué le dicen?</span></div></div>
-  <div class="st2"><span class="d">DÍA <span class="qv">?</span></span><div class="m q">Último intento <span>¿cuántos en total?</span></div></div>
-  <div class="st2 end2"><span class="d" style="color:#7a6a6d">FIN</span><div class="m" style="background:#f1ecec;color:#7a6a6d">Descartado sin respuesta <span>mensaje de despedida</span></div></div>
+  <p class="cap" style="margin:0 0 1.6vh;font-weight:600;color:var(--ink)">Ejemplo: calificó y no agenda la Reunión 1</p>
+  <div class="st2"><span class="d">DÍA 0</span><div class="m">Invitación a la R1 con link de agenda <span>email + WhatsApp</span></div></div>
+  <div class="st2"><span class="d">DÍA 3</span><div class="m">Recordatorio cálido + agenda <span>WhatsApp</span></div></div>
+  <div class="st2"><span class="d">DÍA 8</span><div class="m">Qué vamos a conversar en la reunión <span>email</span></div></div>
+  <div class="st2"><span class="d">DÍA 15</span><div class="m">¿Te quedó alguna duda? Último WhatsApp <span>WhatsApp</span></div></div>
+  <div class="st2"><span class="d">DÍA 25</span><div class="m">Último aviso antes de cerrar <span>email</span></div></div>
+  <div class="st2 end2"><span class="d" style="color:#7a6a6d">FIN</span><div class="m" style="background:#f1ecec;color:#7a6a6d">Descartado sin respuesta <span>automático</span></div></div>
   <div class="ok2">✓ Si responde en cualquier paso, sale de la secuencia y sigue el flujo.</div>
 </div></div>
   </div>
@@ -497,7 +534,7 @@ ol.q li small{display:block;font-size:1.5vh;color:var(--dim);margin-top:.4vh}
   <h2>Siempre termina igual:<br><em>cliente o descartado</em></h2>
   <div class="dg">
     <div class="mf"><div class="row"><div class="nd cl">Cliente: cargar productos<small>cerrados y sus parámetros</small></div></div><div style="height:3vh"></div><div class="row"><div class="nd ds">Descartado<small>no calificado</small></div></div><div style="height:1.2vh"></div><div class="row"><div class="nd ds">Descartado<small>sin respuesta</small></div></div><div style="height:1.2vh"></div><div class="row"><div class="nd ds">Descartado<small>post-reunión</small></div></div></div>
-    <div class="dgr"><h3>Lo que dice el dibujo</h3><ul><li>Al cliente se le <b>cargan los productos cerrados</b> y sus parámetros.</li><li>Hay <b>3 tipos de descarte</b>, cada uno con su mensaje.</li></ul><h3 class="op">Lo que hay que definir hoy</h3><ul><li>Qué datos del producto se cargan.</li><li>Qué pasa después de cerrar: referidos, post-venta. <b>No está en el dibujo.</b></li><li>¿Un descartado puede volver más adelante?</li></ul></div>
+    <div class="dgr"><h3>Lo que dice el dibujo</h3><ul><li>Al cliente se le <b>cargan los productos cerrados</b> y sus parámetros.</li><li>Si cierra en el acto, <b>no sale mensaje automático</b>.</li><li>Ariel escribió el mensaje del no calificado y el del post-reunión. El "sin respuesta" ya se avisa en el último paso del seguimiento.</li></ul><h3 class="op">Lo que hay que definir hoy</h3><ul><li>Qué datos del producto se cargan.</li><li>Qué pasa después de cerrar: referidos, post-venta. <b>No está en el dibujo.</b></li><li>¿Un descartado puede volver más adelante?</li></ul></div>
   </div>
 </section>
 
@@ -529,19 +566,31 @@ ol.q li small{display:block;font-size:1.5vh;color:var(--dim);margin-top:.4vh}
   </div>
 </section>
 
-<!-- 11 SUPUESTOS DE ARIEL -->
+<!-- 11 LO QUE ARIEL YA DECIDIÓ -->
 <section class="slide">
-  <p class="kicker"><span class="dot"></span>Lo que Ariel dejó para confirmar</p>
-  <h2>Cuatro decisiones,<br><em>¿las confirmamos?</em></h2>
+  <p class="kicker"><span class="dot"></span>Los 4 supuestos del borrador</p>
+  <h2>Ariel ya los <em>respondió</em></h2>
   <div class="sup">
-    <div class="row"><div><h3>Si no responde después de todos los mensajes, se descarta solo</h3><p>En las 3 esperas (formulario, R1, R2), sin que ustedes tengan que hacer nada.</p></div>
-      <div class="chk" data-k="s1" data-label="Descarte automático al agotar nutrición"><button data-v="Sí">Sí</button><button data-v="Ajustar">Ajustar</button><button data-v="No">No</button></div></div>
-    <div class="row"><div><h3>Tres mensajes de despedida distintos</h3><p>No calificó · no avanzó después de una reunión · no respondió.</p></div>
-      <div class="chk" data-k="s2" data-label="3 mensajes de descarte distintos"><button data-v="Sí">Sí</button><button data-v="Ajustar">Ajustar</button><button data-v="No">No</button></div></div>
-    <div class="row"><div><h3>Máximo dos reuniones</h3><p>No hay Reunión 3. Después de la R2, cliente o descartado.</p></div>
-      <div class="chk" data-k="s3" data-label="Tope de 2 reuniones"><button data-v="Sí">Sí</button><button data-v="Ajustar">Ajustar</button><button data-v="No">No</button></div></div>
-    <div class="row"><div><h3>Formulario, cadencia y textos los definimos juntos</h3><p>Sale de lo que me cuentan hoy y de los mensajes que ya usan.</p></div>
-      <div class="chk" data-k="s4" data-label="Formulario, cadencia y textos a definir juntos"><button data-v="Sí">Sí</button><button data-v="Ajustar">Ajustar</button><button data-v="No">No</button></div></div>
+    <div class="row"><div><h3>Si no responde después de todos los mensajes, se descarta solo</h3><p>En las 3 secuencias: después del día 35, 25 o 15 según la espera.</p></div><span class="st3">✓ Confirmado</span></div>
+    <div class="row"><div><h3>Mensajes de despedida distintos</h3><p>No calificado y post-reunión tienen su mensaje. El "sin respuesta" se avisa en el último paso del seguimiento.</p></div><span class="st3 half">2 mensajes + aviso</span></div>
+    <div class="row"><div><h3>Máximo dos reuniones</h3><p>No hay Reunión 3. Después de la R2, cliente o descartado.</p></div><span class="st3">✓ Confirmado</span></div>
+    <div class="row"><div><h3>Formulario, ritmo y textos</h3><p>10 campos, 5 mensajes clave y 3 secuencias, todo escrito.</p></div><span class="st3">✓ Entregado</span></div>
+  </div>
+</section>
+
+<!-- 11b DECISIONES PARA CONSTRUIR -->
+<section class="slide">
+  <p class="kicker"><span class="dot"></span>Para poder construirlo</p>
+  <h2>Cuatro decisiones<br><em>que necesito hoy</em></h2>
+  <div class="sup">
+    <div class="row"><div><h3>¿De dónde sale el email del prospecto?</h3><p>El Mensaje 0 y toda la Nutrición 1 van por email. Si escribe por mensaje directo de Instagram, no tenemos su email.</p></div>
+      <div class="chk" data-k="d1" data-label="Origen del email"><button data-v="Anuncio con formulario">Anuncio con formulario</button><button data-v="Por el mismo chat">Por el mismo chat</button><button data-v="Los dos">Los dos</button></div></div>
+    <div class="row"><div><h3>¿WhatsApp oficial o no oficial?</h3><p>Oficial: Meta aprueba cada mensaje, 9 plantillas por número de asesor, y tarda días. No oficial: sale sin aprobación.</p></div>
+      <div class="chk" data-k="d2" data-label="WhatsApp"><button data-v="Oficial">Oficial</button><button data-v="No oficial">No oficial</button></div></div>
+    <div class="row"><div><h3>¿El Mensaje 0 va también por WhatsApp?</h3><p>Va a alguien que todavía no completó nada. Para ese mismo contacto, la Nutrición 1 es solo email.</p></div>
+      <div class="chk" data-k="d3" data-label="Mensaje 0 por WhatsApp"><button data-v="Email + WhatsApp">Email + WhatsApp</button><button data-v="Solo email">Solo email</button></div></div>
+    <div class="row"><div><h3>¿A quién avisamos cuando se descarta alguien?</h3><p>Ariel lo dejó pendiente: las alertas internas de descarte.</p></div>
+      <div class="chk" data-k="d4" data-label="Alertas de descarte"><button data-v="Al asesor">Al asesor</button><button data-v="Asesor + TAF">Asesor + TAF</button><button data-v="A nadie">A nadie</button></div></div>
   </div>
 </section>
 
@@ -568,17 +617,17 @@ ol.q li small{display:block;font-size:1.5vh;color:var(--dim);margin-top:.4vh}
   <h2>Ustedes me pasan, yo armo,<br><em>la próxima lo prueban</em></h2>
   <div class="two">
     <div><h3>Ustedes</h3><ul>
-      <li>Los mensajes que ya usan <small>(primer contacto, insistencia, despedida)</small></li>
-      <li>El formulario actual, si tienen</li>
+      <li>Leer los textos de Ariel y marcar lo que no suena a ustedes</li>
       <li>Logo, foto y datos de su marca</li>
       <li>Días y horarios para reuniones</li>
+      <li>El número de WhatsApp que van a usar</li>
       <li>Acceso a su Instagram / Facebook</li>
     </ul></div>
     <div class="me"><h3>Yo · antes del 20/11</h3><ul>
-      <li>Pipeline con las etapas de Ariel ajustadas a lo de hoy</li>
-      <li>Formulario con las preguntas que definimos</li>
-      <li>Mensajes de email y WhatsApp en cada etapa</li>
-      <li>Seguimiento automático en cada espera</li>
+      <li>Pipeline con las etapas del flujo de Ariel</li>
+      <li>Formulario de 10 campos</li>
+      <li>Los 5 mensajes y las 3 secuencias cargados</li>
+      <li>Descarte automático y aviso al asesor</li>
       <li>Todo andando en una cuenta de prueba</li>
     </ul></div>
   </div>
