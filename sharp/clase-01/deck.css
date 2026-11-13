@@ -1,0 +1,163 @@
+:root{
+  --bg:#fbfbfd;
+  --ink:#1d1d1f;
+  --dim:#6e6e73;
+  --hair:#e3e3e6;
+  --accent:#f97316;
+  --font:-apple-system,BlinkMacSystemFont,"SF Pro Display","SF Pro Text","Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;background:var(--bg);color:var(--ink);font-family:var(--font);overflow:hidden;
+  -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+
+#deck{position:fixed;inset:0;display:flex;align-items:center;justify-content:center}
+.slide{
+  display:none;width:min(100vw,177.78vh);height:min(56.25vw,100vh);
+  padding:0 9vw;flex-direction:column;justify-content:center;
+  animation:in .4s cubic-bezier(.16,1,.3,1);
+}
+.slide.on{display:flex}
+/* zoom propio (deck.js): agranda el contenido y lo reacomoda dentro de la slide */
+.slide>*{zoom:var(--z,1)}
+.slide.mid{align-items:center;text-align:center;padding:0 12vw}
+
+/* ---------- entrada escalonada, estilo Apple ---------- */
+@keyframes rise{
+  from{opacity:0;transform:translateY(26px);filter:blur(6px)}
+  to{opacity:1;transform:none;filter:blur(0)}
+}
+.slide.on>*{animation:rise .9s cubic-bezier(.16,1,.3,1) both}
+.slide.on>*:nth-child(1){animation-delay:.04s}
+.slide.on>*:nth-child(2){animation-delay:.16s}
+.slide.on>*:nth-child(3){animation-delay:.28s}
+.slide.on>*:nth-child(4){animation-delay:.40s}
+.slide.on>*:nth-child(5){animation-delay:.52s}
+
+/* los contenedores no entran: entran sus hijos, uno por uno */
+.slide.on>.cols,.slide.on>.steps,.slide.on>.states{animation:none}
+.slide.on .cols>div,.slide.on .steps>li,.slide.on .states>div{
+  animation:rise .9s cubic-bezier(.16,1,.3,1) both
+}
+.slide.on .cols>div:nth-child(1),.slide.on .steps>li:nth-child(1),.slide.on .states>div:nth-child(1){animation-delay:.34s}
+.slide.on .cols>div:nth-child(2),.slide.on .steps>li:nth-child(2),.slide.on .states>div:nth-child(2){animation-delay:.44s}
+.slide.on .cols>div:nth-child(3),.slide.on .steps>li:nth-child(3),.slide.on .states>div:nth-child(3){animation-delay:.54s}
+.slide.on .cols>div:nth-child(4){animation-delay:.64s}
+
+/* la frase grande entra más lenta y más marcada */
+.slide.on>.big,.slide.on>.task,.slide.on>.quote{animation-duration:1.1s}
+
+@media (prefers-reduced-motion:reduce){
+  .slide.on>*,.slide.on .cols>div,.slide.on .steps>li,.slide.on .states>div{animation:none}
+}
+
+/* --- tipografía --- */
+.kicker{font-size:1.55vh;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);font-weight:600;margin-bottom:4vh}
+.kicker .dot{display:inline-block;width:.6vh;height:.6vh;border-radius:50%;background:var(--accent);
+  vertical-align:middle;margin-right:.9vh;transform:translateY(-.15vh)}
+
+h1{font-size:8.2vh;line-height:1.02;font-weight:700;letter-spacing:-.035em}
+h2{font-size:6vh;line-height:1.06;font-weight:700;letter-spacing:-.03em}
+.lede{font-size:2.6vh;line-height:1.5;color:var(--dim);font-weight:400;max-width:44ch;margin-top:3.4vh}
+.foot{position:absolute;bottom:7vh;font-size:1.7vh;color:#a1a1a6;font-weight:400}
+
+/* --- cita --- */
+.quote{font-size:6.4vh;line-height:1.14;font-weight:600;letter-spacing:-.03em;max-width:20ch}
+.by{font-size:2vh;color:var(--dim);margin-top:4.5vh;font-weight:400}
+
+/* --- tres estados --- */
+.states{display:flex;gap:6vw;margin-top:7vh}
+.states div{}
+.states b{display:block;font-size:3.4vh;font-weight:700;letter-spacing:-.02em}
+.states .no b{color:var(--accent)}
+.states span{display:block;font-size:1.9vh;color:var(--dim);margin-top:1vh;font-weight:400}
+
+/* --- cuatro columnas --- */
+.cols{display:grid;grid-template-columns:repeat(4,1fr);gap:3.4vw;margin-top:6vh}
+.cols div{border-top:1px solid var(--hair);padding-top:2.6vh}
+.cols h3{font-size:2.35vh;font-weight:600;letter-spacing:-.015em;margin-bottom:1.6vh}
+.cols p{font-size:1.9vh;line-height:1.55;color:var(--dim);font-weight:400}
+.cols em{display:block;margin-top:2vh;font-style:normal;font-size:1.7vh;color:var(--accent);
+  font-family:ui-monospace,"SF Mono",Menlo,monospace}
+
+/* --- frase grande --- */
+.big{font-size:10vh;line-height:1.02;font-weight:700;letter-spacing:-.045em}
+.big span{color:var(--accent)}
+.after{font-size:2.3vh;line-height:1.5;color:var(--dim);margin-top:5vh;max-width:42ch;font-weight:400}
+
+/* --- pasos --- */
+.steps{margin-top:6vh;max-width:52ch}
+.steps li{list-style:none;display:flex;gap:2.4vw;align-items:baseline;padding:2.6vh 0;border-top:1px solid var(--hair)}
+.steps li:last-child{border-bottom:1px solid var(--hair)}
+.steps .n{font-size:1.8vh;color:var(--accent);font-weight:600;flex:0 0 auto;width:2ch}
+.steps .t{font-size:2.9vh;line-height:1.3;font-weight:400;letter-spacing:-.015em}
+.steps .t b{font-weight:600}
+
+/* --- tarea --- */
+.task{font-size:5.2vh;line-height:1.16;font-weight:600;letter-spacing:-.03em;max-width:22ch}
+
+/* --- chrome --- */
+#bar{position:fixed;left:0;bottom:0;height:2px;background:var(--accent);width:0;transition:width .7s cubic-bezier(.16,1,.3,1)}
+#num{position:fixed;right:3vw;bottom:3vh;font-size:1.5vh;color:#c7c7cc;font-weight:500;letter-spacing:.08em}
+#hint{position:fixed;top:3vh;right:3vw;font-size:1.4vh;color:#c7c7cc;font-weight:400;transition:opacity .4s}
+@media print{#bar,#num,#hint{display:none}.slide{display:flex!important;page-break-after:always}}
+
+/* ---------- comparación en dos lados (sin campo / con campo) ---------- */
+.vs{display:grid;grid-template-columns:1fr 1fr;gap:5vw;margin-top:6vh;max-width:70ch}
+.vs>div{border-top:1px solid var(--hair);padding-top:2.8vh}
+.vs h3{font-size:1.7vh;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);font-weight:600;margin-bottom:2.4vh}
+.vs .r{font-size:3.4vh;line-height:1.25;font-weight:600;letter-spacing:-.025em}
+.vs .r small{display:block;font-size:1.95vh;color:var(--dim);font-weight:400;margin-top:1.6vh;letter-spacing:0}
+.vs .ok .r{color:var(--accent)}
+
+/* ---------- tres zonas de color (solo clase 2) ---------- */
+.zn{display:flex;gap:1vw;align-items:center;margin-top:1.4vh}
+.zn i{width:1vh;height:1vh;border-radius:50%;display:inline-block}
+.zn.bot i{background:#7c3aed} .zn.hum i{background:#3b82f6} .zn.fin i{background:#16a34a}
+.zn span{font-size:1.75vh;color:var(--dim)}
+
+/* ---------- tabla mínima (matriz de caminos) ---------- */
+.mx{width:100%;border-collapse:collapse;margin-top:5vh;font-size:2vh}
+.mx th{text-align:left;font-size:1.6vh;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);
+  font-weight:600;padding:0 0 2vh;border-bottom:1px solid var(--hair)}
+.mx td{padding:2.3vh 0;border-bottom:1px solid var(--hair);font-weight:400}
+.mx td:first-child{font-weight:600}
+.mx .y{color:var(--accent);font-weight:600}
+.mx .n{color:#c7c7cc}
+
+/* ---------- mapa del curso: 12 clases en dos columnas ---------- */
+.plan{display:grid;grid-template-columns:1fr 1fr;gap:0 5vw;margin-top:4.5vh}
+.plan li{list-style:none;display:flex;gap:1.6vw;align-items:baseline;padding:1.45vh 0;border-top:1px solid var(--hair)}
+.plan .n{font-size:1.5vh;color:var(--accent);font-weight:600;width:2.2ch;flex:0 0 auto}
+.plan .t{font-size:2.15vh;font-weight:500;letter-spacing:-.015em}
+.plan .a{font-size:1.55vh;color:var(--dim);margin-left:auto;text-align:right;white-space:nowrap}
+
+/* ---------- arcos ---------- */
+.arcs{display:grid;grid-template-columns:repeat(4,1fr);gap:2.4vw;margin-top:5.5vh}
+.arcs>div{border-top:2px solid var(--hair);padding-top:2.4vh}
+.arcs>div:first-child{border-top-color:var(--accent)}
+.arcs .r{font-size:1.5vh;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);font-weight:600}
+.arcs h3{font-size:2.7vh;font-weight:700;letter-spacing:-.025em;margin:1.4vh 0}
+.arcs p{font-size:1.85vh;color:var(--dim);line-height:1.55}
+
+/* ---------- cadena / círculo ---------- */
+.chain{display:flex;gap:1.2vw;align-items:stretch;margin-top:6vh}
+.chain>div{flex:1;border-top:1px solid var(--hair);padding-top:2.6vh}
+.chain b{display:block;font-size:1.5vh;color:var(--accent);font-weight:600;letter-spacing:.1em}
+.chain h3{font-size:2.4vh;font-weight:600;letter-spacing:-.02em;margin:1.2vh 0}
+.chain p{font-size:1.8vh;color:var(--dim);line-height:1.5}
+
+/* ---------- molde de clase ---------- */
+.mold{margin-top:5vh;max-width:64ch}
+.mold li{list-style:none;display:flex;gap:2vw;align-items:baseline;padding:2.1vh 0;border-top:1px solid var(--hair)}
+.mold li:last-child{border-bottom:1px solid var(--hair)}
+.mold .m{font-size:1.6vh;color:var(--accent);font-weight:600;width:7ch;flex:0 0 auto;font-family:ui-monospace,"SF Mono",Menlo,monospace}
+.mold .t{font-size:2.5vh;font-weight:400;letter-spacing:-.015em}
+.mold .t b{font-weight:600}
+.mold .t small{display:block;font-size:1.75vh;color:var(--dim);margin-top:.6vh}
+
+/* ---------- zonas del pipeline: el color significa (solo clase 2) ---------- */
+.cols div.z h3::before{content:"";display:inline-block;width:.9vh;height:.9vh;border-radius:50%;
+  margin-right:.9vh;vertical-align:middle;transform:translateY(-.15vh)}
+.cols div.z.bot h3::before{background:#7c3aed}
+.cols div.z.hum h3::before{background:#3b82f6}
+.cols div.z.fin h3::before{background:#16a34a}

@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kit Asesor · Clase 1</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="deck.css">
+<style>
+:root{
+  --bg:#fffaf9;--ink:#313128;--dim:#7a6a6d;--hair:#ecd9dd;
+  --accent:#C85C73;--dark:#803B4A;--light:#F1D5DA;--coral:#FF7E6B;--yellow:#EDBF4D;--green:#3f9e6b;--violet:#7c3aed;
+  --font:"Montserrat",-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif;
+}
+body{background:var(--bg)}
+#bar{background:var(--accent)}
+h1,h2{color:var(--ink)}
+h2 em,h1 em{font-style:normal;color:var(--accent)}
+h2{font-size:5.2vh}
+.note{font-size:1.5vh;color:var(--dim);margin-top:2.4vh}
+.pill{display:inline-block;font-size:1.3vh;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:.6vh 1vw;border-radius:99vh;background:var(--light);color:var(--dark)}
+
+/* portada */
+.cover-art{position:absolute;right:8vw;top:50%;transform:translateY(-50%);width:26vw}
+.cover-art .ring{width:100%;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle at 35% 30%,var(--coral),var(--accent) 55%,var(--dark));box-shadow:0 4vh 10vh rgba(200,92,115,.35);display:flex;align-items:center;justify-content:center;flex-direction:column}
+.cover-art .ring b{font-size:10vh;color:#fff;letter-spacing:-.05em;font-weight:800;line-height:1}
+.cover-art .ring span{font-size:1.6vh;color:#fff;letter-spacing:.2em;text-transform:uppercase;font-weight:600;margin-top:1vh}
+
+/* ciclo */
+.cycle{display:grid;grid-template-columns:repeat(4,1fr);gap:2vw;margin-top:5vh}
+.cycle>div{border-top:2px solid var(--hair);padding-top:2.2vh;position:relative}
+.cycle>div:first-child{border-top-color:var(--accent)}
+.cycle b{display:block;font-size:1.4vh;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:700}
+.cycle h3{font-size:2.6vh;font-weight:700;letter-spacing:-.02em;margin:1.2vh 0}
+.cycle p{font-size:1.8vh;line-height:1.5;color:var(--dim)}
+.cycle .who{display:inline-block;margin-top:1.4vh;font-size:1.3vh;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:.4vh .8vw;border-radius:99vh;background:var(--light);color:var(--dark)}
+.cycle .who.yo{background:#ede7fb;color:var(--violet)}
+.support{display:flex;gap:3vw;margin-top:4.5vh;font-size:1.75vh;color:var(--dim)}
+.support b{color:var(--ink);font-weight:600}
+
+/* calendario */
+.tl{display:grid;grid-template-columns:repeat(5,1fr);gap:1.4vw;margin-top:5vh}
+.tl>div{border-top:2px solid var(--hair);padding-top:2vh}
+.tl>div.now{border-top-color:var(--accent)}
+.tl b{display:block;font-size:3.4vh;font-weight:800;letter-spacing:-.03em;color:var(--accent)}
+.tl h3{font-size:2vh;font-weight:700;margin:1vh 0 .6vh}
+.tl p{font-size:1.6vh;color:var(--dim);line-height:1.45}
+.classes{display:grid;grid-template-columns:repeat(6,1fr);gap:.8vw;margin-top:4vh}
+.classes div{background:#fff;border:1px solid var(--hair);border-radius:1.2vh;padding:1.4vh .8vw;font-size:1.45vh;line-height:1.4;color:var(--dim)}
+.classes div b{display:block;color:var(--ink);font-size:1.6vh;margin-bottom:.4vh}
+.classes div.on{border-color:var(--accent);background:var(--light)}
+
+/* flujo */
+.flow{display:grid;grid-template-columns:repeat(5,1fr);gap:1vw;margin-top:3.4vh}
+.st{border-top:2px solid var(--hair);padding-top:1.6vh}
+.st>b{display:block;font-size:1.3vh;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:700;margin-bottom:1.2vh}
+.nd{font-size:1.5vh;line-height:1.35;border-radius:1.2vh;padding:1.2vh .8vw;margin-bottom:1vh;font-weight:600;text-align:center}
+.nd small{display:block;font-weight:400;color:var(--dim);font-size:1.25vh;margin-top:.3vh}
+.nd.tr{background:var(--light);border:1.5px solid var(--accent);border-radius:99vh}
+.nd.au{background:#efe7dc;border:1px solid #d9cdbb}
+.nd.wt{background:#fff;border:1.5px dashed #c9bcc0;color:#5d5a52}
+.nd.dc{background:#efe7dc;border:1px solid #d9cdbb;clip-path:polygon(8% 0,92% 0,100% 50%,92% 100%,8% 100%,0 50%)}
+.nd.cl{background:#e4efe7;border:1.5px solid var(--green);border-radius:99vh}
+.nd.ds{background:#f1ecec;border:1px solid #b99;border-radius:99vh;color:#7a6a6d}
+.legend{margin-top:1.6vh;font-size:1.5vh;color:var(--dim)}
+
+/* preguntas + notas */
+.qa{margin-top:3.6vh;max-width:72ch}
+ol.q{counter-reset:q;list-style:none}
+ol.q li{counter-increment:q;display:flex;gap:1.2vw;align-items:baseline;padding:1.55vh 0;border-top:1px solid var(--hair);font-size:2.15vh;line-height:1.38;letter-spacing:-.01em}
+ol.q li:last-child{border-bottom:1px solid var(--hair)}
+ol.q li::before{content:counter(q);font-size:1.5vh;color:var(--accent);font-weight:700;width:1.6ch;flex:0 0 auto}
+ol.q li small{display:block;font-size:1.5vh;color:var(--dim);margin-top:.4vh}
+.notes{display:flex;flex-direction:column}
+.notes label{font-size:1.3vh;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);font-weight:700;margin-bottom:1vh}
+.notes textarea{flex:1;min-height:38vh;width:100%;resize:none;border:1.5px dashed #d9c3c8;border-radius:1.4vh;background:#fff;padding:1.6vh 1.2vw;font:400 1.85vh/1.5 var(--font);color:var(--ink);outline:none}
+.notes textarea:focus{border-style:solid;border-color:var(--accent)}
+.ariel{margin-top:2.6vh;font-size:1.9vh;color:var(--dim);line-height:1.45}
+.ariel b{color:var(--dark)}
+
+/* supuestos */
+.sup{margin-top:3.4vh;max-width:none}
+.sup .row{display:grid;grid-template-columns:1fr auto;gap:2vw;align-items:center;padding:1.9vh 0;border-top:1px solid var(--hair)}
+.sup .row:last-of-type{border-bottom:1px solid var(--hair)}
+.sup h3{font-size:2.2vh;font-weight:700;letter-spacing:-.015em}
+.sup p{font-size:1.65vh;color:var(--dim);margin-top:.5vh;line-height:1.45}
+.chk{display:flex;gap:.6vw}
+.chk button{font:600 1.5vh var(--font);padding:.9vh 1.2vw;border-radius:99vh;border:1.5px solid var(--hair);background:#fff;color:var(--dim);cursor:pointer}
+.chk button.sel[data-v="Sí"]{background:var(--green);border-color:var(--green);color:#fff}
+.chk button.sel[data-v="Ajustar"]{background:var(--yellow);border-color:var(--yellow);color:#4a3b05}
+.chk button.sel[data-v="No"]{background:var(--accent);border-color:var(--accent);color:#fff}
+.sup textarea{min-height:9vh!important;flex:none}
+
+/* marca */
+.brand{display:grid;grid-template-columns:repeat(3,1fr);gap:1vh 2vw;margin-top:3.4vh}
+.brand div{border-top:1px solid var(--hair);padding:1.5vh 0}
+.brand b{display:block;font-size:2vh;font-weight:700}
+.brand span{font-size:1.55vh;color:var(--dim)}
+
+/* tarea */
+.two{display:grid;grid-template-columns:1fr 1fr;gap:4vw;margin-top:4.5vh}
+.two>div{border-top:2px solid var(--hair);padding-top:2.2vh}
+.two>div.me{border-top-color:var(--violet)}
+.two h3{font-size:1.4vh;letter-spacing:.14em;text-transform:uppercase;font-weight:700;color:var(--accent);margin-bottom:1.4vh}
+.two>div.me h3{color:var(--violet)}
+.two li{list-style:none;font-size:2vh;line-height:1.45;padding:1.1vh 0;border-bottom:1px solid var(--hair)}
+.two li small{color:var(--dim);font-size:1.5vh}
+
+#export{margin-top:4.5vh;font:700 1.9vh var(--font);padding:1.8vh 2.4vw;border-radius:99vh;border:0;background:var(--accent);color:#fff;cursor:pointer;box-shadow:0 1.4vh 3vh rgba(200,92,115,.3)}
+
+/* ---------- diagrama de Ariel: vista completa ---------- */
+.full{display:grid;grid-template-columns:auto 1fr;gap:4vw;align-items:center}
+.full a img{height:80vh;display:block;border-radius:1.2vh;border:1px solid var(--hair);box-shadow:0 2vh 5vh rgba(128,59,74,.1)}
+.full .k{display:flex;gap:3vw;margin:3.4vh 0}
+.full .k b{display:block;font-size:6vh;font-weight:800;color:var(--accent);letter-spacing:-.04em;line-height:1}
+.full .k span{font-size:1.6vh;color:var(--dim)}
+.stg{counter-reset:s;margin-top:1vh}
+.stg li{list-style:none;counter-increment:s;display:flex;gap:1vw;align-items:baseline;padding:1.3vh 0;border-top:1px solid var(--hair);font-size:2vh}
+.stg li::before{content:counter(s);color:var(--accent);font-weight:700;font-size:1.5vh;width:1.5ch}
+.stg li small{color:var(--dim);font-size:1.5vh;margin-left:auto}
+
+/* ---------- diagrama por etapa ---------- */
+.dg{display:grid;grid-template-columns:auto 1fr;gap:4.5vw;margin-top:3vh;align-items:center}
+.mf{display:flex;flex-direction:column}
+.mf .row{display:grid;grid-template-columns:15vw 8vw 13vw;align-items:center}
+.mf .nd{margin:0;font-size:1.55vh}
+.mf .dn{width:15vw;height:3.6vh;display:flex;flex-direction:column;align-items:center;position:relative}
+.mf .dn::before{content:"";width:1.5px;flex:1;background:#313128}
+.mf .dn::after{content:"";border:.55vh solid transparent;border-top:.8vh solid #313128;border-bottom:0}
+.mf .dn span{position:absolute;left:calc(50% + .8vw);top:45%;transform:translateY(-50%);font-size:1.25vh;color:var(--dim);white-space:nowrap}
+.mf .ar{position:relative;height:1.5px;background:#313128;margin:0 .5vw}
+.mf .ar::after{content:"";position:absolute;right:-1px;top:50%;transform:translateY(-50%);border:.55vh solid transparent;border-left:.8vh solid #313128;border-right:0}
+.mf .ar span{position:absolute;bottom:.7vh;left:0;font-size:1.2vh;color:var(--dim);white-space:nowrap}
+.mf .ar.nu{background:none;height:0;border-top:1.5px dashed var(--accent)}
+.mf .ar.nu::after{border-left-color:var(--accent)}
+.mf .ar.nu span{color:var(--accent)}
+.mf .side{display:flex;flex-direction:column;align-items:stretch;text-align:center}
+.mf .side i{font-style:normal;font-size:1.15vh;color:var(--dim);margin:.4vh 0}
+.mf .end{width:15vw;text-align:center;font-size:1.4vh;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accent)}
+.nd.nu{background:#fff;border:1.5px dashed var(--accent);color:var(--accent)}
+.mf .nd.dc{padding:1.7vh 1.6vw}
+.dgr h3{font-size:1.35vh;letter-spacing:.14em;text-transform:uppercase;font-weight:700;color:var(--accent);margin-bottom:1vh}
+.dgr h3.op{color:var(--violet);margin-top:3.4vh}
+.dgr li{list-style:none;font-size:1.95vh;line-height:1.45;padding:1.05vh 0;border-top:1px solid var(--hair)}
+.dgr li b{font-weight:600}
+.waits{display:grid;grid-template-columns:repeat(3,1fr);gap:2vw;margin-top:4vh}
+.waits>div{border-top:2px solid var(--hair);padding-top:1.8vh;display:flex;flex-direction:column;align-items:stretch;text-align:center}
+.waits>div>b{font-size:1.3vh;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:700;margin-bottom:1.2vh;text-align:left}
+.waits .nd{margin:0}
+.waits i{font-style:normal;font-size:1.25vh;color:var(--accent);margin:.6vh 0}
+.waits i.g{color:var(--dim)}
+
+/* ---------- preguntas + visual ---------- */
+.qa{display:grid!important;grid-template-columns:1fr 1fr;gap:4.5vw;align-items:center;max-width:none!important}
+.vis{position:relative}
+.card{background:#fff;border:1px solid var(--hair);border-radius:2vh;box-shadow:0 2vh 5vh rgba(128,59,74,.08);padding:2.2vh 1.5vw}
+.card h4{font-size:1.3vh;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);font-weight:700;margin-bottom:1.4vh;display:flex;justify-content:space-between;align-items:center}
+.qv{color:var(--accent);font-weight:700;border-bottom:1.5px dashed var(--accent);padding:0 .3vw}
+.cap{font-size:1.5vh;color:var(--dim);margin-top:1.6vh;line-height:1.45}
+.av{width:3.6vh;height:3.6vh;border-radius:50%;background:var(--light);color:var(--dark);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:1.35vh;flex:0 0 auto}
+/* captación */
+.src{display:grid;grid-template-columns:auto auto 1fr;gap:1.2vw;align-items:center}
+.srcs{display:flex;flex-direction:column;gap:1.1vh}
+.sc{display:flex;align-items:center;gap:.8vw;background:#fff;border:1px solid var(--hair);border-radius:1.4vh;padding:1vh .9vw}
+.sc i{font-style:normal;width:3.4vh;height:3.4vh;border-radius:1vh;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:1.4vh}
+.sc b{display:block;font-size:1.6vh}.sc span{display:block;font-size:1.25vh;color:var(--dim)}
+.into{font-size:3.4vh;color:var(--accent);font-weight:300}
+.inbox .r{display:flex;gap:.8vw;align-items:center;padding:1.1vh 0;border-top:1px solid var(--hair)}
+.inbox .r b{font-size:1.5vh;display:block}.inbox .r span{font-size:1.3vh;color:var(--dim)}
+.inbox .r .tag{color:#fff;font-size:1.05vh}
+.tag{margin-left:auto;font-size:1.05vh;font-weight:700;padding:.3vh .5vw;border-radius:99vh;color:#fff;white-space:nowrap}
+/* primer contacto */
+.chat{display:grid;grid-template-columns:1.2fr 1fr;gap:1.4vw;align-items:center}
+.ph .hd{display:flex;gap:.8vw;align-items:center;padding-bottom:1.3vh;border-bottom:1px solid var(--hair);margin-bottom:1.4vh}
+.ph .hd b{font-size:1.55vh;display:block}.ph .hd span{font-size:1.2vh;color:var(--green)}
+.bb{font-size:1.5vh;line-height:1.4;padding:1.1vh .9vw;border-radius:1.4vh;margin-bottom:1vh;max-width:88%}
+.bb.l{background:#f3eef0}
+.bb.r{margin-left:auto;background:#fff;border:1.5px dashed var(--accent);color:var(--accent);font-weight:600}
+.bb.f{margin-left:auto;background:var(--light);color:var(--dark)}
+.bb.f small{display:block;font-size:1.2vh;opacity:.8}
+.timer{display:inline-block;font-size:1.2vh;font-weight:700;color:#8a6a10;background:#fff3cf;border-radius:99vh;padding:.4vh .7vw;margin:0 0 1vh auto}
+.frm .fl{margin-bottom:1.3vh}.frm .fl span{display:block;font-size:1.25vh;color:var(--dim);margin-bottom:.5vh}
+.frm .fl i{display:block;height:3vh;border:1px dashed #d9c3c8;border-radius:.8vh;font-style:normal;font-size:1.3vh;color:var(--accent);padding:.6vh .5vw}
+/* ficha */
+.fx .top{display:flex;gap:.9vw;align-items:center;margin-bottom:1.6vh}
+.fx .top b{font-size:1.9vh;display:block}.fx .top span{font-size:1.25vh;color:var(--dim)}
+.fx .r{display:flex;justify-content:space-between;align-items:center;padding:1.15vh 0;border-top:1px solid var(--hair);font-size:1.6vh}
+.fx .r>span{color:var(--dim)}
+.chips{display:flex;gap:.4vw}.chips em{font-style:normal;font-size:1.2vh;padding:.35vh .6vw;border-radius:99vh;background:#f3eef0;color:var(--ink)}
+.dec{display:grid;grid-template-columns:1fr 1fr;gap:.8vw;margin-top:1.8vh}
+.dec div{text-align:center;font-size:1.5vh;font-weight:700;padding:1.2vh 0;border-radius:99vh}
+.dec .y{background:#e4efe7;color:var(--green);border:1.5px solid var(--green)}
+.dec .n{background:#f1ecec;color:#7a6a6d;border:1px solid #b99}
+/* reuniones */
+.cal{display:grid;grid-template-columns:1.35fr 1fr;gap:1.2vw;align-items:start}
+.wk{display:grid;grid-template-columns:repeat(5,1fr);gap:.4vw}
+.wk>b{font-size:1.15vh;color:var(--dim);text-align:center;letter-spacing:.08em}
+.wk>i{font-style:normal;height:5.8vh;border-radius:.8vh;background:#faf6f7;font-size:1.1vh;line-height:1.25;padding:.5vh .3vw}
+.wk>i.r1{background:var(--light);color:var(--dark);font-weight:600}
+.wk>i.r2{background:#ede7fb;color:var(--violet);font-weight:600}
+.wk>i.q{border:1px dashed #d9c3c8;color:var(--accent);display:flex;align-items:center;justify-content:center;font-weight:700;background:#fff}
+.bk .r{display:flex;justify-content:space-between;padding:1.05vh 0;border-top:1px solid var(--hair);font-size:1.45vh}
+.bk .r span{color:var(--dim)}
+.bar{margin-top:1.6vh;font-size:1.3vh;color:var(--dim)}
+.bar div{display:flex;height:1.4vh;border-radius:99vh;overflow:hidden;margin-top:.6vh;border:1px dashed #d9c3c8}
+.bar div i{background:var(--accent);width:50%}.bar div u{flex:1;background:#ede7fb}
+/* seguimiento */
+.tlv{position:relative;padding-left:2.4vw}
+.tlv::before{content:"";position:absolute;left:.9vw;top:1.6vh;bottom:3.6vh;border-left:1.5px dashed var(--accent)}
+.tlv .st2{position:relative;display:flex;gap:1vw;align-items:center;margin-bottom:1.3vh}
+.tlv .st2::before{content:"";position:absolute;left:-1.85vw;width:1.3vh;height:1.3vh;border-radius:50%;background:#fff;border:2px solid var(--accent)}
+.tlv .d{font-size:1.25vh;font-weight:700;color:var(--accent);width:6ch;letter-spacing:.06em}
+.tlv .m{flex:1;background:#fff;border:1px solid var(--hair);border-radius:1.2vh;padding:1vh .9vw;font-size:1.45vh;display:flex;justify-content:space-between;gap:.6vw}
+.tlv .m.q{border:1.5px dashed var(--accent)}
+.tlv .m span{color:var(--dim);font-size:1.25vh}
+.tlv .end2::before{background:#b99;border-color:#b99}
+.ok2{display:flex;gap:.8vw;align-items:center;margin-top:1.6vh;font-size:1.45vh;color:var(--green);font-weight:600}
+/* cierre */
+.cl2 .top{display:flex;gap:.9vw;align-items:center;margin-bottom:1.4vh}
+.cl2 .top b{font-size:1.9vh;display:block}
+.cl2 .pc{font-size:1.15vh;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--green);background:#e4efe7;border:1px solid var(--green);border-radius:99vh;padding:.3vh .6vw}
+.cl2 .r{display:flex;justify-content:space-between;padding:1.05vh 0;border-top:1px solid var(--hair);font-size:1.55vh}
+.cl2 .r span{color:var(--dim)}
+.next{display:grid;grid-template-columns:1fr 1fr;gap:.8vw;margin-top:1.4vh}
+.next div{border:1.5px dashed var(--violet);border-radius:1.4vh;padding:1.2vh .8vw;font-size:1.45vh;color:var(--violet);font-weight:600;background:#fff}
+.next small{display:block;font-weight:400;color:var(--dim);font-size:1.2vh;margin-top:.3vh}
+</style>
+</head>
+<body>
+<div id="deck">
+
+<!-- 1 PORTADA -->
+<section class="slide on" style="position:relative">
+  <p class="kicker"><span class="dot"></span>Kit Asesor · Clase 1</p>
+  <h1>Cómo trabajan<br><em>hoy</em></h1>
+  <p class="lede">Hoy no les muestro nada terminado. Les pregunto cómo hacen hoy, lo alineamos con el flujo de Ariel y con eso armo su primera versión para que la prueben.</p>
+  <p class="foot">Bruno · Euge · Andrés — noviembre 2026</p>
+  <div class="cover-art"><div class="ring"><b>01</b><span>relevamiento</span></div></div>
+</section>
+
+<!-- 2 COMO VAMOS A TRABAJAR -->
+<section class="slide">
+  <p class="kicker"><span class="dot"></span>Cómo vamos a trabajar</p>
+  <h2>Ustedes me cuentan, yo construyo,<br><em>ustedes prueban</em></h2>
+  <div class="cycle">
+    <div><b>1 · Clase</b><h3>Me cuentan</h3><p>Cómo captan, qué dicen, cómo siguen. Lo que ya les funciona no se toca.</p><span class="who">Ustedes</span></div>
+    <div><b>2 · Entre clases</b><h3>Construyo</h3><p>Lo armo en Sharp: pipeline, mensajes, formulario, seguimiento.</p><span class="who yo">Yo</span></div>
+    <div><b>3 · Clase</b><h3>Prueban</h3><p>Lo recorremos juntos como si fueran un prospecto. Ven qué llega y cuándo.</p><span class="who">Ustedes</span></div>
+    <div><b>4 · Siempre</b><h3>Ajustamos</h3><p>Lo que no suena a ustedes se cambia. Cuando anda, se los explico para que lo usen solos.</p><span class="who">Juntos</span></div>
+  </div>
+  <div class="support"><span><b>2 clases por mes</b> · hasta 90 min, grabadas</span><span><b>Jueves</b> · dudas y práctica</span><span><b>WhatsApp</b> · días hábiles, respuesta en 24 h</span></div>
+</section>
+
+<!-- 3 CALENDARIO -->
+<section class="slide">
+  <p class="kicker"><span class="dot"></span>Calendario</p>
+  <h2>Hacia el 1 de marzo,<br><em>probado por ustedes</em></h2>
+  <div class="tl">
+    <div class="now"><b>20/11</b><h3>Clon andando</h3><p>Primera versión en una cuenta de prueba.</p></div>
+    <div><b>31/12</b><h3>Bot y reportes v1</h3><p>Andando en sus cuentas.</p></div>
+    <div><b>31/01</b><h3>Leads entrando</h3><p>Prospectos reales, medidos.</p></div>
+    <div><b>10/02</b><h3>Kit v2</h3><p>Con manual y video de recorrido.</p></div>
+    <div><b>01/03</b><h3>Lanzamiento</h3><p>A la primera tanda de asesores.</p></div>
+  </div>
+  <div class="classes">
+    <div class="on"><b>Clase 1 · hoy</b>Cómo trabajan hoy</div>
+    <div><b>Clase 2</b>Prueban la v1: flujo y mensajes</div>
+    <div><b>Clase 3</b>Su cuenta: marca, WhatsApp, agenda</div>
+    <div><b>Clase 4</b>El bot: qué responde y qué no</div>
+    <div><b>Clase 5</b>Leer el reporte y ajustar</div>
+    <div><b>Clase 6</b>Kit v2: lo que aprendimos</div>
+  </div>
+  <p class="note">Los temas de cada clase se ajustan según cómo vayamos.</p>
+</section>
+
+<!-- 4 FLUJO DE ARIEL -->
+<section class="slide">
+  <div class="full">
+    <a href="flujo-ariel.png" target="_blank" title="Abrir en grande"><img src="flujo-ariel.png" alt="Flujo de tratamiento de prospectos, borrador v1 de Ariel"></a>
+    <div>
+      <p class="kicker"><span class="dot"></span>Punto de partida · borrador v1 de Ariel</p>
+      <h2>El flujo que dibujó Ariel.<br><em>¿Así trabajan ustedes?</em></h2>
+      <div class="k"><div><b>5</b><span>etapas</span></div><div><b>3</b><span>esperas con seguimiento</span></div><div><b>2</b><span>salidas: cliente o descartado</span></div></div>
+      <ol class="stg">
+        <li>Captación <small>entra por redes, recibe formulario</small></li>
+        <li>Calificación <small>decide el asesor</small></li>
+        <li>Reunión 1 <small>avanza, cierra o se descarta</small></li>
+        <li>Reunión 2 <small>cierra o se descarta</small></li>
+        <li>Cierre <small>cliente con sus productos</small></li>
+      </ol>
+      <p class="note">Lo vemos etapa por etapa: primero el dibujo, después cómo lo hacen hoy.</p>
+    </div>
+  </div>
+</section>
+
+<section class="slide">
+  <p class="kicker"><span class="dot"></span>Etapa 1 · Captación · el dibujo de Ariel</p>
+  <h2>Entra por redes,<br><em>recibe el formulario</em></h2>
+  <div class="dg">
+    <div class="mf"><div class="row"><div class="nd tr">Lead entra por redes<small>Instagram / Facebook</small></div></div><div class="dn"></div><div class="row"><div class="nd au">Automatización envía<br>el Formulario</div></div><div class="dn"></div><div class="end">→ Calificación</div></div>
+    <div class="dgr"><h3>Lo que dice el dibujo</h3><ul><li>Cada asesor conecta <b>sus propias redes</b>.</li><li>Apenas entra el lead, se le manda el formulario <b>solo</b>, sin que el asesor haga nada.</li></ul><h3 class="op">Lo que hay que definir hoy</h3><ul><li>¿Por dónde entra exactamente: comentario, mensaje directo, anuncio con formulario, WhatsApp?</li><li>¿Por qué canal le llega el formulario?</li><li>¿Qué pasa si escribe directo al WhatsApp del asesor?</li></ul></div>
+  </div>
+</section>
+
+<!-- 5 CAPTACION -->
+<section class="slide">
+  <p class="kicker"><span class="dot"></span>Etapa 1 · Captación</p>
+  <h2>¿De dónde llegan <em>sus prospectos</em>?</h2>
+  <div class="qa">
+    <div>
+    <ol class="q">
+      <li><span>¿De dónde vienen hoy? Pauta, publicaciones, referidos, conocidos…<small>¿Cuál trae más y cuál trae mejores?</small></span></li>
+      <li><span>¿Cuántos les llegan por semana, más o menos?</span></li>
+      <li><span>¿La pauta la hacen ustedes o TAF? ¿Qué anuncio les funcionó?</span></li>
+      <li><span>¿Por dónde escribe la persona? Comentario, mensaje directo, WhatsApp…</span></li>
+      <li><span>¿Tienen Instagram o Facebook con su nombre, o usan el de TAF?</span></li>
+    </ol></div>
+    <div class="vis"><div class="src">
+  <div class="srcs">
+    <div class="sc"><i style="background:linear-gradient(45deg,#f9a03f,#d62976,#962fbf)">IG</i><div><b>Instagram</b><span>comentario · mensaje</span></div></div>
+    <div class="sc"><i style="background:#1877f2">f</i><div><b>Facebook</b><span>anuncio · mensaje</span></div></div>
+    <div class="sc"><i style="background:#25d366">W</i><div><b>WhatsApp</b><span>escriben directo</span></div></div>
+    <div class="sc"><i style="background:var(--yellow)">R</i><div><b>Referidos</b><span>los pasa un cliente</span></div></div>
+  </div>
+  <div class="into">→</div>
+  <div class="card inbox"><h4>Bandeja única · [Asesor]</h4>
+    <div class="r"><div class="av">LG</div><div><b>Laura G.</b><span>Hola, vi el reel del seguro…</span></div><span class="tag" style="background:#d62976">IG</span></div>
+    <div class="r"><div class="av">MP</div><div><b>Martín P.</b><span>Quiero info del ahorro</span></div><span class="tag" style="background:#1877f2">FB</span></div>
+    <div class="r"><div class="av">SR</div><div><b>Sofía R.</b><span>Me pasó tu número Ana</span></div><span class="tag" style="background:#25d366">WA</span></div>
+    <div class="r"><div class="av">?</div><div><b>¿Cuántos por semana?</b><span>hoy: <span class="qv">?</span></span></div></div>
+  </div>
+</div>
+<p class="cap">Hoy cada canal llega por su lado. En Sharp, todo cae en una sola bandeja.</p></div>
+  </div>
+</section>
+
+<!-- 6 PRIMER CONTACTO -->
+<section class="slide">
+  <p class="kicker"><span class="dot"></span>Etapa 1 · Primer contacto</p>
+  <h2>Los primeros minutos<br><em>con el prospecto</em></h2>
+  <div class="qa">
+    <div>
+    <ol class="q">
+      <li><span>¿Quién responde y cuánto tarda?</span></li>
+      <li><span>¿Qué le dicen en el primer mensaje?<small>Si lo tienen guardado, mándenmelo tal cual.</small></span></li>
+      <li><span>¿Usan un formulario hoy? ¿Qué preguntas tiene?</span></li>
+      <li><span>¿Qué WhatsApp usan, personal o Business? ¿Es el número que quieren usar?</span></li>
+      <li><span>¿Qué preguntas les hacen siempre los prospectos?<small>Eso es lo primero que va a responder el bot.</small></span></li>
+    </ol></div>
+    <div class="vis"><div class="chat">
+  <div class="card ph">
+    <div class="hd"><div class="av">S</div><div><b>[Asesor]</b><span>en línea</span></div></div>
+    <div class="bb l">Hola! Vi la publicación, quiero info 🙂</div>
+    <div style="display:flex"><span class="timer">⏱ ¿en cuánto responden?</span></div>
+    <div class="bb r">¿Qué le responden hoy?</div>
+    <div class="bb f">📋 Formulario de [Asesor]<small>completalo y te contacto</small></div>
+  </div>
+  <div class="card frm"><h4>Formulario</h4>
+    <div class="fl"><span>Pregunta 1</span><i>?</i></div>
+    <div class="fl"><span>Pregunta 2</span><i>?</i></div>
+    <div class="fl"><span>Pregunta 3</span><i>?</i></div>
+    <div class="fl" style="margin:0"><span>Las que se repiten siempre</span><i>?</i></div>
+  </div>
+</div>
+<p class="cap">El primer mensaje y el formulario salen solos. Hoy definimos qué dicen.</p></div>
+  </div>
+</section>
+
+<section class="slide">
+  <p class="kicker"><span class="dot"></span>Etapa 2 · Calificación · el dibujo de Ariel</p>
+  <h2>Responde el formulario<br>y <em>decide el asesor</em></h2>
+  <div class="dg">
+    <div class="mf"><div class="row"><div class="nd wt">Espera respuesta<br>del Formulario</div><div class="ar nu"><span>No responde</span></div><div class="side"><div class="nd nu">Nutrición escalonada</div><i>agota pasos ↓</i><div class="nd ds">Descartado<small>sin respuesta</small></div></div></div><div class="dn"><span>Responde</span></div><div class="row"><div class="nd dc">¿Prospecto calificado?<small>evalúa el asesor</small></div><div class="ar"><span>No calificado</span></div><div class="side"><div class="nd ds">Descartado<small>no calificado</small></div></div></div><div class="dn"><span>Calificado</span></div><div class="end">→ Reunión 1</div></div>
+    <div class="dgr"><h3>Lo que dice el dibujo</h3><ul><li>Si no completa el formulario, entra en <b>nutrición</b>. Si se agotan los pasos, se descarta solo.</li><li><b>El asesor</b> decide si califica, no la máquina.</li><li>El no calificado tiene su <b>propio mensaje</b> de despedida.</li></ul><h3 class="op">Lo que hay que definir hoy</h3><ul><li>Las preguntas del formulario.</li><li>Qué hace que alguien sea "calificado".</li><li>El mensaje para el que no califica.</li></ul></div>
+  </div>
+</section>
+
+<!-- 7 CALIFICACION -->
+<section class="slide">
+  <p class="kicker"><span class="dot"></span>Etapa 2 · Calificación</p>
+  <h2>¿Cuándo un prospecto<br><em>vale una reunión</em>?</h2>
+  <div class="qa">
+    <div>
+    <ol class="q">
+      <li><span>¿Qué tiene que tener alguien para que valga la pena reunirse?</span></li>
+      <li><span>¿Qué datos necesitan saber antes de la reunión?<small>Edad, familia, ingresos, objetivo, zona…</small></span></li>
+      <li><span>¿Qué productos ofrecen más y a quién?<small>Protección familiar, ahorro, retiro…</small></span></li>
+      <li><span>¿A quién descartan? ¿Se lo dicen o dejan de responder?</span></li>
+      <li><span>¿Lo deciden ustedes solos o lo consultan con alguien?</span></li>
+    </ol>
+    <p class="ariel"><b>Ariel:</b> el asesor decide si califica. La IA solo propone.</p></div>
+    <div class="vis"><div class="card fx">
+  <div class="top"><div class="av">LG</div><div><b>Laura G.</b><span>Prospecto · llegó por Instagram</span></div></div>
+  <div class="r"><span>Edad</span><span class="qv">?</span></div>
+  <div class="r"><span>Familia</span><span class="qv">?</span></div>
+  <div class="r"><span>Ingresos</span><span class="qv">?</span></div>
+  <div class="r"><span>Objetivo</span><span class="qv">?</span></div>
+  <div class="r"><span>Producto de interés</span><div class="chips"><em>Protección</em><em>Ahorro</em><em>Retiro</em></div></div>
+  <div class="r"><span>¿Qué más necesitan saber?</span><span class="qv">?</span></div>
+  <div class="dec"><div class="y">Calificado</div><div class="n">No calificado</div></div>
+  <p class="cap" style="text-align:center;margin-top:1.2vh">El asesor toca uno de los dos. El resto es automático.</p>
+</div></div>
+  </div>
+</section>
+
+<section class="slide">
+  <p class="kicker"><span class="dot"></span>Etapa 3 · Reunión 1 · el dibujo de Ariel</p>
+  <h2>Agenda, reunión<br>y <em>tres caminos</em></h2>
+  <div class="dg">
+    <div class="mf"><div class="row"><div class="nd au">Envía email + WhatsApp:<br>agenda Reunión 1</div></div><div class="dn"></div><div class="row"><div class="nd wt">Espera agenda /<br>realización Reunión 1</div><div class="ar nu"><span>No agenda</span></div><div class="side"><div class="nd nu">Nutrición escalonada</div><i>agota pasos ↓</i><div class="nd ds">Descartado<small>sin respuesta</small></div></div></div><div class="dn"><span>Se realiza la reunión</span></div><div class="row"><div class="nd dc">¿Avanza tras Reunión 1?</div><div class="ar"><span>Descartar</span></div><div class="side"><div class="nd ds">Descartado<small>post-reunión</small></div></div></div><div class="dn"><span>Avanza</span></div><div class="row"><div class="nd dc">¿Cerró en Reunión 1?</div><div class="ar"><span>Sí, cerró</span></div><div class="side"><div class="nd cl">Cliente<small>cargar productos y parámetros</small></div></div></div><div class="dn"><span>No cerró</span></div><div class="end">→ Reunión 2</div></div>
+    <div class="dgr"><h3>Lo que dice el dibujo</h3><ul><li>La invitación a agendar sale <b>por email y WhatsApp</b> a la vez.</li><li>Después de la reunión el asesor marca uno de 3 caminos: <b>descartar, cerró, o sigue a R2</b>.</li></ul><h3 class="op">Lo que hay que definir hoy</h3><ul><li>Con qué agenda se reserva (link, horarios, duración).</li><li>Si no se presenta, ¿cuenta como "no agenda" y vuelve a nutrición?</li><li>¿Recordatorio antes de la reunión?</li></ul></div>
+  </div>
+</section>
+
+<section class="slide">
+  <p class="kicker"><span class="dot"></span>Etapa 4 · Reunión 2 · el dibujo de Ariel</p>
+  <h2>La última oportunidad:<br><em>cierra o se despide</em></h2>
+  <div class="dg">
+    <div class="mf"><div class="row"><div class="nd au">Envía email + WhatsApp:<br>agenda Reunión 2</div></div><div class="dn"></div><div class="row"><div class="nd wt">Espera agenda /<br>realización Reunión 2</div><div class="ar nu"><span>No agenda</span></div><div class="side"><div class="nd nu">Nutrición escalonada</div><i>agota pasos ↓</i><div class="nd ds">Descartado<small>sin respuesta</small></div></div></div><div class="dn"><span>Se realiza la reunión</span></div><div class="row"><div class="nd dc">¿Cerró en Reunión 2?</div><div class="ar"><span>No cerró</span></div><div class="side"><div class="nd ds">Descartado<small>post-reunión</small></div></div></div><div class="dn"><span>Sí, cerró</span></div><div class="row"><div class="nd cl">Cliente: cargar productos<small>cerrados y sus parámetros</small></div></div></div>
+    <div class="dgr"><h3>Lo que dice el dibujo</h3><ul><li>Misma mecánica que la R1: email + WhatsApp, espera con nutrición.</li><li><b>No hay Reunión 3.</b> Después de la R2, cliente o descartado.</li></ul><h3 class="op">Lo que hay que definir hoy</h3><ul><li>¿Cuánto tiempo pasa entre la R1 y la R2?</li><li>¿Qué se hace distinto en la R2?</li><li>El mensaje para el que no cierra.</li></ul></div>
+  </div>
+</section>
+
+<!-- 8 REUNIONES -->
+<section class="slide">
+  <p class="kicker"><span class="dot"></span>Etapas 3 y 4 · Reuniones</p>
+  <h2>Reunión 1 y Reunión 2,<br><em>cómo las hacen</em></h2>
+  <div class="qa">
+    <div>
+    <ol class="q">
+      <li><span>¿Presencial, Zoom o Meet? ¿Cuánto dura cada una?</span></li>
+      <li><span>¿Cómo agendan hoy? Google Calendar, a mano, un link…<small>¿Qué días y horarios tienen libres?</small></span></li>
+      <li><span>¿Qué hacen en la R1 y qué en la R2?</span></li>
+      <li><span>De cada 10 que cierran, ¿cuántos cierran en la primera?</span></li>
+      <li><span>¿Cuántos no se presentan? ¿Qué hacen con ellos?</span></li>
+    </ol>
+    <p class="ariel"><b>Ariel:</b> máximo 2 reuniones. Después de la R2, cliente o descartado.</p></div>
+    <div class="vis"><div class="cal">
+  <div class="card"><h4>Agenda · [Asesor]</h4>
+    <div class="wk">
+      <b>LUN</b><b>MAR</b><b>MIÉ</b><b>JUE</b><b>VIE</b>
+      <i class="r1">R1 · Laura<br>16:00</i><i></i><i class="q">?</i><i class="r2">R2 · Martín<br>10:00</i><i></i>
+      <i></i><i class="q">?</i><i class="r1">R1 · Sofía<br>18:00</i><i></i><i class="q">?</i>
+      <i class="q">?</i><i></i><i></i><i class="q">?</i><i class="r1">R1 · Juan<br>11:00</i>
+    </div>
+    <div class="bar">De cada 10 cierres, ¿cuántos en la R1?<div><i></i><u></u></div></div>
+  </div>
+  <div class="card bk"><h4>Reunión 1</h4>
+    <div class="r"><span>Dónde</span><span class="qv">?</span></div>
+    <div class="r"><span>Duración</span><span class="qv">?</span></div>
+    <div class="r"><span>Días y horarios</span><span class="qv">?</span></div>
+    <div class="r"><span>Recordatorio</span><span class="qv">?</span></div>
+    <div class="r"><span>Si no se presenta</span><span class="qv">?</span></div>
+  </div>
+</div>
+<p class="cap">El prospecto elige el horario solo, con el link de agenda que llega por email y WhatsApp.</p></div>
+  </div>
+</section>
+
+<section class="slide">
+  <p class="kicker"><span class="dot"></span>En cada espera · el dibujo de Ariel</p>
+  <h2>Tres esperas,<br><em>tres secuencias de seguimiento</em></h2>
+  <div class="dg">
+    <div class="mf"><div class="waits" style="width:38vw;margin-top:0"><div><b>Calificación</b><div class="nd wt">Espera el formulario</div><i>no responde ⇢</i><div class="nd nu">Nutrición escalonada</div><i class="g">agota pasos ↓</i><div class="nd ds">Descartado<small>sin respuesta</small></div></div><div><b>Reunión 1</b><div class="nd wt">Espera agenda R1</div><i>no responde ⇢</i><div class="nd nu">Nutrición escalonada</div><i class="g">agota pasos ↓</i><div class="nd ds">Descartado<small>sin respuesta</small></div></div><div><b>Reunión 2</b><div class="nd wt">Espera agenda R2</div><i>no responde ⇢</i><div class="nd nu">Nutrición escalonada</div><i class="g">agota pasos ↓</i><div class="nd ds">Descartado<small>sin respuesta</small></div></div></div></div>
+    <div class="dgr"><h3>Lo que dice el dibujo</h3><ul><li>Cada espera tiene <b>su propia secuencia</b>: puede tener distinta cantidad de pasos y cadencia.</li><li>Si el prospecto responde en cualquier paso, <b>sale de la secuencia</b> y sigue el flujo.</li><li>Si se agotan los pasos, <b>se descarta solo</b>.</li></ul><h3 class="op">Lo que hay que definir hoy</h3><ul><li>Cuántos mensajes en cada espera y cada cuánto.</li><li>Por qué canal: WhatsApp, email o los dos.</li><li>Los textos de cada paso.</li></ul></div>
+  </div>
+</section>
+
+<!-- 9 SEGUIMIENTO -->
+<section class="slide">
+  <p class="kicker"><span class="dot"></span>En cada espera · Seguimiento</p>
+  <h2>Cuando el prospecto<br><em>no responde</em></h2>
+  <div class="qa">
+    <div>
+    <ol class="q">
+      <li><span>¿Cuántas veces le insisten? ¿Cada cuánto?</span></li>
+      <li><span>¿Por dónde? WhatsApp, llamada, mail…</span></li>
+      <li><span>¿Qué le escriben para insistir?<small>Mándenme los mensajes reales.</small></span></li>
+      <li><span>¿Cuándo lo dan por perdido?</span></li>
+      <li><span>¿Vuelven a contactar a los viejos? ¿Cada cuánto?</span></li>
+    </ol>
+    <p class="ariel"><b>Ariel:</b> la insistencia puede ser distinta en cada espera (formulario, R1, R2).</p></div>
+    <div class="vis"><div class="tlv">
+  <div class="st2"><span class="d">DÍA 0</span><div class="m">Le llega el formulario <span>automático</span></div></div>
+  <div class="st2"><span class="d">DÍA <span class="qv">?</span></span><div class="m q">Primer recordatorio <span>¿WhatsApp o email?</span></div></div>
+  <div class="st2"><span class="d">DÍA <span class="qv">?</span></span><div class="m q">Segundo intento <span>¿qué le dicen?</span></div></div>
+  <div class="st2"><span class="d">DÍA <span class="qv">?</span></span><div class="m q">Último intento <span>¿cuántos en total?</span></div></div>
+  <div class="st2 end2"><span class="d" style="color:#7a6a6d">FIN</span><div class="m" style="background:#f1ecec;color:#7a6a6d">Descartado sin respuesta <span>mensaje de despedida</span></div></div>
+  <div class="ok2">✓ Si responde en cualquier paso, sale de la secuencia y sigue el flujo.</div>
+</div></div>
+  </div>
+</section>
+
+<section class="slide">
+  <p class="kicker"><span class="dot"></span>Etapa 5 · Cierre · el dibujo de Ariel</p>
+  <h2>Siempre termina igual:<br><em>cliente o descartado</em></h2>
+  <div class="dg">
+    <div class="mf"><div class="row"><div class="nd cl">Cliente: cargar productos<small>cerrados y sus parámetros</small></div></div><div style="height:3vh"></div><div class="row"><div class="nd ds">Descartado<small>no calificado</small></div></div><div style="height:1.2vh"></div><div class="row"><div class="nd ds">Descartado<small>sin respuesta</small></div></div><div style="height:1.2vh"></div><div class="row"><div class="nd ds">Descartado<small>post-reunión</small></div></div></div>
+    <div class="dgr"><h3>Lo que dice el dibujo</h3><ul><li>Al cliente se le <b>cargan los productos cerrados</b> y sus parámetros.</li><li>Hay <b>3 tipos de descarte</b>, cada uno con su mensaje.</li></ul><h3 class="op">Lo que hay que definir hoy</h3><ul><li>Qué datos del producto se cargan.</li><li>Qué pasa después de cerrar: referidos, post-venta. <b>No está en el dibujo.</b></li><li>¿Un descartado puede volver más adelante?</li></ul></div>
+  </div>
+</section>
+
+<!-- 10 CIERRE -->
+<section class="slide">
+  <p class="kicker"><span class="dot"></span>Etapa 5 · Cierre y después</p>
+  <h2>Cuando dice que sí,<br><em>¿qué pasa?</em></h2>
+  <div class="qa">
+    <div>
+    <ol class="q">
+      <li><span>¿Qué hacen apenas cierra? Alta, papeles, aviso a TAF…</span></li>
+      <li><span>¿Qué datos de la venta quieren guardar?<small>Compañía, producto, prima, plazo, fecha…</small></span></li>
+      <li><span>¿Piden referidos? ¿Cuándo y cómo?</span></li>
+      <li><span>¿Hacen algo después? Cumpleaños, renovación, otro producto…</span></li>
+      <li><span>¿Dónde anotan todo hoy? Excel, cuaderno, HubSpot, memoria…</span></li>
+    </ol></div>
+    <div class="vis"><div>
+  <div class="card cl2">
+    <div class="top"><div class="av" style="background:#e4efe7;color:var(--green)">LG</div><div><b>Laura G.</b></div><span class="pc" style="margin-left:auto">Cliente</span></div>
+    <div class="r"><span>Compañía</span><span class="qv">?</span></div>
+    <div class="r"><span>Producto</span><span class="qv">?</span></div>
+    <div class="r"><span>Prima</span><span class="qv">?</span></div>
+    <div class="r"><span>Plazo</span><span class="qv">?</span></div>
+    <div class="r"><span>Fecha de alta</span><span class="qv">?</span></div>
+  </div>
+  <div class="next"><div>Pedir referidos<small>¿cuándo y cómo?</small></div><div>Post-venta<small>cumpleaños, renovación, otro producto</small></div></div>
+  <p class="cap">Los productos quedan cargados en la ficha. Lo violeta no está en el dibujo de Ariel: lo decidimos hoy.</p>
+</div></div>
+  </div>
+</section>
+
+<!-- 11 SUPUESTOS DE ARIEL -->
+<section class="slide">
+  <p class="kicker"><span class="dot"></span>Lo que Ariel dejó para confirmar</p>
+  <h2>Cuatro decisiones,<br><em>¿las confirmamos?</em></h2>
+  <div class="sup">
+    <div class="row"><div><h3>Si no responde después de todos los mensajes, se descarta solo</h3><p>En las 3 esperas (formulario, R1, R2), sin que ustedes tengan que hacer nada.</p></div>
+      <div class="chk" data-k="s1" data-label="Descarte automático al agotar nutrición"><button data-v="Sí">Sí</button><button data-v="Ajustar">Ajustar</button><button data-v="No">No</button></div></div>
+    <div class="row"><div><h3>Tres mensajes de despedida distintos</h3><p>No calificó · no avanzó después de una reunión · no respondió.</p></div>
+      <div class="chk" data-k="s2" data-label="3 mensajes de descarte distintos"><button data-v="Sí">Sí</button><button data-v="Ajustar">Ajustar</button><button data-v="No">No</button></div></div>
+    <div class="row"><div><h3>Máximo dos reuniones</h3><p>No hay Reunión 3. Después de la R2, cliente o descartado.</p></div>
+      <div class="chk" data-k="s3" data-label="Tope de 2 reuniones"><button data-v="Sí">Sí</button><button data-v="Ajustar">Ajustar</button><button data-v="No">No</button></div></div>
+    <div class="row"><div><h3>Formulario, cadencia y textos los definimos juntos</h3><p>Sale de lo que me cuentan hoy y de los mensajes que ya usan.</p></div>
+      <div class="chk" data-k="s4" data-label="Formulario, cadencia y textos a definir juntos"><button data-v="Sí">Sí</button><button data-v="Ajustar">Ajustar</button><button data-v="No">No</button></div></div>
+  </div>
+</section>
+
+<!-- 12 MARCA -->
+<section class="slide">
+  <p class="kicker"><span class="dot"></span>Su cuenta</p>
+  <h2>Lo único que cambia entre asesores:<br><em>su marca</em></h2>
+  <div class="brand">
+    <div><b>Nombre</b><span>Cómo se presentan: el suyo, una marca, "de TAF"…</span></div>
+    <div><b>Logo y foto</b><span>Para mails, formulario y el perfil de WhatsApp.</span></div>
+    <div><b>WhatsApp</b><span>Número que van a usar para los prospectos.</span></div>
+    <div><b>Mail</b><span>Desde dónde salen los correos.</span></div>
+    <div><b>Agenda</b><span>Días, horarios y duración de cada reunión.</span></div>
+    <div><b>Firma</b><span>Cómo cierran un mensaje.</span></div>
+    <div><b>Zona</b><span>Dónde atienden: Bella Vista, Corrientes, online…</span></div>
+    <div><b>Redes</b><span>Instagram y Facebook que se conectan.</span></div>
+    <div><b>Tono</b><span>¿Tutean, vosean, usted? ¿Emojis sí o no?</span></div>
+  </div>
+</section>
+
+<!-- 13 TAREA -->
+<section class="slide">
+  <p class="kicker"><span class="dot"></span>Antes de la próxima clase</p>
+  <h2>Ustedes me pasan, yo armo,<br><em>la próxima lo prueban</em></h2>
+  <div class="two">
+    <div><h3>Ustedes</h3><ul>
+      <li>Los mensajes que ya usan <small>(primer contacto, insistencia, despedida)</small></li>
+      <li>El formulario actual, si tienen</li>
+      <li>Logo, foto y datos de su marca</li>
+      <li>Días y horarios para reuniones</li>
+      <li>Acceso a su Instagram / Facebook</li>
+    </ul></div>
+    <div class="me"><h3>Yo · antes del 20/11</h3><ul>
+      <li>Pipeline con las etapas de Ariel ajustadas a lo de hoy</li>
+      <li>Formulario con las preguntas que definimos</li>
+      <li>Mensajes de email y WhatsApp en cada etapa</li>
+      <li>Seguimiento automático en cada espera</li>
+      <li>Todo andando en una cuenta de prueba</li>
+    </ul></div>
+  </div>
+</section>
+
+<!-- 14 CIERRE -->
+<section class="slide mid">
+  <p class="kicker"><span class="dot"></span>Gracias</p>
+  <h2>La próxima,<br><em>lo prueban ustedes</em></h2>
+  <p class="lede" style="margin-left:auto;margin-right:auto">Les mando el resumen de hoy por WhatsApp. Cualquier mensaje que se acuerden, mándenlo por ahí.</p>
+</section>
+
+</div>
+<div id="bar"></div><div id="num"></div><div id="hint">← → para navegar · Cmd + / − para el zoom</div>
+<script src="deck.js"></script>
+</body>
+</html>
